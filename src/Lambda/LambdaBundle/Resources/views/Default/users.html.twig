@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+{% block title %}users{% endblock %}
+{% block content %}
+{% for user in users %}
+    ID User : {{ user.id }}</br>
+    Nom : {{ user.username }}</br>
+    Passe : {{ user.password }}</br>
+    Email : {{ user.email }}</br>
+    Compte actif : {% if user.enabled==1 %}Oui{% else %}Non{% endif %}</br>
+    Membre depuis : {{ user.mdepuis|date('d/m/Y') }}</br>
+    Telephone : {% if user.telephone %}{{ user.telephone }}{% else %}Aucun renseigné{% endif %}</br>
+    {{ user.genre }}</br>
+{% else %}
+    Aucun utilisateur trouvé !!
+{% endfor %}
+{% endblock %}

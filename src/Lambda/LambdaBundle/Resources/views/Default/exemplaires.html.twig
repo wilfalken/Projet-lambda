@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+{% block title %}Exemplaires {% endblock %}
+
+{% block content %}
+    
+{% if app.user %}{{ app.user.username }}{% endif %}
+
+<div class="tablecontainer">
+        <h1>Vos exemplaires :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id d'exemplaire :</th>
+                    <th>Objet :</th>
+                    <th>Date d'ajout :</th>
+                    <th>Photo :</th>
+{#                    <th>Cp</th>
+                    <th>Ville</th>
+                    <th>Pays</th>
+                    <th>Actions</th>#}
+                </tr>
+            </thead>
+            <tbody>
+                {% for exemplaire in exemplaires %}
+                    <tr>
+                        <td>{{ exemplaire.id }}</a></td>
+                        <td>{{ exemplaire.iditem }}</td>
+                        <td>{{ exemplaire.dateajout }}</td>
+                        <td>{{ exemplaire.photo }}</td>
+                        <td>{{ exemplaire.divers }}</td>
+                        <td>{{ exemplaire.divers }}</td>
+                        <td>{{ exemplaire.divers }}</td>
+                        <td>
+                            <ul>
+
+                                <a class="btn btn-primary btn-xs" href="{{ path('adresse_show', { 'id': exemplaire.id }) }}">Voir</a>
+
+                                <a class="btn btn-primary btn-xs" href="{{ path('adresse_edit', { 'id': exemplaire.id }) }}">Modifier</a>
+
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+
+            <a class="btn btn-warning" href="{{ path('adresse_new') }}">Nouvel exemplaire</a>
+
+        </ul>
+    </div>
+{% endblock %}
+

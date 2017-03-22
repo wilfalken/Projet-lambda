@@ -1,0 +1,10 @@
+services:
+    form_authenticator:
+        class: AppBundle\Security\FormAuthenticator
+        arguments: ["@router"]
+
+
+
+#    lambda.example:
+#        class: Lambda\LambdaBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

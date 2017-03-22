@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+{% block title %}Inscription{% endblock %}
+{% block content %}
+
+<div class="form-signin">
+    <h2 class="form-signin-heading">Inscription au service <span id="sstitre">L@mbda</span></h2>
+{{ form_start(form) }}
+    {{ form_row(form.username, required=true) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+    {{ form_row(form.telephone) }}
+    {{ form_row(form.genre) }}
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'} }) }}
+{{ form_end(form) }}
+</div>
+{% endblock %}

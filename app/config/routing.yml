@@ -1,0 +1,27 @@
+lambda_commentaire:
+    resource: "@LambdaBundle/Controller/CommentaireController.php"
+    type:     annotation
+
+lambda_adresse:
+    resource: "@LambdaBundle/Controller/AdresseController.php"
+    type:     annotation
+
+lambda_categorie:
+    resource: "@LambdaBundle/Controller/CategorieController.php"
+    type:     annotation
+
+lambda_categorie:
+    resource: "@LambdaBundle/Controller/categorieController.php"
+    type:     annotation
+
+lambda_item:
+    resource: "@LambdaBundle/Controller/ItemController.php"
+    type:     annotation
+
+lambda:
+    resource: "@LambdaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

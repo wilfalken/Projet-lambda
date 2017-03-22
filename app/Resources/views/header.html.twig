@@ -1,0 +1,14 @@
+<div class="header">
+    </br>    
+Ceci est un header !!!!
+
+{% if (app.user) %}Bienvenue {{ app.user.username }}
+    <a class="btn btn-danger btn-sm" href="{{ path('logout') }}">Deconnexion</a>
+    {% else %}
+        <a class="btn btn-primary btn-sm" href="{{ path('login') }}">Connexion ></a>
+        <a class="btn btn-primary btn-success btn-sm" href="{{ path('register') }}">Inscription</a>
+    {% endif %}
+    
+    
+    
+</div>

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Item</h1>
+
+    <table  class="table table-condensed table-striped table-hover">
+        <tbody>
+            <tr>
+                <th>Iditem</th>
+                <td>{{ item.iditem }}</td>
+            </tr>
+            <tr>
+                <th>Nomitem</th>
+                <td>{{ item.nomitem }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ item.description }}</td>
+            </tr>
+            <tr>
+                <th>Photoitem</th>
+                <td>{{ item.photoitem }}</td>
+            </tr>
+            <tr>
+                <th>Isvalide</th>
+                <td>{% if item.isvalide %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>
+                  {#  {% for categorie in item.nomcategorie %}
+                        {{ categorie.nomcategorie }}
+                    {% endfor %}#}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ dump(vals) }}{{ dump(item.iditem) }}{{ dump(nomprop) }}{#{{ dump(categorie) }}#} {#{{ dump(propriete) }}#}
+{#                    {% for propriete in item.proprietes %}
+                        {{ propriete.1 }}
+                    {% endfor %}#}
+                </td>
+            </tr>
+            {#</td>{{ item.nomcategorie }}</td>#}
+
+
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('item_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('item_edit', { 'id': item.iditem }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

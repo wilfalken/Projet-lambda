@@ -1,0 +1,93 @@
+/* formulaire de connexion */
+
+
+
+.tablecontainer {
+    width: 60%;
+    margin: auto;
+}
+
+.bs-example {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+}
+
+.form-signin {
+  text-align: center;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+      background-color: #ecf9f2;
+
+/*      border-color: #ddd;
+    border-width: 30px;
+    border-radius: 4px 4px;*/
+    outline: 1px solid #e6e6e6;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px
+}
+.checkbox {
+      margin-left: 20px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+#sstitre {
+    color: orange;
+    font-style: italic;
+}
+.red{
+    color: red;
+}
+/****************************************************************************
+header
+*****************************************************************************/
+
+.header {
+    top:0;
+    text-align: center;
+    background-color: black;
+    color: orange;
+    height: 60px;
+}
+
+/****************************************************************************
+footer
+*****************************************************************************/
+.footer {
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    clear: both;
+    bottom: 0;
+    text-align: center;
+    background-color: black;
+    color: orange;
+}
