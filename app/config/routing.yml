@@ -1,3 +1,11 @@
+base:
+    resource: "@BaseBundle/Resources/config/routing.yml"
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
 lambda_commentaire:
     resource: "@LambdaBundle/Controller/CommentaireController.php"
     type:     annotation

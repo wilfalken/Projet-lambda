@@ -107,17 +107,25 @@ class ItemController extends Controller
             ->getRepository('LambdaBundle:Item');
             $val = $repository->getValeurProp($item);             //($iditem, $idcategorie);
             $prop = $repository->getNomProp($item);             //($iditem, $idcategorie);
-
-        
+            $categorie = $item->getIdcategorie()->first()->getNomcategorie();
+           
+            for ($i=0; $i<count($prop); $i++){
+               $proprietes[] = array(
+                   $prop[$i]['nomprop'],
+                   $val[$i]['valeur']
+               );
+               
+            }
         
 
         return $this->render('item/show.html.twig', array(
             'item' => $item,
             'delete_form' => $deleteForm->createView(),
-            'vals' => $val,
-            'nomprop' => $prop,
-            //'propriete' => $prop,
-            //'categorie' => $idcategorie,
+            //'vals' => $val,
+            //'nomprop' => $prop,
+            'proprietes' => $proprietes,
+            'categorie' => $categorie,
+            
         ));
     }
 
