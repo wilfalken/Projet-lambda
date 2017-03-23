@@ -1,10 +1,10 @@
 base:
     resource: "@BaseBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /base
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin
 
 lambda_commentaire:
     resource: "@LambdaBundle/Controller/CommentaireController.php"

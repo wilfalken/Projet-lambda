@@ -1,3 +1,12 @@
 admin_homepage:
     path:     /
     defaults: { _controller: AdminBundle:Default:index }
+
+
+user:
+    path: /user
+    defaults: { _controller: LambdaBundle:User:index }
+
+exemplaire:
+    path: /exemplaire
+    defaults: { _controller: LambdaBundle:Exemplaire:index }

@@ -2,9 +2,7 @@ lambda_homepage:
     path: /
     defaults: { _controller: LambdaBundle:Default:index }
     
-user:
-    path: /user
-    defaults: { _controller: LambdaBundle:User:index }
+
 
 login:
     path: /login
@@ -15,9 +13,13 @@ logout:
     defaults: { _controller: LambdaBundle:Security:logout }
 
 register:
-    path: /register/
+    path: /register
     defaults: { _controller: LambdaBundle:Security:register }
-
-exemplaire:
-    path: /exemplaire
-    defaults: { _controller: LambdaBundle:Exemplaire:index }
+    
+#admin:
+#    path: /admin
+#    defaults: { _controller: AdminBundle:Default:index }
+#    
+#base:
+#    path: /base
+#    defaults: { _controller: BaseBundle:Default:index }
