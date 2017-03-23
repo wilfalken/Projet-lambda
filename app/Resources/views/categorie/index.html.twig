@@ -1,13 +1,14 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}Les categories{% endblock %}
 {% block body %}
-    <h1>Categories list</h1>
+    <div class="tablecontainer">
+    <h1>Liste des Catégories</h1>
 
     <table class="table table-condensed table-striped table-hover">
         <thead>
             <tr>
-                <th>Idcategorie</th>
-                <th>Nomcategorie</th>
+                <th>Id de categorie</th>
+                <th>Nom de categorie</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,12 +19,11 @@
                 <td>{{ categorie.nomcategorie }}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('categorie_show', { 'id': categorie.idcategorie }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('categorie_edit', { 'id': categorie.idcategorie }) }}">edit</a>
-                        </li>
+
+                            <a class="btn btn-primary btn-xs" href="{{ path('categorie_show', { 'id': categorie.idcategorie }) }}">Voir</a>
+
+                            <a class="btn btn-primary btn-xs" href="{{ path('categorie_edit', { 'id': categorie.idcategorie }) }}">Editer</a>
+
                     </ul>
                 </td>
             </tr>
@@ -32,8 +32,10 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('categorie_new') }}">Create a new categorie</a>
-        </li>
+
+            <a class="btn btn-warning" href="{{ path('categorie_new') }}">Nouvelle categorie</a>
+
     </ul>
+    </div>
+            
 {% endblock %}

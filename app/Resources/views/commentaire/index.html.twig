@@ -1,43 +1,44 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Liste de commentaires{% endblock %}
 {% block body %}
-    <h1>Commentaires list</h1>
+    <div class="tablecontainer">
+        <h1>Liste des commentaires</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Idcommentaire</th>
-                <th>Dateajout</th>
-                <th>Idtype</th>
-                <th>Entite</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for commentaire in commentaires %}
-            <tr>
-                <td><a href="{{ path('commentaire_show', { 'id': commentaire.idcommentaire }) }}">{{ commentaire.idcommentaire }}</a></td>
-                <td>{% if commentaire.dateajout %}{{ commentaire.dateajout|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ commentaire.idtype }}</td>
-                <td>{{ commentaire.entite }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('commentaire_show', { 'id': commentaire.idcommentaire }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('commentaire_edit', { 'id': commentaire.idcommentaire }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id commentaire</th>
+                    <th>Date d'ajout</th>
+                    <th>Id de type</th>
+                    <th>Entite</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for commentaire in commentaires %}
+                    <tr>
+                        <td><a href="{{ path('commentaire_show', { 'id': commentaire.idcommentaire }) }}">{{ commentaire.idcommentaire }}</a></td>
+                        <td>{% if commentaire.dateajout %}{{ commentaire.dateajout|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ commentaire.idtype }}</td>
+                        <td>{{ commentaire.entite }}</td>
+                        <td>
+                            <ul>
 
-    <ul>
-        <li>
-            <a href="{{ path('commentaire_new') }}">Create a new commentaire</a>
-        </li>
-    </ul>
+                                <a class="btn btn-primary btn-xs" href="{{ path('commentaire_show', { 'id': commentaire.idcommentaire }) }}">Voir</a>
+
+                                <a class="btn btn-primary btn-xs" href="{{ path('commentaire_edit', { 'id': commentaire.idcommentaire }) }}">Editer</a>
+
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+
+            <a class="btn btn-warning" href="{{ path('commentaire_new') }}">Nouveau commentaire</a>
+
+        </ul>
+    </div>
 {% endblock %}

@@ -1,40 +1,43 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Commentaire{% endblock %}
 {% block body %}
-    <h1>Commentaire</h1>
+    <div class="tablecontainer">
+        <h1>Commentaire</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Idcommentaire</th>
-                <td>{{ commentaire.idcommentaire }}</td>
-            </tr>
-            <tr>
-                <th>Dateajout</th>
-                <td>{% if commentaire.dateajout %}{{ commentaire.dateajout|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Idtype</th>
-                <td>{{ commentaire.idtype }}</td>
-            </tr>
-            <tr>
-                <th>Entite</th>
-                <td>{{ commentaire.entite }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-condensed table-striped table-hover">
+            <tbody>
+                <tr>
+                    <th>Id du commentaire</th>
+                    <td>{{ commentaire.idcommentaire }}</td>
+                </tr>
+                <tr>
+                    <th>Date d'ajout</th>
+                    <td>{% if commentaire.dateajout %}{{ commentaire.dateajout|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Id de type</th>
+                    <td>{{ commentaire.idtype }}</td>
+                </tr>
+                <tr>
+                    <th>Entite</th>
+                    <td>{{ commentaire.entite }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('commentaire_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('commentaire_edit', { 'id': commentaire.idcommentaire }) }}">Edit</a>
-        </li>
-        <li>
+        <ul>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+
+            <input class="btn btn-danger" type="submit" value="Supprimer">
+            <a class="btn btn-warning" href="{{ path('commentaire_edit', { 'id': commentaire.idcommentaire }) }}">Editer</a>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            </br></br>
+            <a class="btn btn-primary" href="{{ path('commentaire_index') }}">Retour à la liste</a>
+
+
+
+
+
+        </ul>
+    </div>
 {% endblock %}

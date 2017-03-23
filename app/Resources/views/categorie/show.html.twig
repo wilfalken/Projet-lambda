@@ -1,32 +1,37 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Categorie{% endblock %}
 {% block body %}
-    <h1>Categorie</h1>
+    <div class="tablecontainer">
+        <h1>Categorie :</h1>
 
-    <table class="table table-condensed table-striped table-hover">
-        <tbody>
-            <tr>
-                <th>Idcategorie</th>
-                <td>{{ categorie.idcategorie }}</td>
-            </tr>
-            <tr>
-                <th>Nomcategorie</th>
-                <td>{{ categorie.nomcategorie }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-condensed table-striped table-hover">
+            <tbody>
+                <tr>
+                    <th>Id de categorie</th>
+                    <td>{{ categorie.idcategorie }}</td>
+                </tr>
+                <tr>
+                    <th>Nom de categorie</th>
+                    <td>{{ categorie.nomcategorie }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('categorie_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('categorie_edit', { 'id': categorie.idcategorie }) }}">Edit</a>
-        </li>
-        <li>
+        <ul>
+
+
+
+
+
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input class="btn btn-danger" type="submit" value="Supprimer">
+            <a class="btn btn-primary" href="{{ path('categorie_edit', { 'id': categorie.idcategorie }) }}">Editer</a>
+
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            </br>
+            </br>
+            <a class="btn btn-warning" href="{{ path('categorie_index') }}">Retourner à la liste</a>
+
+        </ul>
+    </div>
 {% endblock %}
