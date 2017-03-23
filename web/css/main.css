@@ -91,3 +91,88 @@ footer
     background-color: black;
     color: orange;
 }
+
+/****************************************************************************
+404
+*****************************************************************************/
+.cont404 {
+    position: relative;
+    margin: auto;
+    text-align: center;
+    left: 10%;
+    top: 40%;
+}
+
+
+
+
+
+.erreur4xx {
+    position: relative;
+    width: 80%;
+    
+    height: 300px;
+    top: 200px;
+    left: 0;
+    background-color: lightgray;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+-webkit-box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
+-moz-box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
+box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
+    border: 1px solid black;
+}
+
+.img404 {
+    position: relative;
+    margin-left: 0;
+    top: -20%;
+    left: -40%;
+    padding: 0;
+    
+    transform:rotate(-10deg);
+-ms-transform:rotate(-10deg); /* Internet Explorer */
+-moz-transform:rotate(-10deg); /* Firefox */
+-webkit-transform:rotate(-10deg); /* Safari et Chrome */
+-o-transform:rotate(-10deg); /* Opera */
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 2px solid white;
+}
+
+.conterror {
+    position: relative;
+  left: 40%;
+  top:-200px;
+  height: 400px;
+  font-weight: bold;
+  font-size: 18px;
+        width: 700px;
+/*    padding: 30px 44px 24px 46px;*/
+    position: relative;
+}
+.open-quote{
+    
+        font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    left:0;
+    top: -50px;
+    color: grey;
+    font-size: 8em;
+}
+.texterror {
+    position: relative;
+    width: 80%;
+    left: 10%;
+}
+
+.close-quote{
+        font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right:0;
+    top: 20px;
+    color: grey;
+    font-size: 8em;
+}
