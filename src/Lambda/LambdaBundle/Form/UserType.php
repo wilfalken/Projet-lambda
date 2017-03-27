@@ -29,8 +29,14 @@ class UserType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('email', EmailType::class, array('label' => 'Email :'))
+               
                 ->add('username', TextType::class, array('label' => 'Nom d\'utilisateur :'))
+                //->add('email', EmailType::class, array('label' => 'Email :'))
+                ->add('email', RepeatedType::class, array(
+                    'type' => EmailType::class,
+                    'first_options' => array('label' => 'Votre email :'),
+                    'second_options' => array('label' => 'Retapez votre email :'),
+                        ))
                 ->add('plainPassword', RepeatedType::class, array(
                     'type' => PasswordType::class,
                     'first_options' => array('label' => 'Mot de passe'),
@@ -42,7 +48,10 @@ class UserType extends AbstractType{
                     'choices' => array(
                         'Homme' => false,
                         'Femme' => true,
-                        )));
+                        ),
+                            'required' => true,
+                            'empty_data' => ''
+                        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

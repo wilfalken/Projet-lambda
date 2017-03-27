@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Typemessage
  *
- * @ORM\Table(name="typemessage", indexes={@ORM\Index(name="IDX_6C59BCC4A6045B8D", columns={"idMessage"})})
+ * @ORM\Table(name="typemessage", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_6C59BCC4A6045B8D", columns={"idMessage"})}, indexes={@ORM\Index(name="IDX_6C59BCC4A6045B8D", columns={"idMessage"})})
  * @ORM\Entity
  */
 class Typemessage
@@ -17,35 +17,21 @@ class Typemessage
      *
      * @ORM\Column(name="typeMessage", type="string", length=50)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $typemessage;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Message
      *
-     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\Message")
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Message")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idMessage", referencedColumnName="idMessage", unique=true)
+     *   @ORM\JoinColumn(name="idMessage", referencedColumnName="idMessage")
      * })
      */
     private $idmessage;
 
 
-
-    /**
-     * Set typemessage
-     *
-     * @param string $typemessage
-     *
-     * @return Typemessage
-     */
-    public function setTypemessage($typemessage)
-    {
-        $this->typemessage = $typemessage;
-
-        return $this;
-    }
 
     /**
      * Get typemessage

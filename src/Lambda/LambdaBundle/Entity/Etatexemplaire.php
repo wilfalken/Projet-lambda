@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Etatexemplaire
  *
- * @ORM\Table(name="etatexemplaire", indexes={@ORM\Index(name="fk_etatexemplaire", columns={"idExemplaire"})})
+ * @ORM\Table(name="etatexemplaire", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_E3F6DB63DC0C2278", columns={"idExemplaire"})}, indexes={@ORM\Index(name="fk_etatexemplaire", columns={"idExemplaire"})})
  * @ORM\Entity
  */
 class Etatexemplaire
@@ -15,37 +15,23 @@ class Etatexemplaire
     /**
      * @var string
      *
-     * @ORM\Column(name="etat", type="string", length=400)
+     * @ORM\Column(name="etat", type="string", length=220)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $etat;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Exemplaire
      *
-     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idExemplaire", referencedColumnName="idexemplaire", unique=true)
+     *   @ORM\JoinColumn(name="idExemplaire", referencedColumnName="idexemplaire")
      * })
      */
     private $idexemplaire;
 
 
-
-    /**
-     * Set etat
-     *
-     * @param string $etat
-     *
-     * @return Etatexemplaire
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
 
     /**
      * Get etat

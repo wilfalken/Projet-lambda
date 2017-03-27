@@ -3,18 +3,14 @@
 namespace Lambda\LambdaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-// DON'T forget this use statement!!!
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * User
- * @ORM\Entity(repositoryClass="Lambda\LambdaBundle\Repository\UserRepository")
+ *
  * @ORM\Table(name="user")
- * @UniqueEntity(fields={"username", "email"}, message="ceci est deja utilisé !!!")
- * 
+ * @ORM\Entity
  */
-class User implements UserInterface, \Serializable
+class User
 {
     /**
      * @var integer
@@ -43,14 +39,12 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=180, nullable=false)
-     * 
      */
     private $email;
 
     /**
      * @var string
-     * @Assert\Length(min = 6,
-     * minMessage="Votre mot de passe doit avoir une longueur d'au moins 6 caractères !!!")
+     *
      * @ORM\Column(name="email_canonical", type="string", length=180, nullable=false)
      */
     private $emailCanonical;
@@ -62,13 +56,13 @@ class User implements UserInterface, \Serializable
      */
     private $enabled;
 
-    
-    
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
     private $isActive;
-    
+
     /**
      * @var string
      *
@@ -103,11 +97,13 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="genre", type="boolean", nullable=true)
      */
     private $genre;
-    
+
     /**
-    * @ORM\Column(type="json_array")
-    */
-    private $roles = array();
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="json_array", nullable=false)
+     */
+    private $roles;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -162,10 +158,6 @@ class User implements UserInterface, \Serializable
         $this->idadresse = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idgroupelien = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idgroupe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->isActive = true;
-        $this->enabled = true;
-        $this->mdepuis = new \Datetime;
-        $this->roles[] = 'ROLE_USER';
     }
 
 
@@ -300,6 +292,30 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
      * Set password
      *
      * @param string $password
@@ -420,6 +436,30 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
      * Add idadresse
      *
      * @param \Lambda\LambdaBundle\Entity\Adresse $idadresse
@@ -520,46 +560,4 @@ class User implements UserInterface, \Serializable
     {
         return $this->idgroupe;
     }
-    
-       /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-        ) = unserialize($serialized);
-    }
-
-    public function eraseCredentials() {
-        
-    }
-
-    public function getRoles() {
-        return $this->roles;
-    }
-
-    public function getSalt() {
-        return null;
-    }
-    
-    public function setRoles(array $roles) {
-        return $this->roles = $roles;
-    }
-
-
 }

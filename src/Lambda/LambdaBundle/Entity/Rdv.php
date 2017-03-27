@@ -21,7 +21,7 @@ class Rdv
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Emprunt
-     *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\Emprunt")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idEmprunt", referencedColumnName="idEmprunt", unique=true)
@@ -31,7 +31,7 @@ class Rdv
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Adresse
-     *
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Adresse")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idAdresseUser", referencedColumnName="idadresse")

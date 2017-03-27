@@ -98,7 +98,7 @@ footer
 .cont404 {
     position: relative;
     margin: auto;
-    text-align: center;
+    /*text-align: center;*/
     left: 10%;
     top: 40%;
 }
@@ -127,9 +127,11 @@ box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
 .img404 {
     position: relative;
     margin-left: 0;
-    top: -20%;
-    left: -40%;
+    top: -70px;
+    left: 50px;
     padding: 0;
+    width: 300px;
+    height: 300px;
     
     transform:rotate(-10deg);
 -ms-transform:rotate(-10deg); /* Internet Explorer */
@@ -143,6 +145,7 @@ box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
 }
 
 .conterror {
+    text-align: center;
     position: relative;
   left: 40%;
   top:-200px;
@@ -166,13 +169,15 @@ box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
     position: relative;
     width: 80%;
     left: 10%;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .close-quote{
         font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     right:0;
-    top: 20px;
+    top: 50px;
     color: grey;
     font-size: 8em;
 }

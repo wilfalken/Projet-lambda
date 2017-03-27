@@ -1,3 +1,7 @@
+lambda_item:
+    resource: "@LambdaBundle/Controller/ItemController.php"
+    type:     annotation
+
 base:
     resource: "@BaseBundle/Resources/config/routing.yml"
     prefix:   /base

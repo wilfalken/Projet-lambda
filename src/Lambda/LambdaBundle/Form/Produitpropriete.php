@@ -12,12 +12,24 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Produitpropriete
 {
-    /**
-     * @var integer
+//    /**
+//     * @var integer
+//     *
+//     * @ORM\Column(name="idproduit", type="integer")
+//     * @ORM\Id
+//     * @ORM\GeneratedValue(strategy="NONE")
+//     */
+    
+    
+       /**
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="idproduit", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Item", inversedBy="idItem")
+     * 
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="idproduit", referencedColumnName="idItem")
+     *   }
+     * )
      */
     private $idproduit;
 
@@ -32,7 +44,7 @@ class Produitpropriete
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="valeur", type="text", length=65535, nullable=false)
      */
     private $valeur;

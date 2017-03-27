@@ -33,7 +33,7 @@ class Exemplaire
      *
      * @ORM\Column(name="dateAjout", type="datetime", nullable=false)
      */
-    private $dateajout = 'CURRENT_TIMESTAMP';
+    private $dateajout;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Item

@@ -36,6 +36,16 @@ class Emprunt
     private $daterendu;
 
     /**
+     * @var \Lambda\LambdaBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idemprunteur", referencedColumnName="id")
+     * })
+     */
+    private $idemprunteur;
+
+    /**
      * @var \Lambda\LambdaBundle\Entity\Exemplaire
      *
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
@@ -46,15 +56,19 @@ class Emprunt
     private $idexemplaire;
 
     /**
-     * @var \Lambda\LambdaBundle\Entity\User
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idemprunteur", referencedColumnName="id")
-     * })
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", mappedBy="idemprunt")
      */
-    private $idemprunteur;
+    private $idadresseuser;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idadresseuser = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -116,6 +130,30 @@ class Emprunt
     }
 
     /**
+     * Set idemprunteur
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $idemprunteur
+     *
+     * @return Emprunt
+     */
+    public function setIdemprunteur(\Lambda\LambdaBundle\Entity\User $idemprunteur = null)
+    {
+        $this->idemprunteur = $idemprunteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idemprunteur
+     *
+     * @return \Lambda\LambdaBundle\Entity\User
+     */
+    public function getIdemprunteur()
+    {
+        return $this->idemprunteur;
+    }
+
+    /**
      * Set idexemplaire
      *
      * @param \Lambda\LambdaBundle\Entity\Exemplaire $idexemplaire
@@ -140,26 +178,36 @@ class Emprunt
     }
 
     /**
-     * Set idemprunteur
+     * Add idadresseuser
      *
-     * @param \Lambda\LambdaBundle\Entity\User $idemprunteur
+     * @param \Lambda\LambdaBundle\Entity\Adresse $idadresseuser
      *
      * @return Emprunt
      */
-    public function setIdemprunteur(\Lambda\LambdaBundle\Entity\User $idemprunteur = null)
+    public function addIdadresseuser(\Lambda\LambdaBundle\Entity\Adresse $idadresseuser)
     {
-        $this->idemprunteur = $idemprunteur;
+        $this->idadresseuser[] = $idadresseuser;
 
         return $this;
     }
 
     /**
-     * Get idemprunteur
+     * Remove idadresseuser
      *
-     * @return \Lambda\LambdaBundle\Entity\User
+     * @param \Lambda\LambdaBundle\Entity\Adresse $idadresseuser
      */
-    public function getIdemprunteur()
+    public function removeIdadresseuser(\Lambda\LambdaBundle\Entity\Adresse $idadresseuser)
     {
-        return $this->idemprunteur;
+        $this->idadresseuser->removeElement($idadresseuser);
+    }
+
+    /**
+     * Get idadresseuser
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdadresseuser()
+    {
+        return $this->idadresseuser;
     }
 }

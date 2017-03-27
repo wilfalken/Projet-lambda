@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+{% block title %}Edition d'un item{% endblock %}
+{% block body %}
+
+    <div class="form-signin">
+        <h1>Edition d'un item</h1>
+        
+        {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input class="btn btn-warning" type="submit" value="Editer" />
+        {{ form_end(edit_form) }}
+        
+        </br>
+        {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Supprimer">
+        {{ form_end(delete_form) }}
+
+        </br>
+        <a class="btn btn-primary btn-xs" href="{{ path('item_index') }}">Retour à la liste</a>
+
+
+
+    </div>
+{% endblock %}

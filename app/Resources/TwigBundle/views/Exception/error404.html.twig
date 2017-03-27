@@ -1,25 +1,12 @@
-{% extends '::base.html.twig' %}
-{% block content %}
-    <div class="cont404">
-        <div class="erreur4xx">
-          {{ app.user }}  
-        <img class="img404" src="{{ asset('img/cables.gif') }}"/>
-        <div class="conterror">
-<div class="open-quote">“</div>
-{% block error %}
-    <div class="texterror">
-La page que vous recherchez n'existe pas !?!</br>
-S'agit-il d'une erreur ???</br>
-Nous travaillons à ce que cette page ne s'affiche plus jamais...</br>
-Il serait peut-être mieux d'aller à l'accueil pour le moment ;-p</br></br>
-    </div>
+{% extends '@Twig/Exception/error.html.twig' %}
+
+    {% block imgerror %}{{ asset('img/cables.gif') }}{% endblock %}
+
+    {% block error %}
+
+        La page que vous recherchez n'existe pas !?!</br>
+        S'agit-il d'une erreur ???</br>
+        Nous travaillons à ce que cette page ne s'affiche plus jamais...</br>
+        Il serait peut-être mieux d'aller à l'accueil pour le moment ;-p</br></br>
+
     {% endblock %}
-<a class="btn btn-warning" href="{{ path('adresse_index') }}">Accueil >></a>
-<div class="close-quote">”</div>
-            
-            
-        </div>   
-        </div>
-    </div>
-{% endblock %}
-    

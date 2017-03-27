@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+{% block title %}Les items{% endblock %}
+{% block body %}
+    <div class="tablecontainer">  
+        <h1>Liste d'items</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id d'item</th>
+                    <th>Nom d'item</th>
+                    <th>Description</th>
+                    <th>Photo</th>
+                    <th>valide ?</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td><a href="{{ path('item_show', { 'id': item.iditem }) }}">{{ item.iditem }}</a></td>
+                        <td>{{ item.nomitem }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.photoitem }}</td>
+                        <td>{% if item.isvalide %}Yes{% else %}No{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('item_show', { 'id': item.iditem }) }}">Voir</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('item_edit', { 'id': item.iditem }) }}">Editer</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+
+            <a class="btn btn-warning" href="{{ path('item_new') }}">Nouvel item</a>
+
+        </ul>
+    </div>
+{% endblock %}

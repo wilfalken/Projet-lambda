@@ -21,7 +21,7 @@ class AdresseType extends AbstractType
                 ->add('cp',TextType::class, array('label' => 'Code postal :'))
                 ->add('ville',TextType::class, array('label' => 'Ville :'))
                 ->add('pays',CountryType::class, array('label' => 'Pays :'))
-                ->add('iduser')
+                //->add('iduser')
                 ;
     }
     

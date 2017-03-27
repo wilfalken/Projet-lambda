@@ -15,7 +15,7 @@ class Typecommentaire
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=400)
+     * @ORM\Column(name="description", type="string", length=200)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

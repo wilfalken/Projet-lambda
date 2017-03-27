@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Item
  *
  * @ORM\Table(name="item")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lambda\LambdaBundle\Repository\ItemRepository")
  */
 class Item
 {
@@ -38,7 +38,7 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="photoItem", type="string", length=100, nullable=true)
+     * @ORM\Column(name="photoItem", type="string", length=100, nullable=false)
      */
     private $photoitem;
 
@@ -63,21 +63,18 @@ class Item
      * )
      */
     private $idcategorie;
-
-    /**
+    
+        /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Lienpropriete", inversedBy="idproduit")
-     * @ORM\JoinTable(name="produitpropriete",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="idproduit", referencedColumnName="idItem")
-     *   },
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Produitpropriete", inversedBy="idproduit")
+     * 
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idpropriete", referencedColumnName="idPropriete")
+     *     @ORM\JoinColumn(name="idItem", referencedColumnName="idproduit")
      *   }
      * )
      */
-    private $idpropriete;
+    private $valeuretendue;
 
     /**
      * Constructor
@@ -85,7 +82,7 @@ class Item
     public function __construct()
     {
         $this->idcategorie = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idpropriete = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->valeuretendue = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -228,38 +225,39 @@ class Item
     {
         return $this->idcategorie;
     }
-
-    /**
-     * Add idpropriete
-     *
-     * @param \Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete
-     *
-     * @return Item
-     */
-    public function addIdpropriete(\Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete)
-    {
-        $this->idpropriete[] = $idpropriete;
-
-        return $this;
-    }
-
-    /**
-     * Remove idpropriete
-     *
-     * @param \Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete
-     */
-    public function removeIdpropriete(\Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete)
-    {
-        $this->idpropriete->removeElement($idpropriete);
-    }
-
-    /**
-     * Get idpropriete
+    
+       /**
+     * Get valeuetendue
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdpropriete()
+    public function getValeursetendues()
     {
-        return $this->idpropriete;
+        return $this->valeursetendues;
+    }
+    
+        /**
+     * Remove valeuretendue
+     *
+     * @param \Lambda\LambdaBundle\Entity\Produitpropriete $idproduit
+     */
+    public function removeValeuretendue(\Lambda\LambdaBundle\Entity\Produitpropriete $idproduit)
+    {
+        $this->valeuretendue->removeElement($idproduit);
+       
+    }
+    
+        /**
+     * Add valeuretendue
+     *
+     * @param \Lambda\LambdaBundle\Entity\Produitpropriete $idproduit
+     *
+     * @return Item
+     */
+    public function addValeuretendue(\Lambda\LambdaBundle\Entity\Produitpropriete $idproduit)
+    {
+        $this->valeuretendue[] = $idproduit;
+
+        return $this;
     }
 }

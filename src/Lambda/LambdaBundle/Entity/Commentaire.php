@@ -47,20 +47,20 @@ class Commentaire
      *
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idUser", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="idCommente", referencedColumnName="id")
      * })
      */
-    private $iduser;
+    private $idcommente;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idCommente", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="idUser", referencedColumnName="id")
      * })
      */
-    private $idcommente;
+    private $iduser;
 
 
 
@@ -147,30 +147,6 @@ class Commentaire
     }
 
     /**
-     * Set iduser
-     *
-     * @param \Lambda\LambdaBundle\Entity\User $iduser
-     *
-     * @return Commentaire
-     */
-    public function setIduser(\Lambda\LambdaBundle\Entity\User $iduser = null)
-    {
-        $this->iduser = $iduser;
-
-        return $this;
-    }
-
-    /**
-     * Get iduser
-     *
-     * @return \Lambda\LambdaBundle\Entity\User
-     */
-    public function getIduser()
-    {
-        return $this->iduser;
-    }
-
-    /**
      * Set idcommente
      *
      * @param \Lambda\LambdaBundle\Entity\User $idcommente
@@ -192,5 +168,29 @@ class Commentaire
     public function getIdcommente()
     {
         return $this->idcommente;
+    }
+
+    /**
+     * Set iduser
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $iduser
+     *
+     * @return Commentaire
+     */
+    public function setIduser(\Lambda\LambdaBundle\Entity\User $iduser = null)
+    {
+        $this->iduser = $iduser;
+
+        return $this;
+    }
+
+    /**
+     * Get iduser
+     *
+     * @return \Lambda\LambdaBundle\Entity\User
+     */
+    public function getIduser()
+    {
+        return $this->iduser;
     }
 }

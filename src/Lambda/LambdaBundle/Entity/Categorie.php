@@ -211,4 +211,8 @@ class Categorie
     {
         return $this->idsouscategorie;
     }
+    
+    public function __toString() {
+        return $this->nomcategorie;
+    }
 }

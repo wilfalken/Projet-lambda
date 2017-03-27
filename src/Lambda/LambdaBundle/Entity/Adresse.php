@@ -71,11 +71,19 @@ class Adresse
     private $iduser;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Emprunt", mappedBy="idadresseuser")
+     */
+    private $idemprunt;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idemprunt = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -266,8 +274,38 @@ class Adresse
     {
         return $this->iduser;
     }
-    
-    public function __toString() {
-        return $this->getIduser()->getId();
+
+    /**
+     * Add idemprunt
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunt $idemprunt
+     *
+     * @return Adresse
+     */
+    public function addIdemprunt(\Lambda\LambdaBundle\Entity\Emprunt $idemprunt)
+    {
+        $this->idemprunt[] = $idemprunt;
+
+        return $this;
+    }
+
+    /**
+     * Remove idemprunt
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunt $idemprunt
+     */
+    public function removeIdemprunt(\Lambda\LambdaBundle\Entity\Emprunt $idemprunt)
+    {
+        $this->idemprunt->removeElement($idemprunt);
+    }
+
+    /**
+     * Get idemprunt
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdemprunt()
+    {
+        return $this->idemprunt;
     }
 }

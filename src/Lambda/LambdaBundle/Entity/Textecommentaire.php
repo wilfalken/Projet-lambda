@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Textecommentaire
  *
- * @ORM\Table(name="textecommentaire", indexes={@ORM\Index(name="IDX_89A8368A27AD97C4", columns={"idCommentaire"})})
+ * @ORM\Table(name="textecommentaire", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_89A8368A27AD97C4", columns={"idCommentaire"})}, indexes={@ORM\Index(name="IDX_89A8368A27AD97C4", columns={"idCommentaire"})})
  * @ORM\Entity
  */
 class Textecommentaire
@@ -15,9 +15,7 @@ class Textecommentaire
     /**
      * @var string
      *
-     * @ORM\Column(name="texteCommentaire", type="string", length=400)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="texteCommentaire", type="text", nullable=false)
      */
     private $textecommentaire;
 
