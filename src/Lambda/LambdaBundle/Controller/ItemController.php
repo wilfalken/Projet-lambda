@@ -3,8 +3,6 @@
 namespace Lambda\LambdaBundle\Controller;
 
 use Lambda\LambdaBundle\Entity\Item;
-use Lambda\LambdaBundle\Entity\Categorie;
-use Lambda\LambdaBundle\Entity\Lienpropriete;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -25,34 +23,9 @@ class ItemController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $items = $em->getRepository('LambdaBundle:Item')->findAll();
-        foreach ($items as $unitem)
-        {
-            $id = $unitem->getIditem();
-            $categorie= $unitem->getIdcategorie();
-        
-            $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('LambdaBundle:Item');
-            $val = $repository->getValeurProp($unitem);
 
-        
-        }
-                    return $this->render('item\index.html.twig', array('items' => $items,
-               'vals' => $val,
-               ));
-        
-        
-        
-        
-        
-        $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository('LambdaBundle:Item')->findAll();
-        foreach ($items as $unitem)
-        {
 
-        }
         return $this->render('item/index.html.twig', array(
             'items' => $items,
         ));
@@ -75,7 +48,7 @@ class ItemController extends Controller
             $em->persist($item);
             $em->flush($item);
 
-            return $this->redirectToRoute('item_show', array('id' => $item->getId()));
+            return $this->redirectToRoute('item_show', array('id' => $item->getIditem()));
         }
 
         return $this->render('item/new.html.twig', array(
@@ -93,39 +66,10 @@ class ItemController extends Controller
     public function showAction(Item $item)
     {
         $deleteForm = $this->createDeleteForm($item);
-        
-        $em = $this->getDoctrine()->getManager();
-        //$items = $em->getRepository('LambdaBundle:Item')->findAll();
-        //foreach ($items as $unitem)
-        
-            $iditem = $item->getIditem();
-            //$collection = $item->getIdCategorie();
-            //$idcats = $item->getIdcategorie();
-            $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('LambdaBundle:Item');
-            $val = $repository->getValeurProp($item);             //($iditem, $idcategorie);
-            $prop = $repository->getNomProp($item);             //($iditem, $idcategorie);
-            $categorie = $item->getIdcategorie()->first()->getNomcategorie();
-           
-            for ($i=0; $i<count($prop); $i++){
-               $proprietes[] = array(
-                   $prop[$i]['nomprop'],
-                   $val[$i]['valeur']
-               );
-               
-            }
-        
 
         return $this->render('item/show.html.twig', array(
             'item' => $item,
             'delete_form' => $deleteForm->createView(),
-            //'vals' => $val,
-            //'nomprop' => $prop,
-            'proprietes' => $proprietes,
-            'categorie' => $categorie,
-            
         ));
     }
 
@@ -144,7 +88,7 @@ class ItemController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('item_edit', array('id' => $item->getId()));
+            return $this->redirectToRoute('item_edit', array('id' => $item->getIditem()));
         }
 
         return $this->render('item/edit.html.twig', array(
@@ -184,7 +128,7 @@ class ItemController extends Controller
     private function createDeleteForm(Item $item)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('item_delete', array('id' => $item->getIdItem())))
+            ->setAction($this->generateUrl('item_delete', array('id' => $item->getIditem())))
             ->setMethod('DELETE')
             ->getForm()
         ;

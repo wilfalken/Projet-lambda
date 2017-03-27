@@ -13,16 +13,7 @@ class ItemType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nomitem')
-                ->add('description')
-                ->add('photoitem')
-                ->add('isvalide')
-//                ->add('nomprop', 'Lienpropriete', array(
-//                    'mapped' => false,
-//                    'data_class' => 'Lambda\LambdaBundle\Entity\Lienpropriete'
-//                ))
-                ->add('nomcategorie', CategorieType::class
-                );
+        $builder->add('nomitem')->add('description')->add('photoitem')->add('isvalide')->add('idcategorie')->add('idpropriete')        ;
     }
     
     /**

@@ -1,73 +1,44 @@
-{% extends '::base.html.twig' %}
-{% block title %}Item{% endblock %}
+{% extends 'base.html.twig' %}
+
 {% block body %}
-    <div class="tablecontainer">
-        <h1>Item</h1>
+    <h1>Item</h1>
 
-        <table  class="table table-condensed table-striped table-hover">
-            <tbody>
-                <tr>
-                    <th>Id d'item</th>
-                    <td>{{ item.iditem }}</td>
-                </tr>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ item.nomitem }}</td>
-                </tr>
-                <tr>
-                    <th>Description</th>
-                    <td>{{ item.description }}</td>
-                </tr>
-                <tr>
-                    <th>Photo</th>
-                    <td>{{ item.photoitem }}</td>
-                </tr>
-                <tr>
-                    <th>valide ?</th>
-                    <td>{% if item.isvalide %}Yes{% else %}No{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Categorie</th>
-                    <td>
-                        {{ categorie }}
-{#                        {% for categories in item.categorie %}
-                            {{ categorie }}
-                        {% endfor %}#}
-                    </td>
-                </tr>
-                {% for propriete in proprietes %}
-                <tr>
-                    <th>
-                        {{ propriete[0]}} </th><td> {{ propriete[1] }}
-                           {#{{ popriete[compteur]['nomprop'] }}#}
-                            {#{{ dump(propriete) }}#}
-                            {#{{ dump(propriete['valeur'])}}#}
-                            </td>
-                       {# {{ dump(vals) }}{{ dump(item.iditem) }}{{ dump(nomprop) }}{#{{ dump(categorie) }}#} {#{{ dump(propriete) }}#}
-                        {#                    {% for propriete in item.proprietes %}
-                                                {{ propriete.1 }}
-                                            {% endfor %}#}
-                </tr>
-                {% endfor %}
-                {#</td>{{ item.nomcategorie }}</td>#}
+    <table>
+        <tbody>
+            <tr>
+                <th>Iditem</th>
+                <td>{{ item.iditem }}</td>
+            </tr>
+            <tr>
+                <th>Nomitem</th>
+                <td>{{ item.nomitem }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ item.description }}</td>
+            </tr>
+            <tr>
+                <th>Photoitem</th>
+                <td>{{ item.photoitem }}</td>
+            </tr>
+            <tr>
+                <th>Isvalide</th>
+                <td>{% if item.isvalide %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
 
-
-            </tbody>
-        </table>
-
-        <ul>
-
-
+    <ul>
+        <li>
+            <a href="{{ path('item_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('item_edit', { 'id': item.iditem }) }}">Edit</a>
+        </li>
+        <li>
             {{ form_start(delete_form) }}
-
-            <input class="btn btn-danger" type="submit" value="Supprimer">
-            <a class="btn btn-warning" href="{{ path('item_edit', { 'id': item.iditem }) }}">Editer</a>
+                <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
-            </br></br>
-            <a class="btn btn-primary" href="{{ path('item_index') }}">Retout à la liste</a>
-
-
-
-        </ul>
-    </div>
+        </li>
+    </ul>
 {% endblock %}
