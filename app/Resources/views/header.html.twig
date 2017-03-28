@@ -1,20 +1,32 @@
 <div class="header">
     </br>    
-Ceci est un header !!!!
 
-{% if (app.user) %}Bienvenue {{ app.user.username }}{% if is_granted('ROLE_ADMIN') %}
-    Administrator
+{#<div class="well research_form">#}
+<div class="nomsite">
+L@MBDA !!!
+</div>
+    <div class="search input-group">
+
+      <input type="text" class="form-control" placeholder="Cherchez un objet !">
+            <span class="input-group-btn">
+        <button class="btn btn-warning" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+{#</div>#}
+<div id="headerright">
+{% if (app.user) %}Bienvenue {{ app.user.username }}. Votre rôle : {% if is_granted('ROLE_ADMIN') %}
+    Administrateur
 {% elseif is_granted('ROLE_USER') %}
-    User
+    Utilisateur
 {% else %}
-    Anonymous
+    Anonyme
 {% endif %}
     <a class="btn btn-danger btn-sm" href="{{ path('logout') }}">Deconnexion</a>
     {% else %}
         <a class="btn btn-primary btn-sm" href="{{ path('login') }}">Connexion ></a>
         <a class="btn btn-primary btn-success btn-sm" href="{{ path('register') }}">Inscription</a>
     {% endif %}
-    
+</div>   
     
     
 </div>

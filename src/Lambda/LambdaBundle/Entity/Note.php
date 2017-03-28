@@ -21,7 +21,7 @@ class Note
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Commentaire
-     *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\Commentaire")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idCommentaire", referencedColumnName="idCommentaire", unique=true)

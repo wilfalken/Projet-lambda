@@ -184,4 +184,8 @@ class Lienpropriete
     {
         return $this->idproduit;
     }
+    
+    public function __toString() {
+        return $this->nomprop;
+    }
 }
