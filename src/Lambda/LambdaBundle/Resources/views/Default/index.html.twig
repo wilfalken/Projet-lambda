@@ -4,4 +4,11 @@
 {% block content %}
     
 Bienvenue sur l'accueil {% if app.user %}{{ app.user.username }}{% endif %} {#affiche l'user connecté#} !!!
+
+{{ form_start(form, {'attr': {'class': 'search input-group'}, 'action': path('homepage'), 'method': 'POST' })  }}
+{{ form_widget(form.search, {'attr': {'class': 'input-group'}} ) }}
+<span class="input-group-btn">
+{{ form_widget(form.envoi, {'attr': {'class': 'btn btn-warning'} , 'method': 'POST' }) }}
+</span>
+{{ form_end(form) }}
 {% endblock %}

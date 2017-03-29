@@ -27,6 +27,36 @@ class ItemRepository extends EntityRepository {
     // voir : https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2/recuperer-ses-entites-avec-doctrine2
     // On n'ajoute pas de critère ou tri particulier, la construction
     // de notre requête est finie
+    public function rechercheparidcategorie($categorie) {
+        //INNER JOIN LambdaBundle:Liencategorie lc WITH i.idItem=lc.idItem
+        $queryBuilder = $this->_em->createQuery(
+                'SELECT i
+                FROM LambdaBundle:Item i
+                join LambdaBundle:Categorie cat
+                WHERE i.idcategorie=:categ')
+                
+//(select cat from LambdaBundle:Categorie cat where cat.idcategorie=:categorie)')
+                //->setParameter('name',$name)
+                ->setParameter('categ',$categorie->getIdcategorie());
+ 
+                
+                
+                
+//                'SELECT i, cat from LambdaBundle:Item i
+//            JOIN LambdaBundle:Categorie cat WITH i.idcategorie=cat.idcategorie
+//                WHERE i.iditem=:name AND cat.idcategorie LIKE :categorie')
+//                ->setParameter('name',$name)
+//                ->setParameter('categorie',$categorie);
+
+
+       // $query = $queryBuilder->getQuery();
+
+
+        // On récupère les résultats à partir de la Query
+
+        $results = $queryBuilder->getResult();
+        return $results;
+    }
 
     public function getValeurProp($item) { // requete ??? : pp.idpropriete, 
     // On récupère la Query à partir du QueryBuilder

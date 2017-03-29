@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+{% block title %}Recherche avancée{% endblock %}
+{% block content %}
+    <div class="form-group">
+    {{ form_start(form, {'attr': {'class': 'input-group'}, 'action': path('advanced'), 'method': 'POST' } ) }}
+{{ form_label(form.name, 'Recherchez des objets par nom :', {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+{{ form_widget(form.name, {'attr': {'class': 'input-group'}} ) }}
+{{ form_label(form.categorie, 'Recherchez des objets par catégorie :', {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+{{ form_widget(form.categorie, {'attr': {'class': 'input-group'}}) }}
+{{ form_label(form.user, 'Recherchez des utilisateurs :', {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+{{ form_widget(form.user, {'attr': {'class': 'input-group'}} ) }}
+{{ form_label(form.groups, 'Recherchez des groupes :', {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+{{ form_widget(form.groups, {'attr': {'class': 'input-group'}} ) }}
+<span class="input-group-btn">
+{{ form_widget(form.envoi, {'attr': {'class': 'btn btn-warning'} , 'method': 'POST' }) }}
+</span>
+{{ form_end(form) }}
+    </div>    
+    
+{% endblock %}

@@ -18,6 +18,14 @@ register:
     path: /register/
     defaults: { _controller: LambdaBundle:Security:register }
     
+search:
+    path: /search
+    defaults: { _controller: LambdaBundle:Default:search }
+ 
+advanced:
+    path: /advanced
+    defaults: { _controller: LambdaBundle:Advanced:advanced }
+    
 #admin:
 #    path: /admin
 #    defaults: { _controller: AdminBundle:Default:index }

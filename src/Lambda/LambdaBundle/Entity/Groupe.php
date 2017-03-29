@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Groupe
  *
  * @ORM\Table(name="groupe")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lambda\LambdaBundle\Repository\GroupeRepository")
  */
 class Groupe
 {
@@ -36,11 +36,11 @@ class Groupe
     private $idusergroupe;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var integer
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", mappedBy="idgroupe")
+     * @ORM\Column(name="officier", type="integer")
      */
-    private $iduser;
+    private $officier;
 
     /**
      * Constructor
@@ -48,7 +48,7 @@ class Groupe
     public function __construct()
     {
         $this->idusergroupe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -120,37 +120,51 @@ class Groupe
         return $this->idusergroupe;
     }
 
+//    /**
+//     * Add iduser
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\User $iduser
+//     *
+//     * @return Groupe
+//     */
+//    public function addIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+//    {
+//        $this->iduser[] = $iduser;
+//
+//        return $this;
+//    }
+
+//    /**
+//     * Remove iduser
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\User $iduser
+//     */
+//    public function removeIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+//    {
+//        $this->iduser->removeElement($iduser);
+//    }
+
     /**
-     * Add iduser
+     * Set officier
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduser
+     * @param integer $officier
      *
      * @return Groupe
      */
-    public function addIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+    public function setOfficier($officier)
     {
-        $this->iduser[] = $iduser;
+        $this->officier = $officier;
 
         return $this;
     }
 
     /**
-     * Remove iduser
+     * Get officier
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduser
+     * @return integer
      */
-    public function removeIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+    public function getOfficier()
     {
-        $this->iduser->removeElement($iduser);
-    }
-
-    /**
-     * Get iduser
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIduser()
-    {
-        return $this->iduser;
+        return $this->officier;
     }
 }

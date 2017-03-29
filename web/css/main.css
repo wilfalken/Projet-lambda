@@ -1,6 +1,22 @@
+.contenu { /*top right bottom left*/
+    padding: 70px 20px 60px 20px;
+}
 
 
 
+
+
+
+/* liens fictifs */
+.none, a.none:visited, a.none:active, a.none:focus, a.none:link{
+    text-decoration: none;
+    color: orange;
+}
+
+a.none:hover{
+    text-decoration: none;
+    color: red;
+}
 
 
 
@@ -92,6 +108,7 @@ header
     position: relative;
     color: white;
     display: block;
+    width: 150px;
     left:10%;
     color: orange;
     font-size: 18px;
@@ -101,7 +118,7 @@ header
 .search{
   
     position: relative;
-    top: -32px;
+    top: -8px;
     left: 30%;
 /*    float: left;*/
     width: 30%;
@@ -111,6 +128,22 @@ header
     position: absolute;
     top: 15px;
     right: 1%;
+    width: 550px;
+}
+
+#padding{
+    display:inline-block;
+    position: relative;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+#paspadding{
+    display: inline-block;
+    position: relative;
+    right: 0px;
+    margin:0;
+    padding: 0;
 }
 
 /****************************************************************************
@@ -118,6 +151,7 @@ footer
 *****************************************************************************/
 .footer {
     position: fixed;
+    display: block;
     width: 100%;
     height: 40px;
     clear: both;

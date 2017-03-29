@@ -31,9 +31,9 @@ class Categorie
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Item", mappedBy="categorie")
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Item", mappedBy="idcategorie")
      */
-    private $items;
+    private $iditem;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -70,7 +70,7 @@ class Categorie
      */
     public function __construct()
     {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->iditem = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idpropriete = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idsouscategorie = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -110,39 +110,39 @@ class Categorie
         return $this->nomcategorie;
     }
 
- //   /**
-//     * Add iditem
-//     *
-//     * @param \Lambda\LambdaBundle\Entity\Item $iditem
-//     *
-//     * @return Categorie
-//     */
-//    public function addIditem(\Lambda\LambdaBundle\Entity\Item $iditem)
-//    {
-//        $this->iditem[] = $iditem;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Remove iditem
-//     *
-//     * @param \Lambda\LambdaBundle\Entity\Item $iditem
-//     */
-//    public function removeIditem(\Lambda\LambdaBundle\Entity\Item $iditem)
-//    {
-//        $this->iditem->removeElement($iditem);
-//    }
-//
-//    /**
-//     * Get iditem
-//     *
-//     * @return \Doctrine\Common\Collections\Collection
-//     */
-//    public function getIditem()
-//    {
-//        return $this->iditem;
-//    }
+    /**
+     * Add iditem
+     *
+     * @param \Lambda\LambdaBundle\Entity\Item $iditem
+     *
+     * @return Categorie
+     */
+    public function addIditem(\Lambda\LambdaBundle\Entity\Item $iditem)
+    {
+        $this->iditem[] = $iditem;
+
+        return $this;
+    }
+
+    /**
+     * Remove iditem
+     *
+     * @param \Lambda\LambdaBundle\Entity\Item $iditem
+     */
+    public function removeIditem(\Lambda\LambdaBundle\Entity\Item $iditem)
+    {
+        $this->iditem->removeElement($iditem);
+    }
+
+    /**
+     * Get iditem
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIditem()
+    {
+        return $this->iditem;
+    }
 
     /**
      * Add idpropriete
@@ -214,39 +214,5 @@ class Categorie
     
     public function __toString() {
         return $this->nomcategorie;
-    }
-
-    /**
-     * Add item
-     *
-     * @param \Lambda\LambdaBundle\Entity\Item $item
-     *
-     * @return Categorie
-     */
-    public function addItem(\Lambda\LambdaBundle\Entity\Item $item)
-    {
-        $this->items[] = $item;
-
-        return $this;
-    }
-
-    /**
-     * Remove item
-     *
-     * @param \Lambda\LambdaBundle\Entity\Item $item
-     */
-    public function removeItem(\Lambda\LambdaBundle\Entity\Item $item)
-    {
-        $this->items->removeElement($item);
-    }
-
-    /**
-     * Get items
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getItems()
-    {
-        return $this->items;
     }
 }
