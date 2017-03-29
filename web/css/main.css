@@ -1,6 +1,7 @@
 .contenu { /*top right bottom left*/
-    padding: 70px 20px 60px 20px;
+    padding: 30px 20px 30px 20px;
 }
+
 
 
 
@@ -118,7 +119,7 @@ header
 .search{
   
     position: relative;
-    top: -8px;
+    top: -40px;
     left: 30%;
 /*    float: left;*/
     width: 30%;

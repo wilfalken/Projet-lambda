@@ -1,6 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends '::basepure.html.twig' %}
 {% block title %}Recherche avancée{% endblock %}
 {% block content %}
+ <div class="popup_large">
     <div class="form-group">
     {{ form_start(form, {'attr': {'class': 'input-group'}, 'action': path('advanced'), 'method': 'POST' } ) }}
 {{ form_label(form.name, 'Recherchez des objets par nom :', {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
@@ -15,6 +16,7 @@
 {{ form_widget(form.envoi, {'attr': {'class': 'btn btn-warning'} , 'method': 'POST' }) }}
 </span>
 {{ form_end(form) }}
-    </div>    
+    </div> 
+ </div>
     
 {% endblock %}
