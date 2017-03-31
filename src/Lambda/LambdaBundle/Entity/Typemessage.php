@@ -14,16 +14,16 @@ class Typemessage
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="typeMessage", type="string", length=50)
      * @ORM\Id
+     * @ORM\Column(name="typeMessage", type="string", length=50)
+     * 
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $typemessage;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Message
-     *
+     * 
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Message")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idMessage", referencedColumnName="idMessage")

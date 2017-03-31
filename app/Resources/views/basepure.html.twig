@@ -7,29 +7,30 @@
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
+        
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/colorbox.css') }}" />
 </head>
 <body>
 
 {% block body %}
-<div class="contenu">    
+  
 {% block content %}
 {% endblock %}
-</div>
+
 {% endblock %}
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-{#<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>#}
+{#<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>#}
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="{{ asset('js/jquery.colorbox-min.js') }}"></script>
 
 
 {% block javascripts %}
-    <script type="text/javascript">
+<script>
+  $('a[rel="color"]').colorbox();
 
- 
 
-    
-    </script>
+</script>
 {% endblock %}
 </body>
 </html>

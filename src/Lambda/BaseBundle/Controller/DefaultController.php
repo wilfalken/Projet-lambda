@@ -8,6 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('BaseBundle:Default:index.html.twig');
+        $user = $this->getUser();
+         return $this->redirect($this->generateUrl('profil', array( 'user' => $user )));
     }
 }

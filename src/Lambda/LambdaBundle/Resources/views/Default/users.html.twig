@@ -10,6 +10,7 @@
     Membre depuis : {{ user.mdepuis|date('d/m/Y') }}</br>
     Telephone : {% if user.telephone %}{{ user.telephone }}{% else %}Aucun renseigné{% endif %}</br>
     {{ user.genre }}</br>
+    <a href="{{ path('adresseunew') }}">ajouter adresse</a>
 {% else %}
     Aucun utilisateur trouvé !!
 {% endfor %}

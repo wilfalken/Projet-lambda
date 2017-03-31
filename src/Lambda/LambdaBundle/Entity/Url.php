@@ -12,18 +12,25 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Url
 {
+     /**
+     * @var integer
+     * @ORM\Id
+     * @ORM\Column(name="idurl", type="integer")
+     * 
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idurl;
+    
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="url", type="string", length=100)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $url;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Item
-     *
+     * 
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Item")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idItem", referencedColumnName="idItem")
@@ -65,5 +72,29 @@ class Url
     public function getIditem()
     {
         return $this->iditem;
+    }
+
+    /**
+     * Get idurl
+     *
+     * @return integer
+     */
+    public function getIdurl()
+    {
+        return $this->idurl;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return Url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
     }
 }

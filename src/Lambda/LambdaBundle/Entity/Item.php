@@ -56,7 +56,7 @@ class Item
      * @ORM\JoinColumn(name="idCategorie", referencedColumnName="idCategorie")
      * 
      */
-    private $idcategorie;
+    private $categorie;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -279,5 +279,29 @@ class Item
     public function getIdcategorie()
     {
         return $this->idcategorie;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \Lambda\LambdaBundle\Entity\Categorie $categorie
+     *
+     * @return Item
+     */
+    public function setCategorie(\Lambda\LambdaBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Lambda\LambdaBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }

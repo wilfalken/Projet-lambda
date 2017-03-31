@@ -29,11 +29,20 @@ class Groupe
     private $nomgroupe;
 
     /**
+     * Owning side
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", mappedBy="idgroupelien")
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", inversedBy="groupes")
+     * @ORM\JoinTable(name="appartientgroupe",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="idgroupelien", referencedColumnName="idGroupe")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="idusergroupe", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $idusergroupe;
+    private $users;
 
     /**
      * @var integer
@@ -166,5 +175,39 @@ class Groupe
     public function getOfficier()
     {
         return $this->officier;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $user
+     *
+     * @return Groupe
+     */
+    public function addUser(\Lambda\LambdaBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $user
+     */
+    public function removeUser(\Lambda\LambdaBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

@@ -1,9 +1,5 @@
-lambda_item:
-    resource: "@LambdaBundle/Controller/ItemController.php"
-    type:     annotation
-
-lambda_item:
-    resource: "@LambdaBundle/Controller/ItemController.php"
+admin_item:
+    resource: "@AdminBundle/Controller/ItemController.php"
     type:     annotation
 
 base:
@@ -14,24 +10,20 @@ admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
     prefix:   /admin
 
-lambda_commentaire:
-    resource: "@LambdaBundle/Controller/CommentaireController.php"
+admin_commentaire:
+    resource: "@AdminBundle/Controller/CommentaireController.php"
     type:     annotation
 
-lambda_adresse:
-    resource: "@LambdaBundle/Controller/AdresseController.php"
+admin_adresse:
+    resource: "@AdminBundle/Controller/AdresseController.php"
     type:     annotation
 
-lambda_categorie:
-    resource: "@LambdaBundle/Controller/CategorieController.php"
+admin_categorie:
+    resource: "@AdminBundle/Controller/CategorieController.php"
     type:     annotation
 
-lambda_categorie:
-    resource: "@LambdaBundle/Controller/categorieController.php"
-    type:     annotation
-
-lambda_item:
-    resource: "@LambdaBundle/Controller/ItemController.php"
+admin_item:
+    resource: "@AdminBundle/Controller/ItemController.php"
     type:     annotation
 
 lambda:

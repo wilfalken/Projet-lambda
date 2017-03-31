@@ -25,6 +25,7 @@ search:
 advanced:
     path: /advanced
     defaults: { _controller: LambdaBundle:Advanced:advanced }
+
     
 #admin:
 #    path: /admin

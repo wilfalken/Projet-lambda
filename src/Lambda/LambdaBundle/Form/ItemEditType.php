@@ -7,9 +7,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Lambda\LambdaBundle\Form\LienproprieteType;
 
 
-class ItemType extends AbstractType
+class ItemEditType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -23,10 +24,11 @@ class ItemType extends AbstractType
                 
         
         
-        ->add('idpropriete', CollectionType::class, array(
-                    'entry_type' => 'Lienproprietetype::class',
-                    'attr'=> array('class' =>'valeur')
-                ))        ;
+        ->add('idpropriete', LienproprieteType::class); //, array(
+                    //'entry_type' => 'LambdaBundle:Lienpropriete',
+                   // 'attr'=> array('class' =>'valeur'
+                     //   )
+               // )        ;
     }
     
     /**

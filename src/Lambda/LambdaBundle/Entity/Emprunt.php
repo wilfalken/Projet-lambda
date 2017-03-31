@@ -38,17 +38,27 @@ class Emprunt
     /**
      * @var \Lambda\LambdaBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
+     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idemprunteur", referencedColumnName="id")
      * })
      */
     private $idemprunteur;
+    
+     /**
+     * @var \Lambda\LambdaBundle\Entity\User
+     *
+     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idproprietaire", referencedColumnName="id")
+     * })
+     */
+    private $idproprietaire;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Exemplaire
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
+     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idExemplaire", referencedColumnName="idexemplaire")
      * })
@@ -56,11 +66,21 @@ class Emprunt
     private $idexemplaire;
 
     /**
+     * Owning side
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", mappedBy="idemprunt")
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", inversedBy="emprunts")
+     *      *      * @ORM\JoinTable(name="lienemprunt",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="idEmprunt", referencedColumnName="idEmprunt")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="idadresse", referencedColumnName="idadresse")
+     *   }
+     * )
+     * 
      */
-    private $idadresseuser;
+    private $adresses;
 
     /**
      * Constructor
@@ -209,5 +229,63 @@ class Emprunt
     public function getIdadresseuser()
     {
         return $this->idadresseuser;
+    }
+
+    /**
+     * Add adress
+     *
+     * @param \Lambda\LambdaBundle\Entity\Adresse $adress
+     *
+     * @return Emprunt
+     */
+    public function addAdress(\Lambda\LambdaBundle\Entity\Adresse $adress)
+    {
+        $this->adresses[] = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Remove adress
+     *
+     * @param \Lambda\LambdaBundle\Entity\Adresse $adress
+     */
+    public function removeAdress(\Lambda\LambdaBundle\Entity\Adresse $adress)
+    {
+        $this->adresses->removeElement($adress);
+    }
+
+    /**
+     * Get adresses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdresses()
+    {
+        return $this->adresses;
+    }
+
+    /**
+     * Set idproprietaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $idproprietaire
+     *
+     * @return Emprunt
+     */
+    public function setIdproprietaire(\Lambda\LambdaBundle\Entity\User $idproprietaire = null)
+    {
+        $this->idproprietaire = $idproprietaire;
+
+        return $this;
+    }
+
+    /**
+     * Get idproprietaire
+     *
+     * @return \Lambda\LambdaBundle\Entity\User
+     */
+    public function getIdproprietaire()
+    {
+        return $this->idproprietaire;
     }
 }

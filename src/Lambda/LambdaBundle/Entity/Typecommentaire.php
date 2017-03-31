@@ -14,16 +14,16 @@ class Typecommentaire
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=200)
      * @ORM\Id
+     * @ORM\Column(name="description", type="string", length=200)
+     * 
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $description;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Commentaire
-     *
+     * 
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Commentaire")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idCommentaire", referencedColumnName="idCommentaire")

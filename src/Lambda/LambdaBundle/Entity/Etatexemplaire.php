@@ -14,16 +14,16 @@ class Etatexemplaire
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="etat", type="string", length=220)
      * @ORM\Id
+     * @ORM\Column(name="etat", type="string", length=220)
+     * 
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $etat;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Exemplaire
-     *
+     * 
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idExemplaire", referencedColumnName="idexemplaire")

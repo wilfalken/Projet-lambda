@@ -1,6 +1,16 @@
 .contenu { /*top right bottom left*/
-    padding: 30px 20px 30px 20px;
+/*    padding: 30px 20px 30px 20px;*/
 }
+
+
+.form-group{
+    max-width: 600px;
+}
+
+.form-group label {
+    width: 100%;
+}
+
 
 
 

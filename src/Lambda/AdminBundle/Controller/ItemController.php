@@ -1,6 +1,6 @@
 <?php
 
-namespace Lambda\LambdaBundle\Controller;
+namespace Lambda\AdminBundle\Controller;
 
 use Lambda\LambdaBundle\Entity\Item;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Item controller.
  *
- * @Route("item")
+ * @Route("/admin/item")
  */
 class ItemController extends Controller
 {
@@ -26,7 +26,7 @@ class ItemController extends Controller
 
         $items = $em->getRepository('LambdaBundle:Item')->findAll();
 
-        return $this->render('item/index.html.twig', array(
+        return $this->render('AdminBundle:item:index.html.twig', array(
             'items' => $items,
         ));
     }
@@ -59,7 +59,7 @@ class ItemController extends Controller
             return $this->redirectToRoute('item_show', array('id' => $item->getIditem()));
         }
 
-        return $this->render('item/new.html.twig', array(
+        return $this->render('AdminBundle:item:new.html.twig', array(
             'item' => $item,
             'form' => $form->createView(),
             //'nomproprietes' =>$nomproprietes,
@@ -76,7 +76,7 @@ class ItemController extends Controller
     {
         $deleteForm = $this->createDeleteForm($item);
 
-        return $this->render('item/show.html.twig', array(
+        return $this->render('AdminBundle:item:show.html.twig', array(
             'item' => $item,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -100,7 +100,7 @@ class ItemController extends Controller
             return $this->redirectToRoute('item_edit', array('id' => $item->getIditem()));
         }
 
-        return $this->render('item/edit.html.twig', array(
+        return $this->render('AdminBundle:item:edit.html.twig', array(
             'item' => $item,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

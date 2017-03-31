@@ -1,6 +1,6 @@
 <?php
 
-namespace Lambda\LambdaBundle\Controller;
+namespace Lambda\AdminBundle\Controller;
 
 use Lambda\LambdaBundle\Entity\Commentaire;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Commentaire controller.
  *
- * @Route("commentaire")
+ * @Route("/admin/commentaire")
  */
 class CommentaireController extends Controller
 {
@@ -26,7 +26,7 @@ class CommentaireController extends Controller
 
         $commentaires = $em->getRepository('LambdaBundle:Commentaire')->findAll();
 
-        return $this->render('commentaire/index.html.twig', array(
+        return $this->render('AdminBundle:commentaire:index.html.twig', array(
             'commentaires' => $commentaires,
         ));
     }
@@ -51,7 +51,7 @@ class CommentaireController extends Controller
             return $this->redirectToRoute('commentaire_show', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('commentaire/new.html.twig', array(
+        return $this->render('AdminBundle:commentaire:new.html.twig', array(
             'commentaire' => $commentaire,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class CommentaireController extends Controller
     {
         $deleteForm = $this->createDeleteForm($commentaire);
 
-        return $this->render('commentaire/show.html.twig', array(
+        return $this->render('AdminBundle:commentaire:show.html.twig', array(
             'commentaire' => $commentaire,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class CommentaireController extends Controller
             return $this->redirectToRoute('commentaire_edit', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('commentaire/edit.html.twig', array(
+        return $this->render('AdminBundle:commentaire:edit.html.twig', array(
             'commentaire' => $commentaire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

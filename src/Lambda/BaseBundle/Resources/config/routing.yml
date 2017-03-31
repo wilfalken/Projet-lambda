@@ -1,3 +1,11 @@
 base_homepage:
     path:     /
     defaults: { _controller: BaseBundle:Default:index }
+    
+profil:
+    path: /profil
+    defaults: { _controller: BaseBundle:Profil:index }
+    
+adresseunew:
+    path: /adresse
+    defaults: { _controller: BaseBundle:Adresse:new }

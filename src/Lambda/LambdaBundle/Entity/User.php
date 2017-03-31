@@ -111,57 +111,52 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     * inverse side
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", mappedBy="users")
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", inversedBy="iduser")
-     * @ORM\JoinTable(name="adresseuser",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="iduser", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idadresse", referencedColumnName="idadresse")
-     *   }
-     * )
      */
-    private $idadresse;
+    private $adresses;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", inversedBy="idusergroupe")
-     * @ORM\JoinTable(name="appartientgroupe",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="idusergroupe", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idgroupelien", referencedColumnName="idGroupe")
-     *   }
-     * )
+     * inverse side
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", mappedBy="users")
+     * 
      */
-    private $idgroupelien;
+    private $groupes;
+    
+//    @ORM\JoinTable(name="appartientgroupe",
+//     *   joinColumns={
+//     *     @ORM\JoinColumn(name="idusergroupe", referencedColumnName="id")
+//     *   },
+//     *   inverseJoinColumns={
+//     *     @ORM\JoinColumn(name="idgroupelien", referencedColumnName="idgroupe")
+//     *   }
+//     * )
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", inversedBy="iduser")
-     * @ORM\JoinTable(name="liengroupe",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="idUser", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idGroupe", referencedColumnName="idGroupe")
-     *   }
-     * )
-     */
-    private $idgroupe;
+ //   /**
+ //    * @var \Doctrine\Common\Collections\Collection
+//     *
+//     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", inversedBy="iduser")
+//     * @ORM\JoinTable(name="liengroupe",
+//    *   joinColumns={
+//     *     @ORM\JoinColumn(name="idUser", referencedColumnName="id")
+//     *   },
+//     *   inverseJoinColumns={
+//     *     @ORM\JoinColumn(name="idGroupe", referencedColumnName="idGroupe")
+//     *   }
+ //    * )
+//     */
+    //private $idgroupe;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idadresse = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idgroupelien = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idgroupe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->adresses = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->idgroupelien = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groupes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
         $this->enabled = true;
         $this->mdepuis = new \Datetime;
@@ -585,5 +580,73 @@ class User implements UserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Add groupe
+     *
+     * @param \Lambda\LambdaBundle\Entity\Groupe $groupe
+     *
+     * @return User
+     */
+    public function addGroupe(\Lambda\LambdaBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes[] = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Remove groupe
+     *
+     * @param \Lambda\LambdaBundle\Entity\Groupe $groupe
+     */
+    public function removeGroupe(\Lambda\LambdaBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes->removeElement($groupe);
+    }
+
+    /**
+     * Get groupes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroupes()
+    {
+        return $this->groupes;
+    }
+
+    /**
+     * Add adress
+     *
+     * @param \Lambda\LambdaBundle\Entity\Adresse $adress
+     *
+     * @return User
+     */
+    public function addAdress(\Lambda\LambdaBundle\Entity\Adresse $adress)
+    {
+        $this->adresses[] = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Remove adress
+     *
+     * @param \Lambda\LambdaBundle\Entity\Adresse $adress
+     */
+    public function removeAdress(\Lambda\LambdaBundle\Entity\Adresse $adress)
+    {
+        $this->adresses->removeElement($adress);
+    }
+
+    /**
+     * Get adresses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdresses()
+    {
+        return $this->adresses;
     }
 }

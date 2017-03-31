@@ -1,16 +1,18 @@
 <?php
 
-namespace Lambda\LambdaBundle\Controller;
+namespace Lambda\BaseBundle\Controller;
 
 use Lambda\LambdaBundle\Entity\Adresse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Adresse controller.
  *
- * @Route("adresse")
+ * @Route("/admin/adresse")
  */
 class AdresseController extends Controller
 {
@@ -26,7 +28,7 @@ class AdresseController extends Controller
 
         $adresses = $em->getRepository('LambdaBundle:Adresse')->findAll();
 
-        return $this->render('adresse/index.html.twig', array(
+        return $this->render('LambdaBundle:Admin/adresse:index.html.twig', array(
             'adresses' => $adresses,
         ));
     }
@@ -37,21 +39,28 @@ class AdresseController extends Controller
      * @Route("/new", name="adresse_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, UserInterface $user)
     {
         $adresse = new Adresse();
-        $form = $this->createForm('Lambda\LambdaBundle\Form\AdresseType', $adresse);
+        $form = $this->createForm('Lambda\LambdaBundle\Form\AdressebaseType', $adresse);
         $form->handleRequest($request);
-
+        //$idUser = $user->getIduser();
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            if ($user != null) { //s'il ya un user
+            
+            $adresse->addUser($user);
+            $user->addAdress($adresse);
+        }
             $em->persist($adresse);
-            $em->flush($adresse);
+            $em->persist($user);
+            $em->flush();
 
             return $this->redirectToRoute('adresse_show', array('id' => $adresse->getIdadresse()));
         }
 
-        return $this->render('adresse/new.html.twig', array(
+        return $this->render('BaseBundle:adresse:new.html.twig', array(
             'adresse' => $adresse,
             'form' => $form->createView(),
         ));
@@ -67,7 +76,7 @@ class AdresseController extends Controller
     {
         $deleteForm = $this->createDeleteForm($adresse);
 
-        return $this->render('adresse/show.html.twig', array(
+        return $this->render('BaseBundle:adresse:show.html.twig', array(
             'adresse' => $adresse,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +100,7 @@ class AdresseController extends Controller
             return $this->redirectToRoute('adresse_edit', array('id' => $adresse->getIdadresse()));
         }
 
-        return $this->render('adresse/edit.html.twig', array(
+        return $this->render('BaseBundle:adresse:edit.html.twig', array(
             'adresse' => $adresse,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -104,7 +113,7 @@ class AdresseController extends Controller
      * @Route("/{id}", name="adresse_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Adresse $adresse)
+    public function deleteAction(Request $request, Adresse $adresse, UserInterface $user)
     {
         $form = $this->createDeleteForm($adresse);
         $form->handleRequest($request);
@@ -112,7 +121,10 @@ class AdresseController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($adresse);
+            $user->removeElement($adresse);
+            $em->persist($adresse, $user);
             $em->flush($adresse);
+            $em->flush($user);
         }
 
         return $this->redirectToRoute('adresse_index');

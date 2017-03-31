@@ -31,7 +31,7 @@ class Categorie
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Item", mappedBy="categorie")
+     * @ORM\OneToMAny(targetEntity="Lambda\LambdaBundle\Entity\Item", mappedBy="categorie")
      */
     private $items;
 

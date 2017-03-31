@@ -14,6 +14,7 @@
                     <th>Description</th>
                     <th>Categorie</td>
                     <th>Photo</th>
+                    <th>Actions</th>
                    
 
                 </tr>
@@ -35,8 +36,9 @@
 
                                 {#{{ dump(categories) }}#}
 
-                                {% if app.user.id == null %}Connectez-vous !{% else %}
-                                    <a class="btn btn-primary btn-xs" href="{{ path('search', { 'id': unitem.iditem }, {'iduser': app.user.id}) }}">Je l'ai !!!</a>
+                                {% if app.user.username|default('Not Logged') != 'Not Logged' %}
+                                    <a class="btn btn-primary btn-xs" href="{{ path('search', { 'id': unitem.nomitem }, {'iduser': app.user.id}) }}">Je l'ai !!!</a>
+                                {% else %}Connectez-vous !
                                 {% endif %}
                             </ul>
                         </td>
