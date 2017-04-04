@@ -43,7 +43,7 @@ class UserType extends AbstractType{
                     'second_options' => array('label' => 'Retapez le mot de passe'),
                 ))
                 ->add('telephone', TextType::class, array('label' => 'telephone'))
-                ->add('save', SubmitType::class, array('label' => 'Je m\'enregistre !!!'))
+                
                 ->add('genre', ChoiceType::class, array(
                     'choices' => array(
                         'Homme' => false,
@@ -51,7 +51,8 @@ class UserType extends AbstractType{
                         ),
                             'required' => true,
                             'empty_data' => ''
-                        ));
+                        ))
+                ->add('save', SubmitType::class, array('label' => 'Je m\'enregistre !!!'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

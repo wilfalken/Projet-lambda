@@ -9,6 +9,6 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
-         return $this->redirect($this->generateUrl('profil', array( 'user' => $user )));
+         return $this->redirect($this->generateUrl('adresse', array( 'user' => $user )));
     }
 }

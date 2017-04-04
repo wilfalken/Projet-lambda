@@ -40,13 +40,14 @@
         <ul>
 
 
-            {{ form_start(delete_form) }}
-            <input class="btn btn-danger" type="submit" value="Supprimer">
-            <a class="btn btn-warning" href="{{ path('adresse_edit', { 'id': adresse.idadresse }) }}">Editer</a>
-            {{ form_end(delete_form) }}
+            {{ form_start(delete_form2) }}
+               
+            <input class="btn btn-danger" type="submit" value="Supprimer" method="DELETE">
+            <a class="btn btn-warning" href="{{ path('base_adresse_edit', { 'id': adresse.idadresse }) }}">Editer</a>
+            {{ form_end(delete_form2) }}
             </br>
             </br>
-            <a class="btn btn-primary" href="{{ path('adresse_index') }}">Retourner à la liste</a>
+            <a class="btn btn-primary" href="{{ path('base_adresse_index') }}">Retourner à la liste</a>
 
 
 

@@ -1,7 +1,12 @@
+
+
+
 .contenu { /*top right bottom left*/
 /*    padding: 30px 20px 30px 20px;*/
 }
-
+th, td{
+    text-align:center;
+}
 
 .form-group{
     max-width: 600px;
@@ -12,11 +17,15 @@
 }
 
 
+input[type=number] {
+    -moz-appearance:textfield;
+}
 
-
-
-
-
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 /* liens fictifs */
 .none, a.none:visited, a.none:active, a.none:focus, a.none:link{
@@ -42,6 +51,7 @@ a.none:hover{
 }
 
 .bs-example {
+    
     margin-right: 0;
     margin-left: 0;
     background-color: #fff;

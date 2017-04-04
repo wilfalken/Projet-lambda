@@ -45,18 +45,28 @@ class Groupe
     private $users;
 
     /**
-     * @var integer
+     * @var array
      *
-     * @ORM\Column(name="officier", type="integer")
+     * @ORM\Column(name="officier", type="json_array")
      */
-    private $officier;
+    private $officiers=array();
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=250, nullable=false)
+     */
+    private $description;
+    
+    
+    
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->idusergroupe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->officiers = array();
         //$this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -152,30 +162,30 @@ class Groupe
 //    {
 //        $this->iduser->removeElement($iduser);
 //    }
-
-    /**
-     * Set officier
-     *
-     * @param integer $officier
-     *
-     * @return Groupe
-     */
-    public function setOfficier($officier)
-    {
-        $this->officier = $officier;
-
-        return $this;
-    }
-
-    /**
-     * Get officier
-     *
-     * @return integer
-     */
-    public function getOfficier()
-    {
-        return $this->officier;
-    }
+//
+//    /**
+//     * Set officier
+//     *
+//     * @param integer $officier
+//     *
+//     * @return Groupe
+//     */
+//    public function setOfficier($officier)
+//    {
+//        $this->officier = $officier;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get officier
+//     *
+//     * @return integer
+//     */
+//    public function getOfficier()
+//    {
+//        return $this->officier;
+//    }
 
     /**
      * Add user
@@ -209,5 +219,64 @@ class Groupe
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set officiers
+     *
+     * @param array $officiers
+     *
+     * @return Groupe
+     */
+    public function setOfficiers(array $officiers)
+    {
+        $this->officiers = $officiers;
+
+        return $this;
+    }
+    
+     /**
+     * Add officiers
+     *
+     * @return array
+     */
+    public function addOfficier(\Lambda\LambdaBundle\Entity\User $user)
+    {
+        $this->officiers[] = $user->getId();
+        return $this;
+    }
+
+    /**
+     * Get officiers
+     *
+     * @return array
+     */
+    public function getOfficiers()
+    {
+        return $this->officiers;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Groupe
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

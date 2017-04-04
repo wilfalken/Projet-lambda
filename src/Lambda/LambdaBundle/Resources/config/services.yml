@@ -3,7 +3,10 @@ services:
         class: AppBundle\Security\FormAuthenticator
         arguments: ["@router"]
 
-
+    lambda.twig.lambda_extension:
+        class: Lambda\LambdaBundle\Twig\CountryExtension
+        tags:
+            - { name: twig.extension }
 
 #    lambda.example:
 #        class: Lambda\LambdaBundle\Example

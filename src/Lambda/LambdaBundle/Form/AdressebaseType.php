@@ -22,7 +22,7 @@ class AdressebaseType extends AbstractType
                 ->add('complement',TextType::class, array('label' => 'Complément d\'adresse :'))
                 ->add('cp',IntegerType::class, array('label' => 'Code postal :'))
                 ->add('ville',TextType::class, array('label' => 'Ville :'))
-                ->add('pays',CountryType::class, array('label' => 'Pays :'))
+                ->add('pays',CountryType::class, array('label' => 'Pays :', 'placeholder' => 'Choisissez un pays'))
                 //->add('iduser')
                 ;
     }

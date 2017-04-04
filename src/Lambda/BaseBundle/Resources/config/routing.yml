@@ -1,11 +1,15 @@
 base_homepage:
-    path:     /
+    path: /
     defaults: { _controller: BaseBundle:Default:index }
     
 profil:
     path: /profil
     defaults: { _controller: BaseBundle:Profil:index }
     
-adresseunew:
+adresse:
     path: /adresse
-    defaults: { _controller: BaseBundle:Adresse:new }
+    defaults: { _controller: BaseBundle:Adressebase:index }
+    
+groupe:
+    path: /groupe
+    defaults: { _controller: BaseBundle:Groupe:index }

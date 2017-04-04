@@ -12,31 +12,33 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Adresse controller.
  *
- * @Route("/admin/adresse")
+ * @Route("/base/adresse")
  */
-class AdresseController extends Controller
+class AdressebaseController extends Controller
 {
     /**
      * Lists all adresse entities.
      *
-     * @Route("/", name="adresse_index")
+     * @Route("/", name="base_adresse_index")
      * @Method("GET")
      */
     public function indexAction()
     {
+        
         $em = $this->getDoctrine()->getManager();
 
         $adresses = $em->getRepository('LambdaBundle:Adresse')->findAll();
-
-        return $this->render('LambdaBundle:Admin/adresse:index.html.twig', array(
+        
+        return $this->render('BaseBundle:adresse:index.html.twig', array(
             'adresses' => $adresses,
+            
         ));
     }
 
     /**
      * Creates a new adresse entity.
      *
-     * @Route("/new", name="adresse_new")
+     * @Route("/new", name="base_adresse_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, UserInterface $user)
@@ -57,7 +59,7 @@ class AdresseController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('adresse_show', array('id' => $adresse->getIdadresse()));
+            return $this->redirectToRoute('base_adresse_show', array('id' => $adresse->getIdadresse()));
         }
 
         return $this->render('BaseBundle:adresse:new.html.twig', array(
@@ -69,7 +71,7 @@ class AdresseController extends Controller
     /**
      * Finds and displays a adresse entity.
      *
-     * @Route("/{id}", name="adresse_show")
+     * @Route("/{id}", name="base_adresse_show")
      * @Method("GET")
      */
     public function showAction(Adresse $adresse)
@@ -78,31 +80,31 @@ class AdresseController extends Controller
 
         return $this->render('BaseBundle:adresse:show.html.twig', array(
             'adresse' => $adresse,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form2' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Displays a form to edit an existing adresse entity.
      *
-     * @Route("/{id}/edit", name="adresse_edit")
+     * @Route("/{id}/edit", name="base_adresse_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Adresse $adresse)
     {
         $deleteForm = $this->createDeleteForm($adresse);
-        $editForm = $this->createForm('Lambda\LambdaBundle\Form\AdresseType', $adresse);
+        $editForm = $this->createForm('Lambda\LambdaBundle\Form\AdressebaseType', $adresse);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('adresse_edit', array('id' => $adresse->getIdadresse()));
+            return $this->redirectToRoute('base_adresse_show', array('id' => $adresse->getIdadresse()));
         }
-
+        //return $this->redirectToRoute('base_adresse_show')
         return $this->render('BaseBundle:adresse:edit.html.twig', array(
             'adresse' => $adresse,
-            'edit_form' => $editForm->createView(),
+           'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -110,24 +112,23 @@ class AdresseController extends Controller
     /**
      * Deletes a adresse entity.
      *
-     * @Route("/{id}", name="adresse_delete")
+     * @Route("/{id}", name="base_adresse_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Adresse $adresse, UserInterface $user)
+    public function deleteAction(Request $request, Adresse $adresse)
     {
+       
         $form = $this->createDeleteForm($adresse);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($adresse);
-            $user->removeElement($adresse);
-            $em->persist($adresse, $user);
+            //$em->persist($adresse);
             $em->flush($adresse);
-            $em->flush($user);
         }
 
-        return $this->redirectToRoute('adresse_index');
+        return $this->redirectToRoute('base_adresse_index');
     }
 
     /**
@@ -140,7 +141,7 @@ class AdresseController extends Controller
     private function createDeleteForm(Adresse $adresse)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('adresse_delete', array('id' => $adresse->getIdadresse())))
+            ->setAction($this->generateUrl('base_adresse_delete', array('id' => $adresse->getIdadresse())))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -1,0 +1,70 @@
+{% extends '::base.html.twig' %}
+{% block title %}Mes groupe{% endblock %}
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Index du groupe</h1>
+        {% for groupe in groupes %}
+            <table class="table table-condensed table-striped table-hover">
+
+                <thead>
+                    <tr>
+                        <th colspan="2" >Groupe</th>
+
+                        <th>Description</th>
+                            {#                    <th>Complement</th>
+                                               <th>Cp</th>
+                                               <th>Ville</th>
+                                               <th>Pays</th>#}
+                        {#<th>Actions</th>#}
+                    </tr>
+                </thead>
+                <tr>
+                    <td>{{ groupe.idgroupe }}</td>
+                    <td>{{ groupe.nomgroupe }}</td>    
+                    <td>{{ groupe.description }}</td>
+                    
+                </tr>
+            </table>
+
+
+            <table class="table table-condensed table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="2" >Utilisateur / membre</th>
+                        {#<th>Membres du groupe</th>#}
+                        {#<th>Nom</th>#}
+
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for membre in groupe.users %}
+                        <tr>
+                            <td>{{ membre.id }}</td>
+                            <td>{{ membre.username }}</td>
+                            <td>
+                                <ul>
+
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_sortir', { 'id': groupe.idgroupe }, {'iduser': app.user} ) }}">Sortir du groupe</a>
+                                    {% if app.user.id in groupe.officiers %}
+                                    <a class="btn btn-danger btn-xs" href="{{ path('base_groupe_virer', { 'id': groupe.idgroupe }, {'iduser': membre.id} ) }}">Renvoyer du groupe</a>
+                                    {% endif %}
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+            </br>
+            <hr/>
+            </br>
+        {% endfor %}
+
+
+        <ul>
+
+            <a class="btn btn-warning" href="{{ path('base_groupe_new') }}">Fonder un nouveau groupe</a>
+
+        </ul>
+    </div>
+{% endblock %}

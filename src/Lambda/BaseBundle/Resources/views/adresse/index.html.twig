@@ -26,13 +26,13 @@
                         <td>{{ adresse.complement }}</td>
                         <td>{{ adresse.cp }}</td>
                         <td>{{ adresse.ville }}</td>
-                        <td>{{ adresse.pays }}</td>
+                        <td>{{ adresse.pays|countryName }}</td>
                         <td>
                             <ul>
 
-                                <a class="btn btn-primary btn-xs" href="{{ path('adresse_show', { 'id': adresse.idadresse }) }}">Voir</a>
+                                <a class="btn btn-primary btn-xs" href="{{ path('base_adresse_show', { 'id': adresse.idadresse }) }}">Voir</a>
 
-                                <a class="btn btn-primary btn-xs" href="{{ path('adresse_edit', { 'id': adresse.idadresse }) }}">Modifier</a>
+                                <a class="btn btn-primary btn-xs" href="{{ path('base_adresse_edit', { 'id': adresse.idadresse }) }}">Modifier</a>
 
                             </ul>
                         </td>
@@ -43,7 +43,7 @@
 
         <ul>
 
-            <a class="btn btn-warning" href="{{ path('adresse_new') }}">Nouvelle adresse</a>
+            <a class="btn btn-warning" href="{{ path('base_adresse_new') }}">Nouvelle adresse</a>
 
         </ul>
     </div>
