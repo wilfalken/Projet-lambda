@@ -13,6 +13,7 @@
                     
                     <th>Nom</th>
                     <th>Officier</th>
+                    <th>Description</th>
                     <th>nombre de membres</td>
                     <th>Action(s)</th>
                    
@@ -21,14 +22,15 @@
             </thead>
             
             <tbody>
-                {% for unitem in liste_groupes %}
+                {% for ungroupe in liste_groupes %}
                     
                     <tr>
                        
-                        <td>{{ unitem.nomgroupe }}</td>
-                        <td>{{ unitem.officier.username }}</td>
-                        <td>{{ unitem.idcategorie['0'].nomcategorie }}</td>
-                        <td>{% if unitem.photoitem==null %}Aucune photo...{% else %}{{ unitem.photoitem }}{% endif %}</td>
+                        <td>{{ ungroupe.nomgroupe }}</td>
+                        <td>{% for officier in ungroupe.officiers %}{{ officier }}{% endfor %}</td>
+                        <td>{{ ungroupe.description }}</td>
+                        <td>{{ ungroupe.users|length }}</td>
+                       
                         
                         
                         <td>
@@ -36,8 +38,8 @@
 
                                 
 
-                                {% if app.user.id == null %}Connectez-vous !{% else %}
-                                    <a class="btn btn-primary btn-xs" href="{{ path('search', { 'id': unitem.iditem }, {'iduser': app.user.id}) }}">Faire partie du groupe ></a>
+                                {% if app.user.id|default('null') == null %}Connectez-vous !{% else %}
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_entrer', { 'id': ungroupe.idgroupe }, {'iduser': app.user.id}) }}">Faire partie du groupe ></a>
                                 {% endif %}
                             </ul>
                         </td>

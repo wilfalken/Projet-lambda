@@ -15,7 +15,7 @@
         <input class="btn btn-danger" type="submit" value="Supprimer">
         {{ form_end(delete_form) }}
         </br>
-        
+        <table class="table table-condensed table-striped table-hover">
                          <thead>Membres du groupe :
                 <tr>
                     <th>Id</th>
@@ -29,16 +29,16 @@
             <tbody>
                 {% for membre in groupe.users %}
                     <tr>
-                        <td>{{ membre.iduser }}</td>
+                        <td>{{ membre.id }}</td>
                         <td>{{ membre.username }}</td>
-                        <td>{{ membre.ville }}</td>
-                        <td>{{ membre.pays }}</td>
+                        <td>{% for adresse in membre.adresses %}{{ adresse.ville }}{% endfor %}</td>
+                        <td>{% for adresse in membre.adresses %}{{ adresse.pays }}{% endfor %}</td>
                         <td>
                             <ul>
 
-                                <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_promouvoir', { 'id': groupe.idgroupe, 'idmembre': membre.iduser }) }}">Sortir du groupe</a>
+                                <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_promouvoir', { 'id': groupe.idgroupe, 'membre': membre }) }}">Sortir du groupe</a>
 
-                                <a class="btn btn-danger btn-xs" href="{{ path('base_groupe_virer', { 'id': groupe.idgroupe, 'idmembre': membre.iduser }) }}">Renvoyer du groupe</a>
+                                <a class="btn btn-danger btn-xs" href="{{ path('base_groupe_virer', { 'id': groupe.idgroupe, 'membre': membre }) }}">Renvoyer du groupe</a>
 
                             </ul>
                         </td>

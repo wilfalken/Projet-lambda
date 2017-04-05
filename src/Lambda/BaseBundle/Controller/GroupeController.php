@@ -134,13 +134,15 @@ class GroupeController extends Controller{
      /**
      * promouvoir membre en officier.
      *
-     * @Route("/{id}/promouvoir", name="base_groupe_promouvoir")
+     * @Route("/{id}/{membre}/promouvoir", name="base_groupe_promouvoir")
      * @Method({"GET", "POST"})
      */
-    public function promouvoirAction(Groupe $groupe, Userinterface $user)
+    public function promouvoirAction(Groupe $groupe, $membre)
     {
-        $em = $this->getDoctrine()->getManager();
-            $groupe->addOfficier($user);
+                $em = $this->getDoctrine()->getManager();
+        $userapromouvoir = $em->getRepository('LambdaBundle:User')->find($membre);
+        $em -> getRepository('LambdaBundle:Groupe');
+            $groupe->addOfficier($userapromouvoir);
             $em->persist($groupe);
             $em->flush($groupe);
         return $this->redirectToRoute('base_groupe_edit', array('id' => $groupe->getIdgroupe()));
@@ -149,17 +151,23 @@ class GroupeController extends Controller{
      /**
      * virer un membre.
      *
-     * @Route("/{id}/virer", name="base_groupe_virer")
+     * @Route("/{id}/{membre}/virer", name="base_groupe_virer")
      * @Method({"GET", "POST"})
      */
-    public function virerAction(Groupe $groupe, UserInterface $user)
-    {
+    public function virerAction(Groupe $groupe, $membre)   //("/{id}/virer", name="base_groupe_virer")
+    {   
+       
+       
+       
+
+            
         $em = $this->getDoctrine()->getManager();
+        $useravirer = $em->getRepository('LambdaBundle:User')->find($membre);
         $em -> getRepository('LambdaBundle:Groupe');
-            $groupe->removeUser($user);
-            $user->removeGroupe($groupe);
-            $em->persist($groupe, $user);
-            $em->flush($groupe, $user);
+            $groupe->removeUser($useravirer);
+            $useravirer->removeGroupe($groupe);
+            $em->persist($groupe, $useravirer);
+            $em->flush($groupe, $useravirer);
         return $this->redirectToRoute('base_groupe_index', array('id' => $groupe->getIdgroupe()));
     }
     
@@ -169,7 +177,7 @@ class GroupeController extends Controller{
      * @Route("/{id}/sortir", name="base_groupe_sortir")
      * @Method({"GET", "POST"})
      */    
-    public function sortirAction(Groupe $groupe, Userinterface $user)
+    public function sortirAction(Groupe $groupe, UserInterface $user)
     {
         $em = $this->getDoctrine()->getManager();
         $em -> getRepository('LambdaBundle:Groupe');
@@ -178,5 +186,22 @@ class GroupeController extends Controller{
             $em->persist($groupe, $user);
             $em->flush($groupe, $user);
         return $this->redirectToRoute('base_groupe_index', array('id' => $groupe->getIdgroupe()));
+    }
+    
+     /**
+     * permet d'entrer dans un groupe.
+     *
+     * @Route("/{id}/entrer", name="base_groupe_entrer")
+     * @Method({"GET", "POST"})
+     */   
+    public function entrerAction(Groupe $groupe, Userinterface $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em -> getRepository('LambdaBundle:Groupe');
+            $groupe->addUser($user);
+            $user->addGroupe($groupe);
+            $em->persist($groupe, $user);
+            $em->flush($groupe, $user);
+            return $this->redirectToRoute('base_groupe_index', array('id' => $groupe->getIdgroupe()));
     }
 }

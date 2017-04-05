@@ -8,6 +8,10 @@ th, td{
     text-align:center;
 }
 
+td.active, th.warning {
+    max-width: 100px;
+}
+
 .form-group{
     max-width: 600px;
 }

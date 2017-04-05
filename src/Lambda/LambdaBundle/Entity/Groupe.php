@@ -242,7 +242,7 @@ class Groupe
      */
     public function addOfficier(\Lambda\LambdaBundle\Entity\User $user)
     {
-        $this->officiers[] = $user->getId();
+        $this->officiers[] = $user->getUsername();
         return $this;
     }
 
