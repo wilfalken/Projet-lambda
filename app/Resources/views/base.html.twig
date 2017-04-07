@@ -6,6 +6,8 @@
         <title>{% block title %}{% endblock %} - L@mbda</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/alertify.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/alertify.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/colorbox.css') }}" />
@@ -17,12 +19,10 @@
         {% include '::header.html.twig' %}
 
         {% block body %}
-
             {% block content %}
             {% endblock %}
-
         {% endblock %}
-        
+
         {% include '::footer.html.twig' %}
 
 
@@ -30,6 +30,7 @@
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery.min.js"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/alertify.min.js') }}"></script>
             <script src="{{ asset('js/jquery.colorbox-min.js') }}"></script>
             <script>
                 $('a[rel="color"]').colorbox();

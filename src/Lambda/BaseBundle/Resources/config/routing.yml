@@ -13,3 +13,7 @@ adresse:
 groupe:
     path: /groupe
     defaults: { _controller: BaseBundle:Groupe:index }
+    
+base_exemplaire:
+    resource: "@BaseBundle/Controller/ExemplaireController.php"
+    type:      annotation

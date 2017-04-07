@@ -52,11 +52,19 @@ class Item
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Categorie", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Categorie", inversedBy="items", fetch="EAGER")
      * @ORM\JoinColumn(name="idCategorie", referencedColumnName="idCategorie")
      * 
      */
     private $categorie;
+    
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire", mappedBy="item")
+     *
+     */
+    private $exemplaires;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -78,7 +86,7 @@ class Item
      */
     public function __construct()
     {
-        //$this->idcategorie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->exemplaires = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idpropriete = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -303,5 +311,39 @@ class Item
     public function getCategorie()
     {
         return $this->categorie;
+    }
+
+    /**
+     * Add exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     *
+     * @return Item
+     */
+    public function addExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires[] = $exemplaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     */
+    public function removeExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires->removeElement($exemplaire);
+    }
+
+    /**
+     * Get exemplaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExemplaires()
+    {
+        return $this->exemplaires;
     }
 }

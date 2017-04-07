@@ -33,7 +33,7 @@ class ItemRepository extends EntityRepository {
                 'SELECT i
                 FROM LambdaBundle:Item i
                 join LambdaBundle:Categorie cat
-                WHERE i.idcategorie=:categ')
+                WHERE i.categorie=:categ')
                 
 //(select cat from LambdaBundle:Categorie cat where cat.idcategorie=:categorie)')
                 //->setParameter('name',$name)

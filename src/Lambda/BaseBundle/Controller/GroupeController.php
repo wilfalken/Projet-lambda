@@ -30,11 +30,15 @@ class GroupeController extends Controller{
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        
         $groupes = $em->getRepository('LambdaBundle:Groupe')->findAll();
+        
+        
+        
         
         return $this->render('BaseBundle:groupe:index.html.twig', array(
             'groupes' => $groupes,
+            
             
         ));
     }
@@ -91,6 +95,24 @@ class GroupeController extends Controller{
             $em->remove($groupe);
             $em->flush($groupe);
         }
+
+        return $this->redirectToRoute('profil');    ///TODO routing !!!
+    }  
+    
+     /**
+     * Efface une entité groupe.
+     *
+     * @Route("/{id}", name="base_groupe_simpledelete")
+     * @Method("GET")
+     */
+    public function simpledeleteAction(Groupe $groupe)
+    {
+       
+        
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($groupe);
+            $em->flush($groupe);
+        
 
         return $this->redirectToRoute('profil');    ///TODO routing !!!
     }  

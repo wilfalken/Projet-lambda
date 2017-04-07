@@ -27,7 +27,7 @@
                        
                         <td>{{ unitem.nomitem }}</td>
                         <td>{{ unitem.description }}</td>
-                        <td>{{ unitem.idcategorie.nomcategorie }}</td>
+                        <td>{{ unitem.categorie.nomcategorie }}</td>
                         <td>{% if unitem.photoitem==null %}Aucune photo...{% else %}{{ unitem.photoitem }}{% endif %}</td>
                         
                         
@@ -37,7 +37,7 @@
                                 {#{{ dump(categories) }}#}
 
                                 {% if app.user.username|default('Not Logged') != 'Not Logged' %}
-                                    <a class="btn btn-primary btn-xs" href="{{ path('search', { 'id': unitem.nomitem }, {'iduser': app.user.id}) }}">Je l'ai !!!</a>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaire_new', { 'iditem': unitem.iditem }) }}">Je l'ai !!!</a>
                                 {% else %}Connectez-vous !
                                 {% endif %}
                             </ul>

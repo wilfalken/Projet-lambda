@@ -1,8 +1,8 @@
 
 
 
-.contenu { /*top right bottom left*/
-/*    padding: 30px 20px 30px 20px;*/
+#contenu { /*top right bottom left*/
+    padding: 30px 20px 30px 20px;
 }
 th, td{
     text-align:center;
@@ -274,4 +274,30 @@ box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
     top: 50px;
     color: grey;
     font-size: 8em;
+}
+
+
+/****************************************************************************
+popup
+*****************************************************************************/
+.cd-popup {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+ 
+.cd-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+ 
+.cd-popup-container {
+  transform: translateY(-40px);
+  transition-property: transform;
+  transition-duration: 0.3s;
+}
+ 
+.is-visible .cd-popup-container {
+  transform: translateY(0);
 }

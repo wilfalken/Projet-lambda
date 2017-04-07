@@ -125,6 +125,14 @@ class User implements UserInterface, \Serializable
      */
     private $groupes;
     
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * inverse side
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire", mappedBy="user")
+     * 
+     */
+    private $exemplaires;
+    
 //    @ORM\JoinTable(name="appartientgroupe",
 //     *   joinColumns={
 //     *     @ORM\JoinColumn(name="idusergroupe", referencedColumnName="id")
@@ -155,7 +163,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->adresses = new \Doctrine\Common\Collections\ArrayCollection();
-        //$this->idgroupelien = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->exemplaires = new \Doctrine\Common\Collections\ArrayCollection();
         $this->groupes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
         $this->enabled = true;
@@ -648,5 +656,39 @@ class User implements UserInterface, \Serializable
     public function getAdresses()
     {
         return $this->adresses;
+    }
+
+    /**
+     * Add exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     *
+     * @return User
+     */
+    public function addExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires[] = $exemplaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     */
+    public function removeExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires->removeElement($exemplaire);
+    }
+
+    /**
+     * Get exemplaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExemplaires()
+    {
+        return $this->exemplaires;
     }
 }
