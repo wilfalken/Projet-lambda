@@ -1,11 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block title %}Exemplaires {% endblock %}
-{% block javascript %}
-    <script>$('.run').click(function(event) {
-    alertify.confirm().show();
-    });</script>
-{% endblock %}
-{% block content %}
+    {% block content %}
 
     {% if app.user %}{{ app.user.username }}{% endif %}
 
@@ -35,12 +30,12 @@
                         <td>{{ exemplaire.photoexemplaire }}</td>
                         <td>
 
-                        
+
                             <ul>
 
                                 <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
 
-                                <a class="btn btn-primary btn-xs run" href="{{ path('base_exemplaire_delete', { 'id': exemplaire.idexemplaire }) }}">Supprimer</a>
+                                <a class="btn btn-primary btn-xs run" href="{{ path('base_exemplaire_simpledelete', { 'id': exemplaire.idexemplaire }) }}" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ exemplaire.item.nomitem }}?');">Supprimer</a>
 
                             </ul>
                         </td>
@@ -55,5 +50,11 @@
 
         </ul>
     </div>
-{% endblock %}
+
+        <script>
+            
+            </script>
+                {% block javascripts %}
+            {% endblock %}
+        {% endblock %}
 

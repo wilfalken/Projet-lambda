@@ -30,11 +30,6 @@ class ExemplaireController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $exemplaires = $em->getRepository('LambdaBundle:Exemplaire')->findAll();
-        foreach ($exemplaires as $unexemplaire){
-            $unexemplaire->getItem();
-        }
-            
-        
         return $this->render('BaseBundle:exemplaire:index.html.twig', array(
             'exemplaires' => $exemplaires,
             
@@ -155,5 +150,23 @@ class ExemplaireController extends Controller {
             ->getForm()
         ;
     }
+    
+     /**
+     * Efface une entité exemplaire sans formulaire.
+     *
+     * @Route("/{id}/sdelete", name="base_exemplaire_simpledelete")
+     * @Method("GET")
+     */
+    public function simpledeleteAction(Exemplaire $exemplaire)
+    {
+       
+        
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($exemplaire);
+            $em->flush($exemplaire);
+        
+
+        return $this->redirectToRoute('base_exemplaire_index');    ///TODO routing !!!
+    }  
 
 }

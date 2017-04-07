@@ -36,7 +36,7 @@ class Message
     private $corps;
 
     /**
-     * @var integer
+     * @var string
      *
      * @ORM\Column(name="typeMessage", type="integer", nullable=false)
      */
@@ -57,7 +57,7 @@ class Message
      *   @ORM\JoinColumn(name="idUserDest", referencedColumnName="id")
      * })
      */
-    private $iduserdest;
+    private $destinataire;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\User
@@ -67,10 +67,15 @@ class Message
      *   @ORM\JoinColumn(name="idUserExp", referencedColumnName="id")
      * })
      */
-    private $iduserexp;
+    private $expediteur;
 
 
 
+    function __construct() {
+        $this->dateenvoi = new \Datetime;
+    }
+  
+    
     /**
      * Get idmessage
      *
@@ -90,6 +95,7 @@ class Message
      */
     public function setSujet($sujet)
     {
+        
         $this->sujet = $sujet;
 
         return $this;
@@ -177,51 +183,54 @@ class Message
         return $this->dateenvoi;
     }
 
+
+
+
     /**
-     * Set iduserdest
+     * Set destinataire
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduserdest
+     * @param \Lambda\LambdaBundle\Entity\User $destinataire
      *
      * @return Message
      */
-    public function setIduserdest(\Lambda\LambdaBundle\Entity\User $iduserdest = null)
+    public function setDestinataire(\Lambda\LambdaBundle\Entity\User $destinataire = null)
     {
-        $this->iduserdest = $iduserdest;
+        $this->destinataire = $destinataire;
 
         return $this;
     }
 
     /**
-     * Get iduserdest
+     * Get destinataire
      *
      * @return \Lambda\LambdaBundle\Entity\User
      */
-    public function getIduserdest()
+    public function getDestinataire()
     {
-        return $this->iduserdest;
+        return $this->destinataire;
     }
 
     /**
-     * Set iduserexp
+     * Set expediteur
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduserexp
+     * @param \Lambda\LambdaBundle\Entity\User $expediteur
      *
      * @return Message
      */
-    public function setIduserexp(\Lambda\LambdaBundle\Entity\User $iduserexp = null)
+    public function setExpediteur(\Lambda\LambdaBundle\Entity\User $expediteur = null)
     {
-        $this->iduserexp = $iduserexp;
+        $this->expediteur = $expediteur;
 
         return $this;
     }
 
     /**
-     * Get iduserexp
+     * Get expediteur
      *
      * @return \Lambda\LambdaBundle\Entity\User
      */
-    public function getIduserexp()
+    public function getExpediteur()
     {
-        return $this->iduserexp;
+        return $this->expediteur;
     }
 }

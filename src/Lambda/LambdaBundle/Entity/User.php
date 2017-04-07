@@ -133,29 +133,7 @@ class User implements UserInterface, \Serializable
      */
     private $exemplaires;
     
-//    @ORM\JoinTable(name="appartientgroupe",
-//     *   joinColumns={
-//     *     @ORM\JoinColumn(name="idusergroupe", referencedColumnName="id")
-//     *   },
-//     *   inverseJoinColumns={
-//     *     @ORM\JoinColumn(name="idgroupelien", referencedColumnName="idgroupe")
-//     *   }
-//     * )
 
- //   /**
- //    * @var \Doctrine\Common\Collections\Collection
-//     *
-//     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", inversedBy="iduser")
-//     * @ORM\JoinTable(name="liengroupe",
-//    *   joinColumns={
-//     *     @ORM\JoinColumn(name="idUser", referencedColumnName="id")
-//     *   },
-//     *   inverseJoinColumns={
-//     *     @ORM\JoinColumn(name="idGroupe", referencedColumnName="idGroupe")
-//     *   }
- //    * )
-//     */
-    //private $idgroupe;
 
     /**
      * Constructor
@@ -420,108 +398,6 @@ class User implements UserInterface, \Serializable
     public function getGenre()
     {
         return $this->genre;
-    }
-
-    /**
-     * Add idadresse
-     *
-     * @param \Lambda\LambdaBundle\Entity\Adresse $idadresse
-     *
-     * @return User
-     */
-    public function addIdadresse(\Lambda\LambdaBundle\Entity\Adresse $idadresse)
-    {
-        $this->idadresse[] = $idadresse;
-
-        return $this;
-    }
-
-    /**
-     * Remove idadresse
-     *
-     * @param \Lambda\LambdaBundle\Entity\Adresse $idadresse
-     */
-    public function removeIdadresse(\Lambda\LambdaBundle\Entity\Adresse $idadresse)
-    {
-        $this->idadresse->removeElement($idadresse);
-    }
-
-    /**
-     * Get idadresse
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdadresse()
-    {
-        return $this->idadresse;
-    }
-
-    /**
-     * Add idgroupelien
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupelien
-     *
-     * @return User
-     */
-    public function addIdgroupelien(\Lambda\LambdaBundle\Entity\Groupe $idgroupelien)
-    {
-        $this->idgroupelien[] = $idgroupelien;
-
-        return $this;
-    }
-
-    /**
-     * Remove idgroupelien
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupelien
-     */
-    public function removeIdgroupelien(\Lambda\LambdaBundle\Entity\Groupe $idgroupelien)
-    {
-        $this->idgroupelien->removeElement($idgroupelien);
-    }
-
-    /**
-     * Get idgroupelien
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdgroupelien()
-    {
-        return $this->idgroupelien;
-    }
-
-    /**
-     * Add idgroupe
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupe
-     *
-     * @return User
-     */
-    public function addIdgroupe(\Lambda\LambdaBundle\Entity\Groupe $idgroupe)
-    {
-        $this->idgroupe[] = $idgroupe;
-
-        return $this;
-    }
-
-    /**
-     * Remove idgroupe
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupe
-     */
-    public function removeIdgroupe(\Lambda\LambdaBundle\Entity\Groupe $idgroupe)
-    {
-        $this->idgroupe->removeElement($idgroupe);
-    }
-
-    /**
-     * Get idgroupe
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdgroupe()
-    {
-        return $this->idgroupe;
     }
     
        /** @see \Serializable::serialize() */
