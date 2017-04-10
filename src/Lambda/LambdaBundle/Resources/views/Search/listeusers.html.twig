@@ -36,8 +36,9 @@
 
                                 
 
-                                {% if app.user.id == null %}Connectez-vous !{% else %}
+                                {% if app.user.id|default(null) == null %}Connectez-vous !{% else %}
                                     <a class="btn btn-primary btn-xs" href="{{ path('search', { 'id': unitem.id }, {'iduser': app.user.id}) }}">Voir le profil !!!</a>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_message_newuser', { 'iddest': unitem.id }) }}">Envoyer un message</a>
                                 {% endif %}
                             </ul>
                         </td>

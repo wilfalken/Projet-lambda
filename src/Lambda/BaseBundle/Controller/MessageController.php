@@ -1,8 +1,9 @@
 <?php
-
 namespace Lambda\BaseBundle\Controller;
 
+
 use Lambda\LambdaBundle\Entity\Message;
+use Lambda\LambdaBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -10,46 +11,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Description of ExemplaireController
+ * Description of MessageController
  * @Route("/message")
  * @author admin
  */
-namespace Lambda\BaseBundle\Controller;
-
-/**
- * Description of MessageControler
- *
- * @author admin
- */
-class MessageControler extends Controller{
+class MessageController extends Controller{
     
-     /**
-     * Finds and displays a exemplaire entity.
-     *
-     * @Route("/{id}", name="base_message_show")
-     * @Method("GET")
-     */
-    public function showAction(Message $message)
-    {
-        $deleteForm = $this->createDeleteForm($message);
-
-        return $this->render('BaseBundle:message:show.html.twig', array(
-            'message' => $message,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+ 
+    
+    
     
      /**
      * Crée une nouvelle entité Message.
      *
-     * @Route("/new", name="base_message_newadmin")
+     * @Route("/newadmin", name="base_message_newadmin")
      * @Method({"GET", "POST"})
      */
     public function newadminAction(Request $request, UserInterface $user) {
         
         $message = new Message();
         $em = $this->getDoctrine()->getManager();
-        $admin = $em->getRepository('LambdaBundle:User')->findByUsername('admin');
+        $admin = $em->getRepository('LambdaBundle:User')->findOneByUsername('admin');
         $form = $this->createForm('Lambda\BaseBundle\Form\MessageadminType', $message);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,23 +52,26 @@ class MessageControler extends Controller{
         ));
     }
     
+
+    
      /**
      * Crée une nouvelle entité Message.
      *
-     * @Route("/{iddest}/new", name="base_message_newadmin")
+     * @Route("/{iddest}/new", name="base_message_newuser")
      * @Method({"GET", "POST"})
      */
-    public function newuserAction(Request $request, User $destinataire) {
+    public function newuserAction(Request $request, $iddest) {
         
         $user=$this->getUser();
         $message = new Message();
-        $message->setDestinataire($destinataire);
+        $em = $this->getDoctrine()->getManager();
+        $destinataire = $em->getRepository('LambdaBundle:User')->find($iddest);
         $form = $this->createForm('Lambda\BaseBundle\Form\MessageuserType', $message);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             if ($user != null) { //s'il ya un user
-                
+                $message->setDestinataire($destinataire);
                 $message->setExpediteur($user);
                 $message->setTypemessage("touser");
                 $em->persist($message);
@@ -97,7 +82,55 @@ class MessageControler extends Controller{
 
         return $this->render('BaseBundle:message:new.html.twig', array(
             'message' => $message,
+            'user' => $destinataire,
             'form' => $form->createView(),
+        ));
+    }
+    
+    
+    /**
+     * Crée une nouvelle entité Message.
+     *
+     * @Route("/{id}/delete", name="base_message_delete")
+     * @Method({"GET", "DELETE"})
+     */
+    public function deleteAction(Request $request, Message $message)
+    {
+       
+        $form = $this->createDeleteForm($message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($message);
+            $em->flush($message);
+        }
+
+        return $this->redirectToRoute('profil');    ///TODO routing !!!
+    }
+    
+        private function createDeleteForm(Message $message)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('base_message_delete', array('id' => $message->getIdmessage())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+    
+    /**
+     * Finds and displays a message entity.
+     *
+     * @Route("/{id}", name="base_message_show")
+     * @Method("GET")
+     */
+    public function showAction(Message $message)
+    {
+        $deleteForm = $this->createDeleteForm($message);
+
+        return $this->render('BaseBundle:message:show.html.twig', array(
+            'message' => $message,
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 }

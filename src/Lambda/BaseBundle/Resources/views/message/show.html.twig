@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+{% block title %}Message{% endblock %}
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Message :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <tbody>
+
+                <tr>
+                    <th>Message en provenance de :</th>
+                    <td>{{ message.expediteur.username }}</td>
+                </tr>
+                                <tr>
+                    <th>En date du :</th>
+                    <td>{{ message.dateenvoi|date("d/m/Y \\à H:i") }}</td>
+                </tr>
+                <tr>
+                    <th>Sujet du message :</th>
+                    <td>{{ message.sujet }}</td>
+                </tr>
+                <tr>
+                    <th>Votre message :</th>
+                    <td>{{ message.corps }}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <ul>
+
+
+            {{ form_start(delete_form) }}
+
+            <input class="btn btn-danger" type="submit" value="Supprimer l'objet" method="DELETE" onClick="return confirm('Êtes-vous sûr de vouloir supprimer le message {{ message.sujet }} du {{ message.dateenvoi|date("d/m/Y \\à H:i") }} ?');" />
+            <a class="btn btn-warning" href="{{ path('base_message_newuser', { 'iddest': message.expediteur.id }) }}" >Répondre</a>
+            {{ form_end(delete_form) }}
+            </br>
+            </br>
+            <a class="btn btn-primary" href="{{ path('base_exemplaire_index') }}">Retourner à la liste</a>
+
+
+
+        </ul>
+    </div>
+{% endblock %}

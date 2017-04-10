@@ -33,11 +33,3 @@ lambda:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-
-base_adresse:
-    resource: "@BaseBundle/Controller/AdressebaseController.php"
-    type:      annotation
-    
-base_groupe:
-    resource: "@BaseBundle/Controller/GroupeController.php"
-    type:      annotation

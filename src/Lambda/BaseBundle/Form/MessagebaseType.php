@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class MessageType extends AbstractType{
+class MessagebaseType extends AbstractType{
     
     /**
      * {@inheritdoc}

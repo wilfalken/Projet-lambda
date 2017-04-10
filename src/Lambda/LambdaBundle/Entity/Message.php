@@ -38,7 +38,7 @@ class Message
     /**
      * @var string
      *
-     * @ORM\Column(name="typeMessage", type="integer", nullable=false)
+     * @ORM\Column(name="typeMessage", type="string", nullable=false)
      */
     private $typemessage;
 

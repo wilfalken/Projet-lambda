@@ -17,3 +17,15 @@ groupe:
 base_exemplaire:
     resource: "@BaseBundle/Controller/ExemplaireController.php"
     type:      annotation
+
+base_adresse:
+    resource: "@BaseBundle/Controller/AdressebaseController.php"
+    type:      annotation
+    
+base_groupe:
+    resource: "@BaseBundle/Controller/GroupeController.php"
+    type:      annotation
+    
+base_message:
+    resource: "@BaseBundle/Controller/MessageController.php"
+    type:      annotation

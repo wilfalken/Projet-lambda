@@ -11,4 +11,5 @@ Bienvenue sur l'accueil {% if app.user %}{{ app.user.username }}{% endif %} {#af
 {{ form_widget(form.envoi, {'attr': {'class': 'btn btn-warning'} , 'method': 'POST' }) }}
 </span>
 {{ form_end(form) }}
+<a href="{{ path('base_message_newuser', {'iddest':6} ) }}">Nouveau message</a>
 {% endblock %}

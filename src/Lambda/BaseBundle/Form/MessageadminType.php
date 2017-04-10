@@ -7,9 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class MessageType extends AbstractType{
+class MessageadminType extends AbstractType{
     
     /**
      * {@inheritdoc}
@@ -19,8 +18,9 @@ class MessageType extends AbstractType{
         
         $builder->add('destinataire', TextType::class, array(
                     'label'  => 'Veuillez entrer le nom du destinataire :',
-                    'placeholder' => 'Administrateur !!!',
-                    'disabled' => true))
+                    'disabled' => true,
+                    'attr' => array(
+                        'placeholder' => 'Administrateur',)))
                 ->add('sujet', TextType::class, array(
                     'label' => 'Renseignez le sujet du message :',
                     'required' => true))
