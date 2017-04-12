@@ -34,18 +34,11 @@ class Emprunt
      * @ORM\Column(name="dateRendu", type="datetime", nullable=false)
      */
     private $daterendu;
-    
-     /**
-     * @var string
-     *
-     * @ORM\Column(name="duree", type="string", nullable=false)
-     */
-    private $duree;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User", inversedBy="emprunts")
+     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idemprunteur", referencedColumnName="id")
      * })
@@ -55,7 +48,7 @@ class Emprunt
      /**
      * @var \Lambda\LambdaBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User", inversedBy="prets")
+     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idproprietaire", referencedColumnName="id")
      * })
@@ -77,7 +70,7 @@ class Emprunt
      * @var \Lambda\LambdaBundle\Entity\Adresse
      *
      * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Adresse", inversedBy="emprunts")
-     * @ORM\JoinColumn(name="idadresse", referencedColumnName="idadresse")
+     * 
      */
     private $adresse;
 
@@ -242,29 +235,5 @@ class Emprunt
     public function getAdresse()
     {
         return $this->adresse;
-    }
-
-    /**
-     * Set duree
-     *
-     * @param string $duree
-     *
-     * @return Emprunt
-     */
-    public function setDuree($duree)
-    {
-        $this->duree = $duree;
-
-        return $this;
-    }
-
-    /**
-     * Get duree
-     *
-     * @return string
-     */
-    public function getDuree()
-    {
-        return $this->duree;
     }
 }

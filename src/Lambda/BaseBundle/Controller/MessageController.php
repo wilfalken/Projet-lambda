@@ -3,7 +3,6 @@ namespace Lambda\BaseBundle\Controller;
 
 
 use Lambda\LambdaBundle\Entity\Message;
-use Lambda\LambdaBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -133,4 +132,77 @@ class MessageController extends Controller{
             'delete_form' => $deleteForm->createView(),
         ));
     }
+//    
+//    /**
+//     * Crée une nouvelle entité Messagedemande de pret.
+//     *
+//     * @Route("/{idex}/{idprop}/new", name="message_demandepret")
+//     * @Method({"GET", "POST"})
+//     */
+//    public function newdemandeAction(Request $request, $idex, $idprop) {
+//        
+//        $user=$this->getUser();
+//        $message = new Message();
+//        $em = $this->getDoctrine()->getManager();
+//        $destinataire = $em->getRepository('LambdaBundle:User')->find($idprop);
+//        $exemplaire = $em->getRepository('LambdaBundle:Exemplaire')->find($idex);
+//        $form = $this->createForm('Lambda\BaseBundle\Form\MessageitemType', $message, array(
+//            'exemplaire' => $exemplaire->getItem(),
+//            'proprietaire' => $destinataire,
+//                ));
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            if ($user != null) { //s'il ya un user
+//                $message->setDestinataire($destinataire);
+//                $message->setExpediteur($user);
+//                $message->setTypemessage("dempret");
+//                $em->persist($message);
+//                $em->flush();
+//            }
+//                    return $this->redirectToRoute('base_message_show', array('id' => $message->getIdmessage()));
+//        }
+//
+//        return $this->render('BaseBundle:message:new.html.twig', array(
+//            'message' => $message,
+//            'user' => $destinataire,
+//            'form' => $form->createView(),
+//        ));
+//    }
+    
+        
+    /**
+     * Crée une nouvelle entité Messagedemande de pret.
+     *
+     * @Route("/{idex}/{idprop}/new", name="message_demandepret")
+     * @Method({"GET", "POST"})
+     */
+    public function newdemandeAction(Request $request, $idex, $idprop) {
+        
+        $user=$this->getUser();
+        $message = new Message();
+        $em = $this->getDoctrine()->getManager();
+        $destinataire = $em->getRepository('LambdaBundle:User')->find($idprop);
+        $exemplaire = $em->getRepository('LambdaBundle:Exemplaire')->find($idex);
+        $text = '<div class="container">L\'utilisateur '.$user->getUsername().' vous demande le prêt de l\'objet : '.$exemplaire->getItem()->getNomitem().
+                '. Vous pouvez soit accepter, soit refuser le pret de cet objet.</br>'.
+                'Si vous acceptez, nous vous invitons à contacter le demandeur par l\'intermédiare de ce bouton, pour convenir d\'un rendez-vous par exemple:'.
+                '<a class="btn btn-primary btn-xs" href="{{ path(\'base_message_newuser\', {\'iddest\':'.$user->getId().'} ) }}">Contacter le demandeur</a>'.
+                '</br>Après cela, je vous invite à signaler à l\'application, et afin d\'éviter les problèmes, un nouvel emprunt de cet objet, par l\'intérmédiaire de ce bouton :'.
+                '<a class="btn btn-primary btn-xs" href="{{ path(\'base_emprunt_new\', {\'idexemplaire\':'.$exemplaire->getIdexemplaire().', \'idemprunteur\': '.$user->getId().' } ) }}">Nouvel emprunt</a>'.
+                '</br>Bonne journée et amusez-vous bien !';
+        $sujet = 'Demande de pret de l\'objet : '.$exemplaire->getItem()->getNomitem();     
+            if ($user != null) { //s'il ya un user
+                $message->setCorps($text);
+                $message->setSujet($sujet);
+                $message->setDestinataire($destinataire);
+                $message->setExpediteur($user);
+                $message->setTypemessage("dempret");
+                $em->persist($message);
+                $em->flush();
+            }
+            return $this->redirectToRoute('base_profil');
+//        return $this->redirectToRoute('base_message_show', array('id' => $message->getIdmessage()));
+    }
+    
 }

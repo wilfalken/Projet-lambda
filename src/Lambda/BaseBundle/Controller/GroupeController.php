@@ -43,6 +43,28 @@ class GroupeController extends Controller{
         ));
     }
     
+     /**
+     * Montre un des groupes.
+     *
+     * @Route("/{idgroupe}", name="base_groupe_show")
+     * @Method("GET")
+     */
+    public function showAction($idgroupe)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $groupe = $em->getRepository('LambdaBundle:Groupe')->findOneByIdgroupe($idgroupe);
+        
+        
+        
+        
+        return $this->render('BaseBundle:groupe:show.html.twig', array(
+            'groupe' => $groupe,
+            
+            
+        ));
+    }
+    
     /**
      * Crée une nouvelle entité Groupe.
      *

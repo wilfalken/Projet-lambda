@@ -83,7 +83,6 @@ class Adresse
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Emprunt", mappedBy="adresse")
-     * @ORM\JoinColumn(name="idEmprunt", referencedColumnName="idEmprunt")
      */
     private $emprunts;
 
@@ -318,10 +317,5 @@ class Adresse
     public function getUsers()
     {
         return $this->users;
-    }
-    
-    public function __toString()
-    {
-        return ''.$this->numrue.', '.$this->textadresse.', '.$this->complement.', '.$this->cp.' '.$this->ville.' - '.$this->pays.'';
     }
 }

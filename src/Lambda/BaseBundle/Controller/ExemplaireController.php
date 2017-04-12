@@ -7,6 +7,7 @@ use Lambda\LambdaBundle\Entity\Item;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Lambda\LambdaBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,6 +32,29 @@ class ExemplaireController extends Controller {
 
         $exemplaires = $em->getRepository('LambdaBundle:Exemplaire')->findAll();
         return $this->render('BaseBundle:exemplaire:index.html.twig', array(
+            'exemplaires' => $exemplaires,
+            
+        ));
+    }
+    
+     /**
+     * Lists all exemplaire entities.
+     *
+     * @Route("/{iduser}", name="base_exemplaires_user")
+     * @Method("GET")
+     */
+    public function indexuserAction(User $iduser)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $exemplaires = $em->getRepository('LambdaBundle:Exemplaire')->findByUser($iduser);
+        if ($iduser==$user){
+            return $this->render('BaseBundle:exemplaire:index.html.twig', array(
+            'exemplaires' => $exemplaires,
+        ));
+        }
+        return $this->render('BaseBundle:exemplaire:indexpublic.html.twig', array(
             'exemplaires' => $exemplaires,
             
         ));

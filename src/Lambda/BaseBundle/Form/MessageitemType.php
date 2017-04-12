@@ -7,9 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class MessagebaseType extends AbstractType{
+class MessageuserType extends AbstractType{
     
     /**
      * {@inheritdoc}
@@ -19,16 +18,19 @@ class MessagebaseType extends AbstractType{
         
         $builder->add('destinataire', TextType::class, array(
                     'label'  => 'Veuillez entrer le nom du destinataire :',
-                    'required' => true))
+                    'disabled' => true,
+                    'attr' => array(
+                        'placeholder' => 'Déjà renseigné précédemment ...',)))
                 ->add('sujet', TextType::class, array(
                     'label' => 'Renseignez le sujet du message :',
-                    'required' => true))
+                    'data' => 'demande de pret de l\'objet '.$exemplaire,
+                    'attr' => array(
+                        'placeholder' => 'Demande de prêt',)
+                    ))
                 ->add('corps', TextareaType::class, array(
                     'label' => 'Tapez votre message :',
                     'required' => true,
                     'attr' => array('class' => 'mytextarea')))
-                
-                
                 ; 
     }
     

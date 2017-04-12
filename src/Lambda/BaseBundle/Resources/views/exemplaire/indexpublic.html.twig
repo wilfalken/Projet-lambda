@@ -33,9 +33,9 @@
 
                             <ul>
 
-                                <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
+                                <a class="btn btn-primary btn-xs disabled" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
 
-                                <a class="btn btn-primary btn-xs run" href="{{ path('base_exemplaire_simpledelete', { 'id': exemplaire.idexemplaire }) }}" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ exemplaire.item.nomitem }}?');">Supprimer</a>
+                                <a class="btn btn-primary btn-xs disabled run" href="{{ path('base_exemplaire_simpledelete', { 'id': exemplaire.idexemplaire }) }}" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ exemplaire.item.nomitem }}?');">Supprimer</a>
 
                             </ul>
                         </td>

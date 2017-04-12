@@ -1,8 +1,51 @@
+/****************************************************************************
+grille de profil
+*****************************************************************************/
+.ul {
+    text-align: right;
+}
+@media (min-width: 1200px){
+.container {
+    width: 100%;
+    text-align: center;
+}}
+.col-lg-8 {
+    width: 100%;
+}
 
+.normal{
+    font-family: "Arial", sans-serif;
+}
+
+.container {
+          text-align: center;
+  padding: 15px;
+  margin: 0 auto;
+      background:#f7f7f7;
+	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Webkit */
+	border:1px solid #aaa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-box-shadow:0 0 15px #aaa;
+	-webkit-box-shadow:0 0 15px #aaa;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+[class*="col-"], footer {
+  border-radius: 6px;
+  line-height: 40px;
+  text-align: center;
+}
 
 
 #contenu { /*top right bottom left*/
-    padding: 30px 20px 30px 20px;
+    padding: 70px 20px 50px 20px;
 }
 th, td{
     text-align:center;
@@ -13,6 +56,31 @@ td.active, th.warning {
 }
 
 .form-group{
+      text-align: center;
+  padding: 15px;
+  margin: 0 auto;
+      
+   
+    max-width: 600px;
+}
+.col-sm-2{
+    width: 100%;
+    text-align: left;
+}
+
+.form-group2{
+      text-align: center;
+  padding: 15px;
+  margin: 0 auto;
+      background:#f7f7f7;
+	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Webkit */
+	border:1px solid #aaa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-box-shadow:0 0 15px #aaa;
+	-webkit-box-shadow:0 0 15px #aaa;
+   
     max-width: 600px;
 }
 
@@ -69,7 +137,14 @@ a.none:hover{
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
-      background-color: #ecf9f2;
+      background:#f7f7f7;
+	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Webkit */
+	border:1px solid #aaa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-box-shadow:0 0 15px #aaa;
+	-webkit-box-shadow:0 0 15px #aaa;
 
 /*      border-color: #ddd;
     border-width: 30px;
@@ -143,7 +218,7 @@ header
 .search{
   
     position: relative;
-    top: -40px;
+    top: -78px;
     left: 30%;
 /*    float: left;*/
     width: 30%;

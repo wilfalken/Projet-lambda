@@ -29,3 +29,11 @@ base_groupe:
 base_message:
     resource: "@BaseBundle/Controller/MessageController.php"
     type:      annotation
+    
+base_profil:
+    resource: "@BaseBundle/Controller/ProfilController.php"
+    type:      annotation
+    
+base_emprunt:
+    resource: "@BaseBundle/Controller/EmpruntController.php"
+    type:      annotation

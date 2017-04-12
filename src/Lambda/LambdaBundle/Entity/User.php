@@ -133,6 +133,22 @@ class User implements UserInterface, \Serializable
      */
     private $exemplaires;
     
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * inverse side
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Emprunt", mappedBy="idproprietaire")
+     * 
+     */
+    private $prets;
+    
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * inverse side
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Emprunt", mappedBy="idemprunteur")
+     * 
+     */
+    private $emprunts;
+    
 
 
     /**
@@ -566,5 +582,73 @@ class User implements UserInterface, \Serializable
     public function getExemplaires()
     {
         return $this->exemplaires;
+    }
+
+    /**
+     * Add pret
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $pret
+     *
+     * @return User
+     */
+    public function addPret(\Lambda\LambdaBundle\Entity\Emprunt $pret)
+    {
+        $this->prets[] = $pret;
+
+        return $this;
+    }
+
+    /**
+     * Remove pret
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $pret
+     */
+    public function removePret(\Lambda\LambdaBundle\Entity\Emprunt $pret)
+    {
+        $this->prets->removeElement($pret);
+    }
+
+    /**
+     * Get prets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPrets()
+    {
+        return $this->prets;
+    }
+
+    /**
+     * Add emprunt
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $emprunt
+     *
+     * @return User
+     */
+    public function addEmprunt(\Lambda\LambdaBundle\Entity\Emprunt $emprunt)
+    {
+        $this->emprunts[] = $emprunt;
+
+        return $this;
+    }
+
+    /**
+     * Remove emprunt
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $emprunt
+     */
+    public function removeEmprunt(\Lambda\LambdaBundle\Entity\Emprunt $emprunt)
+    {
+        $this->emprunts->removeElement($emprunt);
+    }
+
+    /**
+     * Get emprunts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEmprunts()
+    {
+        return $this->emprunts;
     }
 }

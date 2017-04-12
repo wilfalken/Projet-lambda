@@ -24,8 +24,8 @@
 
             {{ form_start(delete_form) }}
                
-            <input class="btn btn-danger" type="submit" value="Supprimer l'objet" method="DELETE">
-            <a class="btn btn-warning" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ exemplaire.item.nomitem }}?');">Modifier</a>
+            <input class="btn btn-danger" type="submit" value="Supprimer l'objet" method="DELETE" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ exemplaire.item.nomitem }}?');">
+            <a class="btn btn-warning" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
             {{ form_end(delete_form) }}
             </br>
             </br>

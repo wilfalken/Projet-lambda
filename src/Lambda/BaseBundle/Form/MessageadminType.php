@@ -20,13 +20,15 @@ class MessageadminType extends AbstractType{
                     'label'  => 'Veuillez entrer le nom du destinataire :',
                     'disabled' => true,
                     'attr' => array(
-                        'placeholder' => 'Administrateur',)))
+                        'placeholder' => 'Administrateur',
+                        )))
                 ->add('sujet', TextType::class, array(
                     'label' => 'Renseignez le sujet du message :',
                     'required' => true))
                 ->add('corps', TextareaType::class, array(
-                    'label' => 'Tapez votre messsage :',
-                    'required' => true))
+                    'label' => 'Tapez votre message :',
+                    'required' => true,
+                    'attr' => array('class' => 'mytextarea')))
                 
                 
                 ; 
