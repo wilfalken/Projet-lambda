@@ -49,7 +49,7 @@ class EmpruntController extends Controller{
         $em = $this->getDoctrine()->getManager();
         $emprunteur = $em->getRepository('LambdaBundle:User')->findOneById($idemprunteur);
         $form = $this->createForm('Lambda\BaseBundle\Form\EmpruntType', $emprunt, array(
-            'user' => $user,
+            'user' => $exemplaire->getUser(),
             'demandeur' => $emprunteur,
             'exemplaire' => $exemplaire,
                 ));
@@ -70,11 +70,15 @@ class EmpruntController extends Controller{
                 $em->persist($user);
                 $em->flush();
             }
-                    return $this->redirectToRoute('base_emprunt_show', array('id' => $emprunt->getIdemprunt()));
+                    return $this->redirectToRoute('base_emprunt_show', array('id' => $emprunt->getIdemprunt())); 
         }
         return $this->render('BaseBundle:emprunt:new.html.twig', array(
             'emprunt' => $emprunt,
             'form' => $form->createView(),
             ));
     }
+    
+    //TODO base_emprunt_show
+    
+
 }

@@ -1,3 +1,7 @@
+admin_evenement:
+    resource: "@AdminBundle/Controller/EvenementController.php"
+    type:     annotation
+
 admin_item:
     resource: "@AdminBundle/Controller/ItemController.php"
     type:     annotation

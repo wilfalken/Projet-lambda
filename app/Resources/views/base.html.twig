@@ -48,7 +48,9 @@
                 
                 tinymce.init({
                     selector: 'textarea.mytextarea',
-                    menubar: false
+                    menubar: false,
+                    plugins: ['wordcount emoticons textcolor colorpicker textpattern autolink link'],
+                    toolbar1: 'undo redo | styleselect | bold italic | outdent indent | link | forecolor backcolor emoticons',
                 });
                 
                 $("#DateCountdown").TimeCircles({

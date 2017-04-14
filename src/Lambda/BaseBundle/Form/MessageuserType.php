@@ -26,8 +26,9 @@ class MessageuserType extends AbstractType{
                     'required' => true))
                 ->add('corps', TextareaType::class, array(
                     'label' => 'Tapez votre message :',
-                    'required' => true,
-                    'attr' => array('class' => 'mytextarea')))
+                    'required' => false,
+                    'attr' => array('class' => 'mytextarea',
+                        )))
                 ; 
     }
     
