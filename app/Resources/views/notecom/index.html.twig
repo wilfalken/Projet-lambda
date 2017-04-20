@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des notes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Note</th>
+                
+                <th>Date d'ajout</th>
+                <th>Item</th>
+                <th>Proprietaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for notecom in notecoms %}
+            <tr>
+                <td>{{ notecom.note }}</td>
+                <td>{% if notecom.dateajout %}{{ notecom.dateajout|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ notecom.idexcommente.item.nomitem }}</td>
+                <td>{{ notecom.idexcommente.user.username }}</td>
+                
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('notecommentaire_show', { 'id': notecom.idcommentaire }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('notecommentaire_edit', { 'id': notecom.idcommentaire }) }}">Editer</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+            {#<a href="{{ path('admin_usercommentaire_new') }}">Create a new textcomUser</a>#}
+    </ul>
+{% endblock %}

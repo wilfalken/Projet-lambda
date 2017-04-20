@@ -1,3 +1,19 @@
+lambda_textcom_user:
+    resource: "@LambdaBundle/Controller/TextcomUserController.php"
+    type:     annotation
+
+lambda_textcom_ex:
+    resource: "@LambdaBundle/Controller/TextcomExController.php"
+    type:     annotation
+    
+lambda_notecom_user:
+    resource: "@LambdaBundle/Controller/NoteUserController.php"
+    type:     annotation
+
+lambda_notecom_ex:
+    resource: "@LambdaBundle/Controller/NoteExController.php"
+    type:     annotation
+    
 admin_evenement:
     resource: "@AdminBundle/Controller/EvenementController.php"
     type:     annotation

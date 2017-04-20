@@ -12,4 +12,5 @@ Bienvenue sur l'accueil {% if app.user %}{{ app.user.username }}{% endif %} {#af
 </span>
 {{ form_end(form) }}
 <a href="{{ path('base_message_newuser', {'iddest':6} ) }}">Nouveau message</a>
+<a class="btn-primary" href="{{ path('extextcommentaire_new', {'idcommente':2} ) }}">Nouveau Commentaire exemplaire</a>
 {% endblock %}

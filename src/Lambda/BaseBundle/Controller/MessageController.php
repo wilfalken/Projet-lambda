@@ -76,11 +76,14 @@ class MessageController extends Controller{
         $user=$this->getUser();
         $message = new Message();
         $em = $this->getDoctrine()->getManager();
-        $destinataire = $em->getRepository('LambdaBundle:User')->find($iddest);
-        $form = $this->createForm('Lambda\BaseBundle\Form\MessageuserType', $message);
+        //$destinataire = $em->getRepository('LambdaBundle:User')->find($iddest);
+        $form = $this->createForm('Lambda\BaseBundle\Form\MessagebaseType', $message);
         $form->handleRequest($request);
+        $data=$form->getData();
+        $destinataire = $em->getRepository('LambdaBundle:User')->findByUsername($data['destinataire']);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $destinataire = $em->getRepository('LambdaBundle:User')->findByUsername($iddest);
             if ($user != null) { //s'il ya un user
                 $message->setDestinataire($destinataire);
                 $message->setExpediteur($user);
@@ -93,7 +96,7 @@ class MessageController extends Controller{
 
         return $this->render('BaseBundle:message:new.html.twig', array(
             'message' => $message,
-            'user' => $destinataire,
+            //'user' => $destinataire,
             'form' => $form->createView(),
         ));
     }

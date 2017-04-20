@@ -26,21 +26,21 @@ class CommentaireController extends Controller
 
         $commentaires = $em->getRepository('LambdaBundle:Commentaire')->findAll();
 
-        return $this->render('AdminBundle:commentaire:index.html.twig', array(
+        return $this->render('BaseBundle:commentaire:index.html.twig', array(
             'commentaires' => $commentaires,
         ));
     }
 
     /**
-     * Creates a new commentaire entity.
+     * Creates a new commentaire entity texte sur exemplaire.
      *
-     * @Route("/new", name="base_commentaire_new")
+     * @Route("/new", name="base_commentaire_ex_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newtexteexAction(Request $request)
     {
         $commentaire = new Commentaire();
-        $form = $this->createForm('Lambda\LambdaBundle\Form\CommentaireType', $commentaire);
+        $form = $this->createForm('Lambda\BaseBundle\Form\CommentairenoteType', $commentaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -48,10 +48,36 @@ class CommentaireController extends Controller
             $em->persist($commentaire);
             $em->flush($commentaire);
 
-            return $this->redirectToRoute('commentaire_show', array('id' => $commentaire->getId()));
+            return $this->redirectToRoute('base_commentaire_show', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('AdminBundle:commentaire:new.html.twig', array(
+        return $this->render('BaseBundle:commentaire:newvrai.html.twig', array(
+            'commentaire' => $commentaire,
+            'form' => $form->createView(),
+        ));
+    }
+    
+    /**
+     * Creates a new commentaire entity note sur exemplaire.
+     *
+     * @Route("/new/{idex}", name="base_commentaire_note_ex_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newnoteAction(Request $request)
+    {
+        $commentaire = new Commentaire();
+        $form = $this->createForm('Lambda\BaseBundle\Form\CommentairenoteType', $commentaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaire);
+            $em->flush($commentaire);
+
+            return $this->redirectToRoute('base_commentaire_show', array('id' => $commentaire->getId()));
+        }
+
+        return $this->render('BaseBundle:commentaire:newvrai.html.twig', array(
             'commentaire' => $commentaire,
             'form' => $form->createView(),
         ));
@@ -67,7 +93,7 @@ class CommentaireController extends Controller
     {
         $deleteForm = $this->createDeleteForm($commentaire);
 
-        return $this->render('AdminBundle:commentaire:show.html.twig', array(
+        return $this->render('BaseBundle:commentaire:show.html.twig', array(
             'commentaire' => $commentaire,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -82,16 +108,16 @@ class CommentaireController extends Controller
     public function editAction(Request $request, Commentaire $commentaire)
     {
         $deleteForm = $this->createDeleteForm($commentaire);
-        $editForm = $this->createForm('Lambda\LambdaBundle\Form\CommentaireType', $commentaire);
+        $editForm = $this->createForm('Lambda\BaseBundle\Form\CommentairenoteType', $commentaire);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentaire_edit', array('id' => $commentaire->getId()));
+            return $this->redirectToRoute('base_commentaire_edit', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('AdminBundle:commentaire:edit.html.twig', array(
+        return $this->render('BaseBundle:commentaire:edit.html.twig', array(
             'commentaire' => $commentaire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -115,7 +141,7 @@ class CommentaireController extends Controller
             $em->flush($commentaire);
         }
 
-        return $this->redirectToRoute('commentaire_index');
+        return $this->redirectToRoute('base_commentaire_index');
     }
 
     /**
@@ -128,7 +154,7 @@ class CommentaireController extends Controller
     private function createDeleteForm(Commentaire $commentaire)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('commentaire_delete', array('id' => $commentaire->getId())))
+            ->setAction($this->generateUrl('base_commentaire_delete', array('id' => $commentaire->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

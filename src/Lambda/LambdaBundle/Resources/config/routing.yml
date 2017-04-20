@@ -26,6 +26,14 @@ advanced:
     path: /advanced
     defaults: { _controller: LambdaBundle:Advanced:advanced }
 
+usrtxtcom:
+    path: /usrtxtcom
+    defaults: { _controller: LambdaBundle:TextcomUser:index }
+    
+extxtcom:
+    path: /extxtcom
+    defaults: { _controller: LambdaBundle:TextcomEx:index }
+
     
 #admin:
 #    path: /admin
