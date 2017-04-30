@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class AdresseType extends AbstractType
 {
@@ -20,7 +21,7 @@ class AdresseType extends AbstractType
                 ->add('complement',TextType::class, array('label' => 'Complément d\'adresse :'))
                 ->add('cp',TextType::class, array('label' => 'Code postal :'))
                 ->add('ville',TextType::class, array('label' => 'Ville :'))
-                ->add('pays',TextType::class, array('label' => 'Pays :'))
+                ->add('pays',CountryType::class, array('label' => 'Pays :', 'placeholder' => 'Choisissez un pays'))
                 ->add('iduser')
                 ;
     }

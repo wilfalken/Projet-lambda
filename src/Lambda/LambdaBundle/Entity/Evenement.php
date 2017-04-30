@@ -3,6 +3,7 @@
 namespace Lambda\LambdaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -39,6 +40,13 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="lienImage", type="string", length=150, nullable=false)
+     * 
+     * @Assert\Image(
+     *     minWidth = 600,
+     *     maxWidth = 1000,
+     *     minHeight = 400,
+     *     maxHeight = 600
+     * )
      */
     private $lienimage;
 
@@ -50,7 +58,11 @@ class Evenement
     private $dateajout;
 
 
-
+    public function __construct()
+    {
+        $this->dateajout = new \Datetime;
+    }
+    
     /**
      * Get idevenement
      *

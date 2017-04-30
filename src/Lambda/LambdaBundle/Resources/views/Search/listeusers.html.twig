@@ -1,0 +1,54 @@
+{% extends 'LambdaBundle:Search:resultats.html.twig' %}
+{% block title %}Resultats{% endblock %}
+{% block content %}
+    <div class="tablecontainer">
+        
+        {% if liste_users==null %}
+            <h2>Votre recherche n'a retourné <span class="red">aucun</span> résultat</h2>
+         {% else %}
+        <h1>Vos résultats de recherche parmi les utilisateurs :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    
+                    <th>Nom</th>
+                    <th colspan="2">Localisation</th>
+                    <th>Genre</td>
+                    <th>Membre depuis</th>
+                   
+
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for unitem in liste_users %}
+                    
+                    <tr>
+                       
+                        <td>{{ unitem.username }}</td>
+                        <td>{{ unitem.adresses|first.ville }}</td>
+                        <td>{{ unitem.adresses|first.pays|countryName }}</td>
+                        <td>{{ unitem.genre ? 'Femme':'Homme' }}</td>
+                        <td>{{ unitem.mdepuis|date('Y-m-d') }}</td>
+                        
+                        
+                        <td>
+                            <ul>
+
+                                
+
+                                {% if app.user.id|default(null) == null %}Connectez-vous !{% else %}
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_profil_public', { 'iduser': unitem.id } ) }}">Voir le profil !!!</a>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_message_newuser', { 'iddest': unitem.id }) }}">Envoyer un message</a>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    
+{% endblock %}

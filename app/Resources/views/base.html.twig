@@ -4,17 +4,81 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}{% endblock %} - L@mbda</title>
-    {% block stylesheets %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
-</head>
-<body>
-{% include '::header.html.twig' %}
-{% block body %}{% block content %}{% endblock %}{% endblock %}
-{% include '::footer.html.twig' %}
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-{% block javascripts %}{% endblock %}
-</body>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('css/TimeCircles.css') }}" />
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+            <link rel="stylesheet" href="{{ asset('css/colorbox.css') }}" />
+            
+            {% block stylesheets %}{% endblock %}
+        
+
+
+    </head>
+    <body>
+        {% include '::header.html.twig' %}
+        <div id="contenu">
+            {% block body %}
+                {% block content %}
+                    {% if app.user %}
+                    <a class="btn btn-primary btn-sm" href="{{ path('base_profil_public', { 'id': app.user } )}}">Mon profil</a>
+                    {% endif %}
+                {% endblock %}
+            {% endblock %}
+        </div>
+        {% include '::footer.html.twig' %}
+
+
+
+
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{{ asset('js/jquery.colorbox-min.js') }}"></script>
+        <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('js/TimeCircles.js') }}"></script>
+                {% block javascripts %}{% endblock %}
+        <script>
+                $('a[rel="color"]').colorbox();
+                
+                tinymce.init({
+                    selector: 'textarea.mytextarea',
+                    menubar: false,
+                    plugins: ['wordcount emoticons textcolor colorpicker textpattern autolink link'],
+                    toolbar1: 'undo redo | styleselect | bold italic | outdent indent | link | forecolor backcolor emoticons',
+                });
+                
+                $("#DateCountdown").TimeCircles({
+    "animation": "smooth",
+    "bg_width": 0.5,
+    "fg_width": 0.05,
+    "circle_bg_color": "grey", {##d4e4f2#}
+    "time": {
+        "Days": {
+            "text": "Jours",
+            "color": "red",
+            "show": true
+        },
+        "Hours": {
+            "text": "Heures",
+            "color": "red",
+            "show": true
+        },
+        "Minutes": {
+            "text": "Minutes",
+            "color": "red",
+            "show": true
+        },
+        "Seconds": {
+            "text": "Secondes",
+            "color": "red",
+            "show": false
+        }
+    }
+});
+
+
+        </script> 
+    </body>
 </html>

@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+{% block title %}Mes objets {% endblock %}
+    {% block content %}
+
+
+    <div class="tablecontainer">
+        <h1>Vos objets :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id d'exemplaire :</th>
+                    <th colspan="2">Objet :</th>
+                    <th>Etat</th>
+                    <th>Date d'ajout :</th>
+                    <th>Photo :</th>
+                        {#                    <th>Cp</th>
+                                            <th>Ville</th>
+                                            <th>Pays</th>#}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exemplaire in exemplaires %}
+                    <tr>
+                        <td>{{ exemplaire.idexemplaire }}</a></td>
+                        <td>{{ exemplaire.item.nomitem }}</td>
+                        <td>{{ exemplaire.item.categorie.nomCategorie }}</td>
+                        <td>{{ exemplaire.etat }}</td>
+                        <td>{{ exemplaire.dateajout|date('Y-m-d') }}</td>
+                        <td>{{ exemplaire.photoexemplaire }}</td>
+                        <td>
+
+
+                            <ul>
+
+                                <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
+
+                                <a class="btn btn-danger btn-xs run" href="{{ path('base_exemplaire_simpledelete', { 'id': exemplaire.idexemplaire }) }}" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ exemplaire.item.nomitem }}?');">Supprimer</a>
+
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+
+
+
+        </ul>
+    </div>
+
+        <script>
+            
+            </script>
+                {% block javascripts %}
+            {% endblock %}
+        {% endblock %}
+

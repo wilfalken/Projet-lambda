@@ -34,11 +34,38 @@ class Emprunt
      * @ORM\Column(name="dateRendu", type="datetime", nullable=false)
      */
     private $daterendu;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="duree", type="string", nullable=false)
+     */
+    private $duree;
+
+    /**
+     * @var \Lambda\LambdaBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User", inversedBy="emprunts")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idemprunteur", referencedColumnName="id")
+     * })
+     */
+    private $idemprunteur;
+    
+     /**
+     * @var \Lambda\LambdaBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User", inversedBy="prets")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idproprietaire", referencedColumnName="id")
+     * })
+     */
+    private $idproprietaire;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Exemplaire
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
+     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idExemplaire", referencedColumnName="idexemplaire")
      * })
@@ -46,15 +73,21 @@ class Emprunt
     private $idexemplaire;
 
     /**
-     * @var \Lambda\LambdaBundle\Entity\User
+     * Owning side
+     * @var \Lambda\LambdaBundle\Entity\Adresse
      *
-     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idemprunteur", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Adresse", inversedBy="emprunts")
+     * @ORM\JoinColumn(name="idadresse", referencedColumnName="idadresse")
      */
-    private $idemprunteur;
+    private $adresse;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateemprunt = new \Datetime;
+    }
 
 
     /**
@@ -116,6 +149,30 @@ class Emprunt
     }
 
     /**
+     * Set idemprunteur
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $idemprunteur
+     *
+     * @return Emprunt
+     */
+    public function setIdemprunteur(\Lambda\LambdaBundle\Entity\User $idemprunteur = null)
+    {
+        $this->idemprunteur = $idemprunteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idemprunteur
+     *
+     * @return \Lambda\LambdaBundle\Entity\User
+     */
+    public function getIdemprunteur()
+    {
+        return $this->idemprunteur;
+    }
+
+    /**
      * Set idexemplaire
      *
      * @param \Lambda\LambdaBundle\Entity\Exemplaire $idexemplaire
@@ -140,26 +197,74 @@ class Emprunt
     }
 
     /**
-     * Set idemprunteur
+     * Set idproprietaire
      *
-     * @param \Lambda\LambdaBundle\Entity\User $idemprunteur
+     * @param \Lambda\LambdaBundle\Entity\User $idproprietaire
      *
      * @return Emprunt
      */
-    public function setIdemprunteur(\Lambda\LambdaBundle\Entity\User $idemprunteur = null)
+    public function setIdproprietaire(\Lambda\LambdaBundle\Entity\User $idproprietaire = null)
     {
-        $this->idemprunteur = $idemprunteur;
+        $this->idproprietaire = $idproprietaire;
 
         return $this;
     }
 
     /**
-     * Get idemprunteur
+     * Get idproprietaire
      *
      * @return \Lambda\LambdaBundle\Entity\User
      */
-    public function getIdemprunteur()
+    public function getIdproprietaire()
     {
-        return $this->idemprunteur;
+        return $this->idproprietaire;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param \Lambda\LambdaBundle\Entity\Adresse $adresse
+     *
+     * @return Emprunt
+     */
+    public function setAdresse(\Lambda\LambdaBundle\Entity\Adresse $adresse = null)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return \Lambda\LambdaBundle\Entity\Adresse
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param string $duree
+     *
+     * @return Emprunt
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
     }
 }

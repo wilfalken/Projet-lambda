@@ -29,6 +29,13 @@ class Lienpropriete
     private $nomprop;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="valeur", type="string", length=200, nullable=false)
+     */
+    private $valeur;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Categorie", mappedBy="idpropriete")
@@ -36,11 +43,19 @@ class Lienpropriete
     private $idcategorie;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Item", mappedBy="idpropriete")
+     */
+    private $idproduit;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->idcategorie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idproduit = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -79,6 +94,30 @@ class Lienpropriete
     }
 
     /**
+     * Set valeur
+     *
+     * @param string $valeur
+     *
+     * @return Lienpropriete
+     */
+    public function setValeur($valeur)
+    {
+        $this->valeur = $valeur;
+
+        return $this;
+    }
+
+    /**
+     * Get valeur
+     *
+     * @return string
+     */
+    public function getValeur()
+    {
+        return $this->valeur;
+    }
+
+    /**
      * Add idcategorie
      *
      * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
@@ -110,5 +149,43 @@ class Lienpropriete
     public function getIdcategorie()
     {
         return $this->idcategorie;
+    }
+
+    /**
+     * Add idproduit
+     *
+     * @param \Lambda\LambdaBundle\Entity\Item $idproduit
+     *
+     * @return Lienpropriete
+     */
+    public function addIdproduit(\Lambda\LambdaBundle\Entity\Item $idproduit)
+    {
+        $this->idproduit[] = $idproduit;
+
+        return $this;
+    }
+
+    /**
+     * Remove idproduit
+     *
+     * @param \Lambda\LambdaBundle\Entity\Item $idproduit
+     */
+    public function removeIdproduit(\Lambda\LambdaBundle\Entity\Item $idproduit)
+    {
+        $this->idproduit->removeElement($idproduit);
+    }
+
+    /**
+     * Get idproduit
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdproduit()
+    {
+        return $this->idproduit;
+    }
+    
+    public function __toString() {
+        return $this->nomprop;
     }
 }

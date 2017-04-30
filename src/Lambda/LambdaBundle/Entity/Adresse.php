@@ -64,18 +64,44 @@ class Adresse
     private $pays;
 
     /**
+     * Owning side
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", mappedBy="idadresse")
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", inversedBy="adresses")
+     *      * @ORM\JoinTable(name="adresseuser",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="idadresse", referencedColumnName="idadresse")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="iduser", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $iduser;
+    private $users;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Emprunt", mappedBy="adresse")
+     * @ORM\JoinColumn(name="idEmprunt", referencedColumnName="idEmprunt")
+     */
+    private $emprunts;
+    
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="actual", type="boolean", nullable=false)
+     */
+    private $principale;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->emprunts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->principale = false;
     }
 
 
@@ -233,41 +259,101 @@ class Adresse
         return $this->pays;
     }
 
+
     /**
-     * Add iduser
+     * Add emprunt
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduser
+     * @param \Lambda\LambdaBundle\Entity\Emprunt $emprunt
      *
      * @return Adresse
      */
-    public function addIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+    public function addEmprunt(\Lambda\LambdaBundle\Entity\Emprunt $emprunt)
     {
-        $this->iduser[] = $iduser;
+        $this->emprunts[] = $emprunt;
 
         return $this;
     }
 
     /**
-     * Remove iduser
+     * Remove emprunt
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduser
+     * @param \Lambda\LambdaBundle\Entity\Emprunt $emprunt
      */
-    public function removeIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+    public function removeEmprunt(\Lambda\LambdaBundle\Entity\Emprunt $emprunt)
     {
-        $this->iduser->removeElement($iduser);
+        $this->emprunts->removeElement($emprunt);
     }
 
     /**
-     * Get iduser
+     * Get emprunts
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIduser()
+    public function getEmprunts()
     {
-        return $this->iduser;
+        return $this->emprunts;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $user
+     *
+     * @return Adresse
+     */
+    public function addUser(\Lambda\LambdaBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Lambda\LambdaBundle\Entity\User $user
+     */
+    public function removeUser(\Lambda\LambdaBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
     
-    public function __toString() {
-        return $this->getIduser()->getId();
+    public function __toString()
+    {
+        return ''.$this->numrue.', '.$this->textadresse.', '.$this->complement.', '.$this->cp.' '.$this->ville.' - '.$this->pays.'';
+    }
+
+    /**
+     * Set principale
+     *
+     * @param boolean $principale
+     *
+     * @return Adresse
+     */
+    public function setPrincipale($principale)
+    {
+        $this->principale = $principale;
+
+        return $this;
+    }
+
+    /**
+     * Get principale
+     *
+     * @return boolean
+     */
+    public function getPrincipale()
+    {
+        return $this->principale;
     }
 }

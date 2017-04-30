@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+{% block title %}WOOoops !!!{% endblock %}
+{% block content %}
+    <div class="cont404">
+        <div class="erreur4xx">
+            <img class="img404" src="{% block imgerror %}{% endblock %}"/>
+            <div class="conterror">
+                <div class="open-quote">“</div>
+                <div class="texterror">
+                    {% block error %}
+                    {% endblock %}
+                </div>
+                <a class="btn btn-warning" href="{{ path('adresse_index') }}">Accueil >></a>
+                <div class="close-quote">”</div>
+
+
+            </div>   
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,3 +1,27 @@
+lambda_textcom_user:
+    resource: "@LambdaBundle/Controller/TextcomUserController.php"
+    type:     annotation
+
+lambda_textcom_ex:
+    resource: "@LambdaBundle/Controller/TextcomExController.php"
+    type:     annotation
+    
+lambda_notecom_user:
+    resource: "@LambdaBundle/Controller/NoteUserController.php"
+    type:     annotation
+
+lambda_notecom_ex:
+    resource: "@LambdaBundle/Controller/NoteExController.php"
+    type:     annotation
+    
+admin_evenement:
+    resource: "@AdminBundle/Controller/EvenementController.php"
+    type:     annotation
+
+admin_item:
+    resource: "@AdminBundle/Controller/ItemController.php"
+    type:     annotation
+
 base:
     resource: "@BaseBundle/Resources/config/routing.yml"
     prefix:   /base
@@ -6,24 +30,20 @@ admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
     prefix:   /admin
 
-lambda_commentaire:
-    resource: "@LambdaBundle/Controller/CommentaireController.php"
+admin_commentaire:
+    resource: "@AdminBundle/Controller/CommentaireController.php"
     type:     annotation
 
-lambda_adresse:
-    resource: "@LambdaBundle/Controller/AdresseController.php"
+admin_adresse:
+    resource: "@AdminBundle/Controller/AdresseController.php"
     type:     annotation
 
-lambda_categorie:
-    resource: "@LambdaBundle/Controller/CategorieController.php"
+admin_categorie:
+    resource: "@AdminBundle/Controller/CategorieController.php"
     type:     annotation
 
-lambda_categorie:
-    resource: "@LambdaBundle/Controller/categorieController.php"
-    type:     annotation
-
-lambda_item:
-    resource: "@LambdaBundle/Controller/ItemController.php"
+admin_item:
+    resource: "@AdminBundle/Controller/ItemController.php"
     type:     annotation
 
 lambda:

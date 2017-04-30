@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des commentaires</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>commentaire texte</th>
+                <th>Id commentaire</th>
+                <th>Date d'ajout</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for textcom in textcoms %}
+            <tr>
+                <td>{{ textcom.textcom }}</td>
+                <td>{{ textcom.idcommentaire }}</td>
+                <td>{% if textcom.dateajout %}{{ textcom.dateajout|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('textecommentaire_show', { 'id': textcom.idcommentaire }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('textecommentaire_edit', { 'id': textcom.idcommentaire }) }}">Editer</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+            {#<a href="{{ path('admin_usercommentaire_new') }}">Create a new textcomUser</a>#}
+    </ul>
+{% endblock %}

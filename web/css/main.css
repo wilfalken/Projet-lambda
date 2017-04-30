@@ -1,3 +1,144 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+    background: WhiteSmoke;
+}
+
+
+/****************************************************************************
+grille de profil
+*****************************************************************************/
+.ul {
+    text-align: right;
+}
+@media (min-width: 1200px){
+.container {
+    width: 80%;
+    height: 80%;
+    text-align: center;
+}}
+.col-lg-8 {
+    width: 100%;
+}
+
+.normal{
+    font-family: "Arial", sans-serif;
+}
+
+.container {
+          text-align: center;
+  padding: 15px;
+  margin: 0 auto;
+      background:#f7f7f7;
+	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Webkit */
+	border:1px solid #aaa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-box-shadow:0 0 15px #aaa;
+	-webkit-box-shadow:0 0 15px #aaa;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+[class*="col-"], footer {
+  border-radius: 6px;
+  line-height: 40px;
+  text-align: center;
+}
+
+
+#contenu { /*top right bottom left*/
+    padding: 0px 0 0px 0;
+    margin-bottom: 80px;
+}
+th, td{
+    text-align:center;
+}
+
+td.active, th.warning {
+    max-width: 100px;
+}
+
+.form-group{
+      text-align: center;
+  padding: 15px;
+  margin: 0 auto;
+      
+   
+    max-width: 600px;
+}
+.col-sm-2{
+    width: 100%;
+    text-align: left;
+}
+
+.form-group2{
+      text-align: center;
+  padding: 15px;
+  margin: 0 auto;
+      background:#f7f7f7;
+	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Webkit */
+	border:1px solid #aaa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-box-shadow:0 0 15px #aaa;
+	-webkit-box-shadow:0 0 15px #aaa;
+   
+    max-width: 600px;
+}
+
+.form-group label {
+    width: 100%;
+}
+
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* liens fictifs */
+.none, a.none:visited, a.none:active, a.none:focus, a.none:link{
+    text-decoration: none;
+    color: orange;
+}
+
+a.none:hover{
+    text-decoration: none;
+    color: red;
+}
+
+/* Accueil */
+#present {
+    width: 100%;
+    text-align : center;
+    color:orange;
+    margin-bottom: 80px;
+}
+
+.spacer {
+    margin: 0 14em 0 14em;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.spacer2{
+   
+    
+    font-size: 20px;
+}
+
+
 /* formulaire de connexion */
 
 
@@ -8,6 +149,7 @@
 }
 
 .bs-example {
+    
     margin-right: 0;
     margin-left: 0;
     background-color: #fff;
@@ -21,7 +163,14 @@
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
-      background-color: #ecf9f2;
+      background:#f7f7f7;
+	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Webkit */
+	border:1px solid #aaa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-box-shadow:0 0 15px #aaa;
+	-webkit-box-shadow:0 0 15px #aaa;
 
 /*      border-color: #ddd;
     border-width: 30px;
@@ -71,11 +220,63 @@ header
 *****************************************************************************/
 
 .header {
+    position: static;
+    width: 100%;
+    padding: 0;
     top:0;
-    text-align: center;
+/*    text-align: center;*/
     background-color: black;
     color: orange;
     height: 60px;
+    border-bottom: 2px solid;
+    border-bottom-color: orange;
+    margin-bottom: 0px;
+}
+
+.nomsite {
+    position: relative;
+    color: white;
+    display: block;
+    width: 150px;
+    left:10%;
+    color: orange;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.ism-slider{
+    top: -34px;
+}
+.search{
+  
+    position: relative;
+    top: -45px;
+    left: 30%;
+/*    float: left;*/
+    width: 30%;
+}
+
+#headerright{
+    position: absolute;
+    top: 15px;
+    right: 1%;
+    width: 550px;
+}
+
+#padding{
+    display:inline-block;
+    position: relative;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+#paspadding{
+    display: inline-block;
+    position: relative;
+    right: 0px;
+    margin:0;
+    padding: 0;
 }
 
 /****************************************************************************
@@ -83,6 +284,7 @@ footer
 *****************************************************************************/
 .footer {
     position: fixed;
+    display: block;
     width: 100%;
     height: 40px;
     clear: both;
@@ -98,7 +300,7 @@ footer
 .cont404 {
     position: relative;
     margin: auto;
-    text-align: center;
+    /*text-align: center;*/
     left: 10%;
     top: 40%;
 }
@@ -127,9 +329,11 @@ box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
 .img404 {
     position: relative;
     margin-left: 0;
-    top: -20%;
-    left: -40%;
+    top: -70px;
+    left: 50px;
     padding: 0;
+    width: 300px;
+    height: 300px;
     
     transform:rotate(-10deg);
 -ms-transform:rotate(-10deg); /* Internet Explorer */
@@ -143,6 +347,7 @@ box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
 }
 
 .conterror {
+    text-align: center;
     position: relative;
   left: 40%;
   top:-200px;
@@ -166,13 +371,41 @@ box-shadow: inset 14px 14px 98px -9px rgba(102,102,102,1);
     position: relative;
     width: 80%;
     left: 10%;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .close-quote{
         font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     right:0;
-    top: 20px;
+    top: 50px;
     color: grey;
     font-size: 8em;
+}
+
+
+/****************************************************************************
+popup
+*****************************************************************************/
+.cd-popup {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+ 
+.cd-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+ 
+.cd-popup-container {
+  transform: translateY(-40px);
+  transition-property: transform;
+  transition-duration: 0.3s;
+}
+ 
+.is-visible .cd-popup-container {
+  transform: translateY(0);
 }

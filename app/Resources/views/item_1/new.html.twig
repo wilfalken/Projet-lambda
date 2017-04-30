@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+{% block title %}Création d'item{% endblock %}
+{% block body %}
+    <div class="form-signin">
+    <h1>Creation d'Item</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input class="btn btn-success" type="submit" value="Créer" />
+    {{ form_end(form) }}
+    </br>
+    <ul>
+        
+            <a class="btn btn-primary btn-xs" href="{{ path('item_index') }}">Retour à la liste</a>
+       
+    </ul>
+</div>
+{% endblock %}

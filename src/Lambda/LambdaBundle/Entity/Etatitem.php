@@ -7,45 +7,31 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Etatitem
  *
- * @ORM\Table(name="etatitem", indexes={@ORM\Index(name="IDX_14ABE57C6CE67B80", columns={"idItem"})})
+ * @ORM\Table(name="etatitem", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_14ABE57C6CE67B80", columns={"idItem"})}, indexes={@ORM\Index(name="IDX_14ABE57C6CE67B80", columns={"idItem"})})
  * @ORM\Entity
  */
 class Etatitem
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="etatInitial", type="string", length=400)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="etatInitial", type="string", length=220)
+     * 
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $etatinitial;
 
     /**
      * @var \Lambda\LambdaBundle\Entity\Item
-     *
-     * @ORM\OneToOne(targetEntity="Lambda\LambdaBundle\Entity\Item")
+     * 
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Item")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idItem", referencedColumnName="idItem", unique=true)
+     *   @ORM\JoinColumn(name="idItem", referencedColumnName="idItem")
      * })
      */
     private $iditem;
 
 
-
-    /**
-     * Set etatinitial
-     *
-     * @param string $etatinitial
-     *
-     * @return Etatitem
-     */
-    public function setEtatinitial($etatinitial)
-    {
-        $this->etatinitial = $etatinitial;
-
-        return $this;
-    }
 
     /**
      * Get etatinitial

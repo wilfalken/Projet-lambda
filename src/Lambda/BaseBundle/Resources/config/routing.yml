@@ -1,3 +1,39 @@
 base_homepage:
-    path:     /
+    path: /
     defaults: { _controller: BaseBundle:Default:index }
+    
+profil:
+    path: /profil
+    defaults: { _controller: BaseBundle:Profil:index }
+    
+adresse:
+    path: /adresse
+    defaults: { _controller: BaseBundle:Adressebase:index }
+    
+groupe:
+    path: /groupe
+    defaults: { _controller: BaseBundle:Groupe:index }
+    
+base_exemplaire:
+    resource: "@BaseBundle/Controller/ExemplaireController.php"
+    type:      annotation
+
+base_adresse:
+    resource: "@BaseBundle/Controller/AdressebaseController.php"
+    type:      annotation
+    
+base_groupe:
+    resource: "@BaseBundle/Controller/GroupeController.php"
+    type:      annotation
+    
+base_message:
+    resource: "@BaseBundle/Controller/MessageController.php"
+    type:      annotation
+    
+base_profil:
+    resource: "@BaseBundle/Controller/ProfilController.php"
+    type:      annotation
+    
+base_emprunt:
+    resource: "@BaseBundle/Controller/EmpruntController.php"
+    type:      annotation

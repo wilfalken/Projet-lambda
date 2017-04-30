@@ -21,5 +21,10 @@ use Doctrine\ORM\NoResultException;
  * @author admin
  */
 class CategorieRepository extends EntityRepository{
-    //put your code here
+
+    public function listeCategoriesalpha()
+    {
+        return $this->createQueryBuilder('categorie')
+            ->orderBy('categorie.nomcategorie', 'ASC');
+    }
 }

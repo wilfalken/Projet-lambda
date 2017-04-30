@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+{% block title %}Adresse{% endblock %}
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Adresse :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <tbody>
+                <tr>
+                    <th>Id d'adresse :</th>
+                    <td>{{ adresse.idadresse }}</td>
+                </tr>
+                <tr>
+                    <th>Numéro de rue :</th>
+                    <td>{{ adresse.numrue }}</td>
+                </tr>
+                <tr>
+                    <th>Nom de rue :</th>
+                    <td>{{ adresse.textadresse }}</td>
+                </tr>
+                <tr>
+                    <th>Complement :</th>
+                    <td>{{ adresse.complement }}</td>
+                </tr>
+                <tr>
+                    <th>Code postal :</th>
+                    <td>{{ adresse.cp }}</td>
+                </tr>
+                <tr>
+                    <th>Ville :</th>
+                    <td>{{ adresse.ville }}</td>
+                </tr>
+                <tr>
+                    <th>Pays :</th>
+                    <td>{{ adresse.pays }}</td>
+                </tr>
+                                <tr>
+                    <th>Adresse principale ?</th>
+                    <td>{{ adresse.principale ? 'Oui':'Non' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ul>
+
+
+            {{ form_start(delete_form2) }}
+               
+            <input class="btn btn-danger" type="submit" value="Supprimer" method="DELETE">
+            <a class="btn btn-warning" href="{{ path('base_adresse_edit', { 'id': adresse.idadresse }) }}">Editer</a>
+            {{ form_end(delete_form2) }}
+            </br>
+            </br>
+            <a class="btn btn-primary" href="{{ path('base_adresse_index') }}">Retourner à la liste</a>
+
+
+
+        </ul>
+    </div>
+{% endblock %}

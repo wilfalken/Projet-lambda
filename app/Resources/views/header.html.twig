@@ -1,14 +1,43 @@
 <div class="header">
     </br>    
-Ceci est un header !!!!
 
-{% if (app.user) %}Bienvenue {{ app.user.username }}
-    <a class="btn btn-danger btn-sm" href="{{ path('logout') }}">Deconnexion</a>
-    {% else %}
-        <a class="btn btn-primary btn-sm" href="{{ path('login') }}">Connexion ></a>
-        <a class="btn btn-primary btn-success btn-sm" href="{{ path('register') }}">Inscription</a>
-    {% endif %}
+{#<div class="well research_form">#}
+<div class="nomsite">
+    <a class="none" href="{{ path('homepage')}}" title="Retour à l'accueil"> L@MBDA !!!</a>
     
+</div>
+    
+
+
+      {#<input type="text" class="form-control" placeholder="Cherchez un objet !">
+            <span class="input-group-btn">
+        <button class="btn btn-warning" type="submit" method="POST" action="{{ path('search') }}">Go!</button>
+      </span>#}
+    <!-- /input-group -->
+{#</div>#}
+<div id="headerright">
+    <div id="padding">
+        <a href="{{ path('advanced')}}" class="btn btn-warning" rel="color">recherche avancée</a>
+    </div>
+        <div id="paspadding">
+{% if (app.user) %}Bienvenue {{ app.user.username }}. Votre rôle : {% if is_granted('ROLE_ADMIN') %}
+    Administrateur
+{% elseif is_granted('ROLE_USER') %}
+    Utilisateur
+{% else %}
+    {{ app.user.username|default('Non connecté') }}
+{% endif %}
+
+    <a class="btn btn-danger btn-sm" href="{{ path('logout')}}">Deconnexion</a>
+    
+    
+    {% else %}
+        <a class="btn btn-primary btn-sm" href="{{ path('login') }}" rel="color">Connexion ></a>
+        <a class="btn btn-primary btn-success btn-sm" href="{{ path('register') }}">Inscription</a>
+        
+    {% endif %}
+        </div>
+        </div>   
     
     
 </div>

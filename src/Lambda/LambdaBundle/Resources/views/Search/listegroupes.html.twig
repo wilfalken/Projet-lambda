@@ -1,0 +1,57 @@
+{% extends 'LambdaBundle:Search:resultats.html.twig' %}
+{% block title %}Resultats{% endblock %}
+{% block content %}
+    <div class="tablecontainer">
+        {% if liste_groupes==null %}
+            <h1>Votre recherche n'a retourné <span class="red">aucun</span> résultat</h1>
+         {% else %}
+        <h1>Vos résultats de recherche parmi les groupes :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    
+                    <th>Nom</th>
+                    <th>Officier</th>
+                    <th>Description</th>
+                    <th>nombre de membres</td>
+                    <th>Action(s)</th>
+                   
+
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for ungroupe in liste_groupes %}
+                    
+                    <tr>
+                       
+                        <td>{{ ungroupe.nomgroupe }}</td>
+                        <td>{% for officier in ungroupe.officiers %}{{ officier }}, {% endfor %}</td>
+                        <td>{{ ungroupe.description }}</td>
+                        <td>{{ ungroupe.users|length }}</td>
+                       
+                        
+                        
+                        <td>
+                            <ul>
+
+                                
+
+                                {% if app.user.id|default('null') == null %}Connectez-vous !{% else %}
+                                   {% if app.user|default('null') not in ungroupe.users %} 
+                                       <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_entrer', { 'id': ungroupe.idgroupe }, {'iduser': app.user.id}) }}">Faire partie du groupe ></a>
+                                   {% else %}
+                                       <a class="btn btn-primary btn-xs disabled" href="{{ path('base_groupe_entrer', { 'id': ungroupe.idgroupe }, {'iduser': app.user.id}) }}">Faire partie du groupe ></a>
+                                       {% endif %}
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    
+{% endblock %}

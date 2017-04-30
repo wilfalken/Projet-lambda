@@ -2,7 +2,13 @@ lambda_homepage:
     path: /
     defaults: { _controller: LambdaBundle:Default:index }
     
-
+user:
+    path: /user
+    defaults: { _controller: LambdaBundle:User:index }
+    
+trouveuser:
+    resource: "@LambdaBundle/Controller/SpecialController.php"
+    type:      annotation
 
 login:
     path: /login
@@ -13,8 +19,25 @@ logout:
     defaults: { _controller: LambdaBundle:Security:logout }
 
 register:
-    path: /register
+    path: /register/
     defaults: { _controller: LambdaBundle:Security:register }
+    
+search:
+    path: /search
+    defaults: { _controller: LambdaBundle:Default:search }
+ 
+advanced:
+    path: /advanced
+    defaults: { _controller: LambdaBundle:Advanced:advanced }
+
+usrtxtcom:
+    path: /usrtxtcom
+    defaults: { _controller: LambdaBundle:TextcomUser:index }
+    
+extxtcom:
+    path: /extxtcom
+    defaults: { _controller: LambdaBundle:TextcomEx:index }
+
     
 #admin:
 #    path: /admin

@@ -38,7 +38,7 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="photoItem", type="string", length=100, nullable=false)
+     * @ORM\Column(name="photoItem", type="string", length=100, nullable=true)
      */
     private $photoitem;
 
@@ -50,26 +50,44 @@ class Item
     private $isvalide;
 
     /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="Lambda\LambdaBundle\Entity\Categorie", inversedBy="items", fetch="EAGER")
+     * @ORM\JoinColumn(name="idCategorie", referencedColumnName="idCategorie")
+     * 
+     */
+    private $categorie;
+    
+     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Categorie", inversedBy="iditem")
-     * @ORM\JoinTable(name="liencategorie",
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire", mappedBy="item")
+     *
+     */
+    private $exemplaires;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Lienpropriete", inversedBy="idproduit")
+     * @ORM\JoinTable(name="produitpropriete",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="idItem", referencedColumnName="idItem")
+     *     @ORM\JoinColumn(name="idproduit", referencedColumnName="idItem")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idCategorie", referencedColumnName="idCategorie")
+     *     @ORM\JoinColumn(name="idpropriete", referencedColumnName="idPropriete")
      *   }
      * )
      */
-    private $idcategorie;
+    private $idpropriete;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idcategorie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->exemplaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idpropriete = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -179,37 +197,153 @@ class Item
         return $this->isvalide;
     }
 
+//    /**
+//     * Add idcategorie
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
+//     *
+//     * @return Item
+//     */
+//    public function addIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie)
+//    {
+//        $this->idcategorie[] = $idcategorie;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove idcategorie
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
+//     */
+//    public function removeIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie)
+//    {
+//        $this->idcategorie->removeElement($idcategorie);
+//    }
+
+ //   /**
+ //    * Get idcategorie
+ //    *
+ //    * @return \Doctrine\Common\Collections\Collection
+ //    */
+//    public function getIdcategorie()
+//    {
+//        return $this->idcategorie;
+//    }
+
     /**
-     * Add idcategorie
+     * Add idpropriete
      *
-     * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
+     * @param \Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete
      *
      * @return Item
      */
-    public function addIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie)
+    public function addIdpropriete(\Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete)
     {
-        $this->idcategorie[] = $idcategorie;
+        $this->idpropriete[] = $idpropriete;
 
         return $this;
     }
 
     /**
-     * Remove idcategorie
+     * Remove idpropriete
+     *
+     * @param \Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete
+     */
+    public function removeIdpropriete(\Lambda\LambdaBundle\Entity\Lienpropriete $idpropriete)
+    {
+        $this->idpropriete->removeElement($idpropriete);
+    }
+
+    /**
+     * Get idpropriete
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdpropriete()
+    {
+        return $this->idpropriete;
+    }
+
+    /**
+     * Set idcategorie
      *
      * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
+     *
+     * @return Item
      */
-    public function removeIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie)
+    public function setIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie = null)
     {
-        $this->idcategorie->removeElement($idcategorie);
+        $this->idcategorie = $idcategorie;
+
+        return $this;
     }
 
     /**
      * Get idcategorie
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Lambda\LambdaBundle\Entity\Categorie
      */
     public function getIdcategorie()
     {
         return $this->idcategorie;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \Lambda\LambdaBundle\Entity\Categorie $categorie
+     *
+     * @return Item
+     */
+    public function setCategorie(\Lambda\LambdaBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Lambda\LambdaBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Add exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     *
+     * @return Item
+     */
+    public function addExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires[] = $exemplaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     */
+    public function removeExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires->removeElement($exemplaire);
+    }
+
+    /**
+     * Get exemplaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExemplaires()
+    {
+        return $this->exemplaires;
     }
 }

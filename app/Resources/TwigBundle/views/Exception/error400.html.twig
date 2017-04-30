@@ -1,0 +1,12 @@
+{% extends '@Twig/Exception/error.html.twig' %}
+
+    {% block imgerror %}{{ asset('img/incompris.gif') }}{% endblock %}
+
+    {% block error %}
+
+        La requête n'a pas été comprise par le serveur.</br>
+        La syntaxe de la requête est vraisemblablement erronée.</br>
+        Peut-être votre navigateur est-il trop ancien, ou bien un des programmeurs n'a pas bien fait son boulot...</br>
+        Quoi qu'il en soit, il serait peut-être mieux de retourner à l'accueil pour le moment. ;-p</br></br>
+
+    {% endblock %}

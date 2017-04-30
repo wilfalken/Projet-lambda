@@ -1,1 +1,44 @@
-Hello World!
+{% extends '::base.html.twig' %}
+{% block title %}Admin{% endblock %}
+{% block body %}
+    </br></br>
+    <div class="form-group2">
+        <h2>Administration</h2><hr />
+        <table class="table table-hover">
+            <thead>
+                <tr>  
+                    <th><i class="fa fa-users fa-3x" aria-hidden="true"></i> Groupes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="btn btn-primary btn-sm" href="{{ path('base_groupe_index', { 'id': app.user } )}}">Les groupes</a></td>
+                </tr>
+        </table>
+        <hr />
+        <table class="table table-hover">
+            <thead>
+                <tr>  
+                    <th><i class="fa fa-camera-retro fa-3x" aria-hidden="true"></i> Exemplaires</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="btn btn-primary btn-sm" href="{{ path('base_exemplaire_index', { 'id': app.user } )}}">Les exemplaires</a></td>
+                </tr>
+        </table>
+        <hr />
+                <table class="table table-hover">
+            <thead>
+                <tr>  
+                    <th><i class="fa fa-envelope fa-3x" aria-hidden="true"></i> Messages</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="btn btn-primary btn-sm" href="{{ path('base_message_index', { 'id': app.user } )}}">Les messages</a></td>
+                </tr>
+        </table>
+        <hr />
+    </div>
+{% endblock %}

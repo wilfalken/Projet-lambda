@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+{% block title %}Mes messages{% endblock %}
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Mes messages</h1>
+        
+            <table class="table table-condensed table-striped table-hover">
+                <thead class="table-bordered">
+                    <tr>
+                        <th >Message en provenance de :</th>
+                        <th>Sujet</th>
+                        <th>Datant de :</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                {% for message in messages %}
+                <tr>
+                    <td>{{ message.expediteur.username }}</td>
+                    <td>{{ message.sujet }}</td>    
+                    <td>{{ message.dateenvoi|date('d / m / Y') }}</td>
+                    <td>
+                        
+                            <a class="btn btn-danger btn-xs" onclick="return confirm('Etes-vous sur de vouloir supprimer le message ?');" href="{{ path('base_message_simpledelete', { 'idmessage': message.idmessage } ) }}">Effacer le message</a>
+                        <a class="btn btn-success" href="{{ path('base_message_show', { 'idmessage': message.idmessage } ) }}">Voir le message</a>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            
+            
+           
+            
+        
+        <ul>
+            {#<a class="btn btn-warning" href="{{ path('base_message_new') }}">Nouveau message</a>#}
+        </ul>
+    </div>
+{% endblock %}

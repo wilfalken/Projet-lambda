@@ -22,5 +22,6 @@ use Doctrine\ORM\NoResultException;
  * @author admin
  */
 class ExemplaireRepository extends EntityRepository{
-    //put your code here
+    
+
 }

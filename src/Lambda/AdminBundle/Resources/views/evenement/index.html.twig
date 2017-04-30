@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Liste des évènements</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id d'evenement</th>
+                    <th>Titre</th>
+                    <th>Texte</th>
+                    <th>Lien image</th>
+                    <th>Date d'ajout</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evenement in evenements %}
+                    <tr>
+                        <td><a href="{{ path('admin_evenement_show', { 'id': evenement.idevenement }) }}">{{ evenement.idevenement }}</a></td>
+                        <td>{{ evenement.titreevenement }}</td>
+                        <td>{{ evenement.texteevenement }}</td>
+                        <td>{{ evenement.lienimage }}</td>
+                        <td>{% if evenement.dateajout %}{{ evenement.dateajout|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>
+                            <ul>
+                                <a class="btn btn-primary btn-xs" href="{{ path('admin_evenement_show', { 'id': evenement.idevenement }) }}">Voir</a>
+                                <a class="btn btn-primary btn-xs" href="{{ path('admin_evenement_edit', { 'id': evenement.idevenement }) }}">Modifier</a>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <a class="btn btn-success btn-xs" href="{{ path('admin_evenement_new') }}">Creation d'un évènement</a>
+        </ul>
+    </div>
+{% endblock %}

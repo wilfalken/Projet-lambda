@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+{% block title %}Objet{% endblock %}
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Objet :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <tbody>
+
+                <tr>
+                    <th>Etat de votre objet :</th>
+                    <td>{{ exemplaire.etat }}</td>
+                </tr>
+                <tr>
+                    <th>Photo de votre objet :</th>
+                    <td>{{ exemplaire.photoExemplaire }}</td>
+                </tr>
+  
+            </tbody>
+        </table>
+
+        <ul>
+
+
+            {{ form_start(delete_form) }}
+               
+            <input class="btn btn-danger" type="submit" value="Supprimer l'objet" method="DELETE" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ exemplaire.item.nomitem }}?');">
+            <a class="btn btn-warning" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
+            {{ form_end(delete_form) }}
+            </br>
+            </br>
+            <a class="btn btn-primary" href="{{ path('base_exemplaires_user', { 'iduser': app.user.id }) }}">Retourner à la liste</a>
+
+
+
+        </ul>
+    </div>
+{% endblock %}

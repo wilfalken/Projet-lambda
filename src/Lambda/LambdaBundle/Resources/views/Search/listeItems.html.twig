@@ -1,0 +1,52 @@
+{% extends 'LambdaBundle:Search:resultats.html.twig' %}
+{% block title %}Resultats{% endblock %}
+{% block liste %}
+        {% if liste_items==null %}
+            <h1>Votre recherche n'a retourné <span class="red">aucun</span> résultat</h1>
+         {% else %}
+        <h1>Vos résultats de recherche parmi les objets :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Categorie</td>
+                    <th>Photo</th>
+                    <th>Actions</th>
+                   
+
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for unitem in liste_items %}
+                    
+                    <tr>
+                       
+                        <td>{{ unitem.nomitem }}</td>
+                        <td>{{ unitem.description }}</td>
+                        <td>{{ unitem.categorie.nomcategorie }}</td>
+                        <td>{% if unitem.photoitem==null %}Aucune photo...{% else %}{{ unitem.photoitem }}{% endif %}</td>
+                        
+                        
+                        <td>
+                            <ul>
+                                <a class="btn btn-primary btn-xs" href="{{ path('base_usersrc', { 'iditem': unitem.iditem }) }}">Trouve !!!</a>
+                                {#{{ dump(categories) }}#}
+
+                                {% if app.user.username|default('Not Logged') != 'Not Logged' %}
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaire_new', { 'iditem': unitem.iditem }) }}">Je l'ai !!!</a>
+                                {% else %}Connectez-vous !
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    
+{% endblock %}

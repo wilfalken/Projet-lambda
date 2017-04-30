@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Groupe
  *
  * @ORM\Table(name="groupe")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lambda\LambdaBundle\Repository\GroupeRepository")
  */
 class Groupe
 {
@@ -29,26 +29,45 @@ class Groupe
     private $nomgroupe;
 
     /**
+     * Owning side
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", mappedBy="idgroupelien")
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", inversedBy="groupes")
+     * @ORM\JoinTable(name="appartientgroupe",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="idgroupelien", referencedColumnName="idGroupe")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="idusergroupe", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $idusergroupe;
+    private $users;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\User", mappedBy="idgroupe")
+     * @ORM\Column(name="officier", type="json_array")
      */
-    private $iduser;
+    private $officiers=array();
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=250, nullable=false)
+     */
+    private $description;
+    
+    
+    
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->idusergroupe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->officiers = array();
+        //$this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -120,37 +139,144 @@ class Groupe
         return $this->idusergroupe;
     }
 
+//    /**
+//     * Add iduser
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\User $iduser
+//     *
+//     * @return Groupe
+//     */
+//    public function addIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+//    {
+//        $this->iduser[] = $iduser;
+//
+//        return $this;
+//    }
+
+//    /**
+//     * Remove iduser
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\User $iduser
+//     */
+//    public function removeIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+//    {
+//        $this->iduser->removeElement($iduser);
+//    }
+//
+//    /**
+//     * Set officier
+//     *
+//     * @param integer $officier
+//     *
+//     * @return Groupe
+//     */
+//    public function setOfficier($officier)
+//    {
+//        $this->officier = $officier;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get officier
+//     *
+//     * @return integer
+//     */
+//    public function getOfficier()
+//    {
+//        return $this->officier;
+//    }
+
     /**
-     * Add iduser
+     * Add user
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduser
+     * @param \Lambda\LambdaBundle\Entity\User $user
      *
      * @return Groupe
      */
-    public function addIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+    public function addUser(\Lambda\LambdaBundle\Entity\User $user)
     {
-        $this->iduser[] = $iduser;
+        $this->users[] = $user;
 
         return $this;
     }
 
     /**
-     * Remove iduser
+     * Remove user
      *
-     * @param \Lambda\LambdaBundle\Entity\User $iduser
+     * @param \Lambda\LambdaBundle\Entity\User $user
      */
-    public function removeIduser(\Lambda\LambdaBundle\Entity\User $iduser)
+    public function removeUser(\Lambda\LambdaBundle\Entity\User $user)
     {
-        $this->iduser->removeElement($iduser);
+        $this->users->removeElement($user);
     }
 
     /**
-     * Get iduser
+     * Get users
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIduser()
+    public function getUsers()
     {
-        return $this->iduser;
+        return $this->users;
+    }
+
+    /**
+     * Set officiers
+     *
+     * @param array $officiers
+     *
+     * @return Groupe
+     */
+    public function setOfficiers(array $officiers)
+    {
+        $this->officiers = $officiers;
+
+        return $this;
+    }
+    
+     /**
+     * Add officiers
+     *
+     * @return array
+     */
+    public function addOfficier(\Lambda\LambdaBundle\Entity\User $user)
+    {
+        $this->officiers[] = $user->getUsername();
+        return $this;
+    }
+
+    /**
+     * Get officiers
+     *
+     * @return array
+     */
+    public function getOfficiers()
+    {
+        return $this->officiers;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Groupe
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

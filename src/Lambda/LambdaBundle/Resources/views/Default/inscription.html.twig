@@ -1,10 +1,11 @@
 {% extends '::base.html.twig' %}
+{% form_theme form 'Fields.twig' %}
 {% block title %}Inscription{% endblock %}
 {% block content %}
-
-<div class="form-signin">
+    </br></br>
+<div class="form-group2">
     <h2 class="form-signin-heading">Inscription au service <span id="sstitre">L@mbda</span></h2>
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': "form-group row"} }) }}
     {{ form_row(form.username, required=true) }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}

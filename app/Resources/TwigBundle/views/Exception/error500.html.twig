@@ -1,0 +1,13 @@
+{% extends '@Twig/Exception/error.html.twig' %}
+
+    {% block imgerror %}{{ asset('img/incompris.gif') }}{% endblock %}
+
+    {% block error %}
+
+        Cette page internet ne peut pas être affichée !!</br>
+        Cela ne vient pas de vous, c'est le serveur qui a un problème.</br>
+        Sans doute un programmeur a-t-il encore tout cassé !!!</br>
+        En tout cas vous avez l'air perdu...</br>
+        Il serait peut-être mieux d'aller à l'accueil pour le moment ;-p</br></br>
+
+    {% endblock %}

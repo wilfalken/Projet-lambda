@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+{% block title %}Adresse{% endblock %}
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Emprunt :</h1>
+
+        <table class="table table-condensed table-striped table-hover">
+            <tbody>
+                <tr>
+                    <th>Id d'emprunt :</th>
+                    <td>{{ emprunt.idemprunt }}</td>
+                </tr>
+                <tr>
+                    <th>Emprunteur :</th>
+                    <td>{{ emprunt.idemprunteur.username }}</td>
+                </tr>
+                <tr>
+                    <th>Temps restant :</th>
+                    <td id="DateCountdown" data-date="{{ emprunt.daterendu|date('m/d/Y H:i') }}" style="height: 80px; width: 50%; text-align:right;"></td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <ul>
+
+
+            
+               
+       
+            <a class="btn btn-warning" href="{{ path('base_emprunt_rendu', { 'id': emprunt.idemprunt }) }}">Signaler l'objet comme rendu</a>
+            </br>
+            </br>
+            <a class="btn btn-primary" href="{{ path('homepage') }}">Retourner à l'accueil</a>
+
+
+
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends '@Twig/Exception/error.html.twig' %}
+
+    {% block imgerror %}{{ asset('img/no.gif') }}{% endblock %}
+
+    {% block error %}
+
+        Cette page internet ne vous est pas accessible !</br>
+        Le serveur n'autorise pas la navigation dans les répertoires.</br>
+        S'agit-il d'une erreur ???</br>
+        En tout cas vous avez l'air perdu...</br>
+        Il serait peut-être mieux d'aller à l'accueil pour le moment ;-p</br></br>
+
+    {% endblock %}

@@ -1,7 +1,43 @@
 {% extends '::base.html.twig' %}
 {% block title %}Bienvenue !!! {% endblock %}
 {% block header %}{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/my-slider.css') }}">{% endblock %}
 {% block content %}
-    
-Bienvenue sur l'accueil {% if app.user %}{{ app.user.username }}{% endif %} {#affiche l'user connecté#} !!!
+
+
+
+    {{ form_start(form, {'attr': {'class': 'search input-group'}, 'action': path('homepage'), 'method': 'POST' })  }}
+    {{ form_widget(form.search, {'attr': {'class': 'input-group'} } ) }}
+    <span class="input-group-btn">
+        {{ form_widget(form.envoi, {'attr': {'class': 'btn btn-warning'} , 'method': 'POST' }) }}
+    </span>
+    {{ form_end(form) }}
+    <div class="ism-slider" data-play_type="loop" data-interval="5000" id="my-slider">
+        <ol>
+            {% for evenement in evenements %}
+                <li>
+                    <a id="evenement" href="{{ path('homepage') }}"><img src="{{ asset('uploads/evenement/' ~ evenement.lienimage) }}"></a>
+                    <div class="ism-caption ism-caption-0">{{ evenement.titreevenement }}</div>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+    </br></br>
+    <div id="present">
+        <i class="fa fa-star-o fa-2x"></i></br></br><p><span class="spacer">Bienvenue !!!</span></i></br></br></br>
+            <span class="spacer2">Vous vous trouvez dans un endroit de partage, plein de trésors ...</br></br>
+                Cherchez, et vous trouverez.</br></br>
+                Ce site existe afin de rapprocher les gens. Il permet de chercher des objets, </br></br>
+                et de voir qui les possède.</br></br>
+                Il permet de discuter, se rapprocher, emprunter des objets, préter des objets...</br></br>
+                Il permet de se grouper, de mettre des choses en commun, bref :</br></br>
+                Sur ce site, il ya peut-être votre seconde famille...</span></br></br></p><i class="fa fa-star-o fa-2x"></i>
+        </br></br>
+        <a class="btn btn-primary btn-success btn-lg" href="{{ path('register') }}">Inscription</a>
+    </div>
+    {#  // TODO   <a href="{{ path('base_message_newuser', {'iddest':6} ) }}">Nouveau message</a>
+        <a class="btn-primary" href="{{ path('extextcommentaire_new', {'idcommente':2} ) }}">Nouveau Commentaire exemplaire</a>#}
+
+
 {% endblock %}
+{% block javascripts %}<script src="{{ asset('js/ism-2.2.min.js') }}"></script>{% endblock %}

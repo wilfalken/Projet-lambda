@@ -4,14 +4,17 @@ namespace Lambda\LambdaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
+// DON'T forget this use statement!!!
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * User
- *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"}), @ORM\UniqueConstraint(name="email", columns={"email"})})
  * @ORM\Entity(repositoryClass="Lambda\LambdaBundle\Repository\UserRepository")
+ * @ORM\Table(name="user")
+ * @UniqueEntity(fields={"username", "email"}, message="ceci est deja utilisé !!!")
+ * 
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -40,12 +43,14 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=180, nullable=false)
+     * 
      */
     private $email;
 
     /**
      * @var string
-     *
+     * @Assert\Length(min = 6,
+     * minMessage="Votre mot de passe doit avoir une longueur d'au moins 6 caractères !!!")
      * @ORM\Column(name="email_canonical", type="string", length=180, nullable=false)
      */
     private $emailCanonical;
@@ -57,6 +62,13 @@ class User implements UserInterface
      */
     private $enabled;
 
+    
+    
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+    
     /**
      * @var string
      *
@@ -91,64 +103,66 @@ class User implements UserInterface
      * @ORM\Column(name="genre", type="boolean", nullable=true)
      */
     private $genre;
+    
+    /**
+    * @ORM\Column(type="json_array")
+    */
+    private $roles = array();
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", inversedBy="iduser")
-     * @ORM\JoinTable(name="adresseuser",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="iduser", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idadresse", referencedColumnName="idadresse")
-     *   }
-     * )
+     * inverse side
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", mappedBy="users")
+     * @ORM\OrderBy({"principale" = "DESC"})
      */
-    private $idadresse;
+    private $adresses;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", inversedBy="idusergroupe")
-     * @ORM\JoinTable(name="appartientgroupe",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="idusergroupe", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idgroupelien", referencedColumnName="idGroupe")
-     *   }
-     * )
+     * inverse side
+     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", mappedBy="users")
+     * 
      */
-    private $idgroupelien;
-
-    /**
+    private $groupes;
+    
+     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Groupe", inversedBy="iduser")
-     * @ORM\JoinTable(name="liengroupe",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="idUser", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idGroupe", referencedColumnName="idGroupe")
-     *   }
-     * )
+     * inverse side
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Exemplaire", mappedBy="user")
+     * 
      */
-    private $idgroupe;
+    private $exemplaires;
+    
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * inverse side
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Emprunt", mappedBy="idproprietaire")
+     * 
+     */
+    private $prets;
+    
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * inverse side
+     * @ORM\OneToMany(targetEntity="Lambda\LambdaBundle\Entity\Emprunt", mappedBy="idemprunteur")
+     * 
+     */
+    private $emprunts;
+    
+
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idadresse = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idgroupelien = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idgroupe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->mdepuis= new \DateTime();
-        $this->enabled=0;
-        $this->usernameCanonical="flan";
-        $this->emailCanonical="flan";
+        $this->adresses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->exemplaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groupes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isActive = true;
+        $this->enabled = true;
+        $this->mdepuis = new \Datetime;
+        $this->roles[] = 'ROLE_USER';
     }
 
 
@@ -207,7 +221,7 @@ class User implements UserInterface
      */
     public function getUsernameCanonical()
     {
-        return $this->username;
+        return $this->usernameCanonical;
     }
 
     /**
@@ -255,7 +269,7 @@ class User implements UserInterface
      */
     public function getEmailCanonical()
     {
-        return $this->email;
+        return $this->emailCanonical;
     }
 
     /**
@@ -401,113 +415,29 @@ class User implements UserInterface
     {
         return $this->genre;
     }
-
-    /**
-     * Add idadresse
-     *
-     * @param \Lambda\LambdaBundle\Entity\Adresse $idadresse
-     *
-     * @return User
-     */
-    public function addIdadresse(\Lambda\LambdaBundle\Entity\Adresse $idadresse)
-    {
-        $this->idadresse[] = $idadresse;
-
-        return $this;
-    }
-
-    /**
-     * Remove idadresse
-     *
-     * @param \Lambda\LambdaBundle\Entity\Adresse $idadresse
-     */
-    public function removeIdadresse(\Lambda\LambdaBundle\Entity\Adresse $idadresse)
-    {
-        $this->idadresse->removeElement($idadresse);
-    }
-
-    /**
-     * Get idadresse
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdadresse()
-    {
-        return $this->idadresse;
-    }
-
-    /**
-     * Add idgroupelien
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupelien
-     *
-     * @return User
-     */
-    public function addIdgroupelien(\Lambda\LambdaBundle\Entity\Groupe $idgroupelien)
-    {
-        $this->idgroupelien[] = $idgroupelien;
-
-        return $this;
-    }
-
-    /**
-     * Remove idgroupelien
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupelien
-     */
-    public function removeIdgroupelien(\Lambda\LambdaBundle\Entity\Groupe $idgroupelien)
-    {
-        $this->idgroupelien->removeElement($idgroupelien);
-    }
-
-    /**
-     * Get idgroupelien
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdgroupelien()
-    {
-        return $this->idgroupelien;
-    }
-
-    /**
-     * Add idgroupe
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupe
-     *
-     * @return User
-     */
-    public function addIdgroupe(\Lambda\LambdaBundle\Entity\Groupe $idgroupe)
-    {
-        $this->idgroupe[] = $idgroupe;
-
-        return $this;
-    }
-
-    /**
-     * Remove idgroupe
-     *
-     * @param \Lambda\LambdaBundle\Entity\Groupe $idgroupe
-     */
-    public function removeIdgroupe(\Lambda\LambdaBundle\Entity\Groupe $idgroupe)
-    {
-        $this->idgroupe->removeElement($idgroupe);
-    }
-
-    /**
-     * Get idgroupe
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdgroupe()
-    {
-        return $this->idgroupe;
-    }
     
-    public function __toString() {
-        $variable=$this->getId();
-        $resultat="$variable";
-        return $resultat." : ".$this->getUsername();
+       /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
     }
 
     public function eraseCredentials() {
@@ -515,15 +445,210 @@ class User implements UserInterface
     }
 
     public function getRoles() {
-        if ($this->getUsername() == 'admin') {
-            return array('ROLE_ADMIN');
-        } else {
-            return array('ROLE_USER');
-        }
+        return $this->roles;
     }
 
     public function getSalt() {
-        
+        return null;
+    }
+    
+    public function setRoles(array $roles) {
+        return $this->roles = $roles;
     }
 
+
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Add groupe
+     *
+     * @param \Lambda\LambdaBundle\Entity\Groupe $groupe
+     *
+     * @return User
+     */
+    public function addGroupe(\Lambda\LambdaBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes[] = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Remove groupe
+     *
+     * @param \Lambda\LambdaBundle\Entity\Groupe $groupe
+     */
+    public function removeGroupe(\Lambda\LambdaBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes->removeElement($groupe);
+    }
+
+    /**
+     * Get groupes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroupes()
+    {
+        return $this->groupes;
+    }
+
+    /**
+     * Add adress
+     *
+     * @param \Lambda\LambdaBundle\Entity\Adresse $adress
+     *
+     * @return User
+     */
+    public function addAdress(\Lambda\LambdaBundle\Entity\Adresse $adress)
+    {
+        $this->adresses[] = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Remove adress
+     *
+     * @param \Lambda\LambdaBundle\Entity\Adresse $adress
+     */
+    public function removeAdress(\Lambda\LambdaBundle\Entity\Adresse $adress)
+    {
+        $this->adresses->removeElement($adress);
+    }
+
+    /**
+     * Get adresses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdresses()
+    {
+        return $this->adresses;
+    }
+
+    /**
+     * Add exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     *
+     * @return User
+     */
+    public function addExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires[] = $exemplaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove exemplaire
+     *
+     * @param \Lambda\LambdaBundle\Entity\Exemplaire $exemplaire
+     */
+    public function removeExemplaire(\Lambda\LambdaBundle\Entity\Exemplaire $exemplaire)
+    {
+        $this->exemplaires->removeElement($exemplaire);
+    }
+
+    /**
+     * Get exemplaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExemplaires()
+    {
+        return $this->exemplaires;
+    }
+
+    /**
+     * Add pret
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $pret
+     *
+     * @return User
+     */
+    public function addPret(\Lambda\LambdaBundle\Entity\Emprunt $pret)
+    {
+        $this->prets[] = $pret;
+
+        return $this;
+    }
+
+    /**
+     * Remove pret
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $pret
+     */
+    public function removePret(\Lambda\LambdaBundle\Entity\Emprunt $pret)
+    {
+        $this->prets->removeElement($pret);
+    }
+
+    /**
+     * Get prets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPrets()
+    {
+        return $this->prets;
+    }
+
+    /**
+     * Add emprunt
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $emprunt
+     *
+     * @return User
+     */
+    public function addEmprunt(\Lambda\LambdaBundle\Entity\Emprunt $emprunt)
+    {
+        $this->emprunts[] = $emprunt;
+
+        return $this;
+    }
+
+    /**
+     * Remove emprunt
+     *
+     * @param \Lambda\LambdaBundle\Entity\Emprunts $emprunt
+     */
+    public function removeEmprunt(\Lambda\LambdaBundle\Entity\Emprunt $emprunt)
+    {
+        $this->emprunts->removeElement($emprunt);
+    }
+
+    /**
+     * Get emprunts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEmprunts()
+    {
+        return $this->emprunts;
+    }
 }

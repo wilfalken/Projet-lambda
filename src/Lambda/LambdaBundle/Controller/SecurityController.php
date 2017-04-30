@@ -32,7 +32,7 @@ class SecurityController extends Controller {
         }
     }
 
-    public function loginAction(Request $request) { //TODO !!!
+    public function loginAction(Request $request) { 
 //        $user = $this->getUser();
 //        if ($user instanceof UserInterface) {
 //            return $this->redirectToRoute('users');
@@ -79,13 +79,15 @@ class SecurityController extends Controller {
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
+            $user->setUsernameCanonical($user->getUsername());
+            $user->setEmailCanonical($user->getEmail());
 
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            // ... do any other work - like sending them an email, etc
+            // ... do any other work - 
             // maybe set a "flash" success message for the user
 
             return $this->redirectToRoute('homepage');

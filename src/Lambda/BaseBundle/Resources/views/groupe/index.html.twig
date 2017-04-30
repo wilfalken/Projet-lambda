@@ -1,0 +1,73 @@
+{% extends '::base.html.twig' %}
+{% block title %}Mes groupe{% endblock %}
+{% block body %}
+    <div class="tablecontainer">
+        <h1>Index du groupe</h1>
+        {% for groupe in groupes %}
+            <table class="table table-condensed table-striped table-hover">
+                <thead class="table-bordered">
+                    <tr>
+                        <th colspan="2" >Groupe</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>{{ groupe.idgroupe }}</td>
+                    <td>{{ groupe.nomgroupe }}</td>    
+                    <td>{{ groupe.description }}</td>
+                    <td>
+                        {% if app.user.username in groupe.officiers %}
+                            <a class="btn btn-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer le groupe ?');" href="{{ path('base_groupe_simpledelete', { 'id': groupe.idgroupe } ) }}">Effacer le groupe</a>
+                        {% else %}<a class="btn btn-warning disabled" href="{{ path('base_groupe_delete', { 'id': groupe.idgroupe } ) }}">Vous n'êtes pas officier du groupe !!</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-condensed table-striped table-hover">
+                <thead class="table-bordered">
+                    <tr>
+                        <th colspan="4" class="table-bordered">Utilisateur / membre</th>
+                        <th class="bg-warning">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for membre in groupe.users %}
+                        <tr class="table-">
+                            <td>{{ membre.id }}</td>
+                            <td>{{ membre.username }}</td>
+                            <td>{% for adresse in membre.adresses %}{{ adresse.ville }}{% endfor %}</td>
+                            <td>{% for adresse in membre.adresses %}{{ adresse.pays|countryName }}{% endfor %}</td>
+                            <td class="active table-bordered">
+
+                                {% if ((app.user.username == membre.username) and (app.user.username not in groupe.officiers)) %}
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_sortir', { 'id': groupe.idgroupe }, {'user': app.user.id} ) }}">Sortir du groupe</a>
+                                {% elseif ((app.user.username == membre.username) and (app.user.username in groupe.officiers) and ( groupe.officiers|length>1 ))%} {# Si le membre n'est pas le dernier officier du groupe, il peut sortir #}
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_sortir', { 'id': groupe.idgroupe }, {'user': app.user.id} ) }}">Sortir du groupe</a>
+                                {% elseif (app.user.username == membre.username) %}
+                                    <a class="btn btn-primary btn-xs disabled" href="{{ path('base_groupe_sortir', { 'id': groupe.idgroupe }, {'user': app.user.id} ) }}">Sortir du groupe</a>
+                                {% endif %}
+
+                                {% if ((app.user.username in groupe.officiers) and (membre.username not in groupe.officiers)) %}
+                                    <a class="btn btn-danger btn-xs" href="{{ path('base_groupe_virer', { 'id': groupe.idgroupe, 'membre': membre.id }) }}">Renvoyer du groupe</a>
+                                    {% if ((app.user.username != membre.username) and (membre.username not in groupe.officiers)) %}
+                                        <a class="btn btn-danger btn-xs" href="{{ path('base_groupe_promouvoir', { 'id': groupe.idgroupe, 'membre': membre.id }) }}">Promouvoir officier</a>
+                                    {% endif %}
+                                {% elseif ((app.user.username == membre.username) and (membre.username in groupe.officiers)) %}
+                                    <a class="btn btn-danger btn-xs disabled" href="{{ path('base_groupe_virer', { 'id': groupe.idgroupe, 'membre': membre.id }) }}">Renvoyer du groupe</a>
+                                {% endif %}
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </br>
+            <hr/>
+            </br>
+        {% endfor %}
+        <ul>
+            <a class="btn btn-warning" href="{{ path('base_groupe_new') }}">Fonder un nouveau groupe</a>
+        </ul>
+    </div>
+{% endblock %}
