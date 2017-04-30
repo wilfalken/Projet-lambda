@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Item</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Iditem</th>
+                <td>{{ item.iditem }}</td>
+            </tr>
+            <tr>
+                <th>Nomitem</th>
+                <td>{{ item.nomitem }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ item.description }}</td>
+            </tr>
+            <tr>
+                <th>Photoitem</th>
+                <td>{{ item.photoitem }}</td>
+            </tr>
+            <tr>
+                <th>Isvalide</th>
+                <td>{% if item.isvalide %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('item_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('item_edit', { 'id': item.iditem }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
