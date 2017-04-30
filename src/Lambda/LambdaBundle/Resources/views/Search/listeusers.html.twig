@@ -2,6 +2,7 @@
 {% block title %}Resultats{% endblock %}
 {% block content %}
     <div class="tablecontainer">
+        
         {% if liste_users==null %}
             <h2>Votre recherche n'a retourné <span class="red">aucun</span> résultat</h2>
          {% else %}
@@ -12,7 +13,7 @@
                 <tr>
                     
                     <th>Nom</th>
-                    <th>Ville</th>
+                    <th colspan="2">Localisation</th>
                     <th>Genre</td>
                     <th>Membre depuis</th>
                    
@@ -26,7 +27,8 @@
                     <tr>
                        
                         <td>{{ unitem.username }}</td>
-                        <td>vide{#{{ unitem.ville }}#}</td>
+                        <td>{{ unitem.adresses|first.ville }}</td>
+                        <td>{{ unitem.adresses|first.pays|countryName }}</td>
                         <td>{{ unitem.genre ? 'Femme':'Homme' }}</td>
                         <td>{{ unitem.mdepuis|date('Y-m-d') }}</td>
                         

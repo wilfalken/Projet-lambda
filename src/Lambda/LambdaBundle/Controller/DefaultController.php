@@ -11,7 +11,9 @@ class DefaultController extends Controller {
 
     public function indexAction(Request $request) {
 
-
+        $em= $this->getDoctrine()->getManager();
+                
+        $evenements = $em->getRepository('LambdaBundle:Evenement')->findAll();
         $defaultData = array('search' => '');
         $form = $this->createFormBuilder($defaultData)
                 ->add('search', SearchType::class, array(
@@ -42,7 +44,8 @@ class DefaultController extends Controller {
 
 
         return $this->render('LambdaBundle:Default:index.html.twig', array(
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'evenements' => $evenements,
         ));
     }
 

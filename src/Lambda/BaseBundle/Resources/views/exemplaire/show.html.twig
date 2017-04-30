@@ -29,7 +29,7 @@
             {{ form_end(delete_form) }}
             </br>
             </br>
-            <a class="btn btn-primary" href="{{ path('base_exemplaire_index') }}">Retourner à la liste</a>
+            <a class="btn btn-primary" href="{{ path('base_exemplaires_user', { 'iduser': app.user.id }) }}">Retourner à la liste</a>
 
 
 

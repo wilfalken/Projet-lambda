@@ -56,7 +56,7 @@ class MessageController extends Controller{
                 $em->persist($message);
                 $em->flush();
             }
-                    return $this->redirectToRoute('base_message_show', array('id' => $message->getIdmessage()));
+                    return $this->redirectToRoute('base_message_show', array('idmessage' => $message->getIdmessage()));
         }
 
         return $this->render('BaseBundle:message:new.html.twig', array(
@@ -79,8 +79,7 @@ class MessageController extends Controller{
         //$destinataire = $em->getRepository('LambdaBundle:User')->find($iddest);
         $form = $this->createForm('Lambda\BaseBundle\Form\MessagebaseType', $message);
         $form->handleRequest($request);
-        $data=$form->getData();
-        $destinataire = $em->getRepository('LambdaBundle:User')->findByUsername($data['destinataire']);
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $destinataire = $em->getRepository('LambdaBundle:User')->findByUsername($iddest);
@@ -91,7 +90,7 @@ class MessageController extends Controller{
                 $em->persist($message);
                 $em->flush();
             }
-                    return $this->redirectToRoute('base_message_show', array('id' => $message->getIdmessage()));
+                    return $this->redirectToRoute('base_message_show', array('idmessage' => $message->getIdmessage()));
         }
 
         return $this->render('BaseBundle:message:new.html.twig', array(

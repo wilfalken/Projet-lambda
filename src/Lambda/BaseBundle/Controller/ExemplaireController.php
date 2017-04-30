@@ -47,34 +47,20 @@ class ExemplaireController extends Controller {
     {
         
         $em = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
-        $exemplaires = $em->getRepository('LambdaBundle:Exemplaire')->findByUser($iduser);
-        if ($iduser==$user){
+        $user = $em->getRepository('LambdaBundle:User')->findById($iduser);
+        $exemplaires = $em->getRepository('LambdaBundle:Exemplaire')->findByUser($user);
+        if ($this->getUser()==$user){
             return $this->render('BaseBundle:exemplaire:index.html.twig', array(
             'exemplaires' => $exemplaires,
         ));
         }
-        return $this->render('BaseBundle:exemplaire:indexpublic.html.twig', array(
+        return $this->render('BaseBundle:exemplaire:index.html.twig', array(
             'exemplaires' => $exemplaires,
             
         ));
     }
     
-    /**
-     * Finds and displays a exemplaire entity.
-     *
-     * @Route("/{id}", name="base_exemplaire_show")
-     * @Method("GET")
-     */
-    public function showAction(Exemplaire $exemplaire)
-    {
-        $deleteForm = $this->createDeleteForm($exemplaire);
 
-        return $this->render('BaseBundle:exemplaire:show.html.twig', array(
-            'exemplaire' => $exemplaire,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
     
     
     
@@ -103,7 +89,7 @@ class ExemplaireController extends Controller {
                 $em->persist($item);
                 $em->flush();
             }
-                    return $this->redirectToRoute('base_exemplaire_show', array('id' => $exemplaire->getIdexemplaire()));
+         return $this->redirectToRoute('base_exemplaires_user', array('iduser' => $user->getId()));
         }
 
         return $this->render('BaseBundle:exemplaire:new.html.twig', array(
@@ -120,6 +106,7 @@ class ExemplaireController extends Controller {
      */
     public function editAction(Request $request, Exemplaire $exemplaire)
     {
+        $user = $this->getUser();
         $deleteForm = $this->createDeleteForm($exemplaire);
         $editForm = $this->createForm('Lambda\BaseBundle\Form\ExemplaireType', $exemplaire);
         $editForm->handleRequest($request);
@@ -127,12 +114,28 @@ class ExemplaireController extends Controller {
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('base_exemplaire_index', array('id' => $exemplaire->getIdexemplaire()));
+            return $this->redirectToRoute('base_exemplaires_user', array('iduser' => $user->getId()));
         }
       
         return $this->render('BaseBundle:exemplaire:edit.html.twig', array(
             'exemplaire' => $exemplaire,
            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    
+        /**
+     * Finds and displays a exemplaire entity.
+     *
+     * @Route("/{id}/show", name="base_exemplaire_show")
+     * @Method("GET")
+     */
+    public function showAction(Exemplaire $exemplaire)
+    {
+        $deleteForm = $this->createDeleteForm($exemplaire);
+
+        return $this->render('BaseBundle:exemplaire:show.html.twig', array(
+            'exemplaire' => $exemplaire,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -145,7 +148,7 @@ class ExemplaireController extends Controller {
      */
     public function deleteAction(Request $request, Exemplaire $exemplaire)
     {
-       
+        $user = $this->getUser();
         $form = $this->createDeleteForm($exemplaire);
         $form->handleRequest($request);
 
@@ -156,7 +159,7 @@ class ExemplaireController extends Controller {
             $em->flush($exemplaire);
         }
 
-        return $this->redirectToRoute('base_exemplaire_index');
+        return $this->redirectToRoute('base_exemplaires_user', array('iduser' => $user->getId()));
     }
     
         /**
@@ -190,7 +193,7 @@ class ExemplaireController extends Controller {
             $em->flush($exemplaire);
         
 
-        return $this->redirectToRoute('base_exemplaire_index');    ///TODO routing !!!
+        return $this->redirectToRoute('base_exemplaires_user', array('iduser' => $this->getUser()->getId()));    ///TODO routing !!!
     }  
 
 }

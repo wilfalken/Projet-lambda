@@ -3,6 +3,7 @@
 namespace Lambda\BaseBundle\Controller;
 
 use Lambda\LambdaBundle\Entity\Adresse;
+use Lambda\LambdaBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Adresse controller.
  *
- * @Route("/base/adresse")
+ * @Route("/adresse")
  */
 class AdressebaseController extends Controller
 {
@@ -34,6 +35,8 @@ class AdressebaseController extends Controller
             
         ));
     }
+    
+
 
     /**
      * Creates a new adresse entity.
@@ -49,7 +52,17 @@ class AdressebaseController extends Controller
         //$idUser = $user->getIduser();
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
+            $anciennes = $user->getAdresses();
+            $data = $form->getData();
+            $princ = $data->getPrincipale();
+            if ($princ == true){
+                foreach ($anciennes as $uneadresse){
+                    $uneadresse->setPrincipale(false);
+                    $em->persist($uneadresse);
+                    $em->flush($uneadresse);
+                }
+                $adresse->setPrincipale(true);
+            }
             if ($user != null) { //s'il ya un user
             
             $adresse->addUser($user);
@@ -67,11 +80,29 @@ class AdressebaseController extends Controller
             'form' => $form->createView(),
         ));
     }
+    
+        /**
+     * Liste les adresses d'un utilisateur
+     *
+     * @Route("/{user}", name="base_mesadresses")
+     * @Method("GET")
+     */
+    public function mesadressesAction(User $user)
+    {
+        
+        $adresses = $user->getAdresses();
+        
+        return $this->render('BaseBundle:adresse:index.html.twig', array(
+            
+            'adresses' => $adresses,
+            
+        ));
+    }
 
     /**
      * Finds and displays a adresse entity.
      *
-     * @Route("/{id}", name="base_adresse_show")
+     * @Route("/{id}/show", name="base_adresse_show")
      * @Method("GET")
      */
     public function showAction(Adresse $adresse)

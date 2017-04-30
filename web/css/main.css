@@ -1,3 +1,9 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+    background: WhiteSmoke;
+}
+
+
 /****************************************************************************
 grille de profil
 *****************************************************************************/
@@ -6,7 +12,8 @@ grille de profil
 }
 @media (min-width: 1200px){
 .container {
-    width: 100%;
+    width: 80%;
+    height: 80%;
     text-align: center;
 }}
 .col-lg-8 {
@@ -45,7 +52,8 @@ hr {
 
 
 #contenu { /*top right bottom left*/
-    padding: 70px 20px 50px 20px;
+    padding: 0px 0 0px 0;
+    margin-bottom: 80px;
 }
 th, td{
     text-align:center;
@@ -110,7 +118,25 @@ a.none:hover{
     color: red;
 }
 
+/* Accueil */
+#present {
+    width: 100%;
+    text-align : center;
+    color:orange;
+    margin-bottom: 80px;
+}
 
+.spacer {
+    margin: 0 14em 0 14em;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.spacer2{
+   
+    
+    font-size: 20px;
+}
 
 
 /* formulaire de connexion */
@@ -194,7 +220,7 @@ header
 *****************************************************************************/
 
 .header {
-    position: absolute;
+    position: static;
     width: 100%;
     padding: 0;
     top:0;
@@ -202,6 +228,9 @@ header
     background-color: black;
     color: orange;
     height: 60px;
+    border-bottom: 2px solid;
+    border-bottom-color: orange;
+    margin-bottom: 0px;
 }
 
 .nomsite {
@@ -215,10 +244,14 @@ header
     font-weight: bold;
     font-style: italic;
 }
+
+.ism-slider{
+    top: -34px;
+}
 .search{
   
     position: relative;
-    top: -78px;
+    top: -45px;
     left: 30%;
 /*    float: left;*/
     width: 30%;

@@ -27,7 +27,7 @@
                     <tr>
                        
                         <td>{{ ungroupe.nomgroupe }}</td>
-                        <td>{% for officier in ungroupe.officiers %}{{ officier }}{% endfor %}</td>
+                        <td>{% for officier in ungroupe.officiers %}{{ officier }}, {% endfor %}</td>
                         <td>{{ ungroupe.description }}</td>
                         <td>{{ ungroupe.users|length }}</td>
                        
@@ -39,7 +39,11 @@
                                 
 
                                 {% if app.user.id|default('null') == null %}Connectez-vous !{% else %}
-                                    <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_entrer', { 'id': ungroupe.idgroupe }, {'iduser': app.user.id}) }}">Faire partie du groupe ></a>
+                                   {% if app.user|default('null') not in ungroupe.users %} 
+                                       <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_entrer', { 'id': ungroupe.idgroupe }, {'iduser': app.user.id}) }}">Faire partie du groupe ></a>
+                                   {% else %}
+                                       <a class="btn btn-primary btn-xs disabled" href="{{ path('base_groupe_entrer', { 'id': ungroupe.idgroupe }, {'iduser': app.user.id}) }}">Faire partie du groupe ></a>
+                                       {% endif %}
                                 {% endif %}
                             </ul>
                         </td>

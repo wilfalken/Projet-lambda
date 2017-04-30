@@ -14,6 +14,7 @@
                     <th>Cp</th>
                     <th>Ville</th>
                     <th>Pays</th>
+                    <th>Adresse principale ?</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                         <td>{{ adresse.cp }}</td>
                         <td>{{ adresse.ville }}</td>
                         <td>{{ adresse.pays|countryName }}</td>
+                        <td>{{ adresse.principale ? 'Oui':'Non' }}</td>
                         <td>
                             <ul>
 

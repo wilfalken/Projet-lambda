@@ -64,7 +64,7 @@ class AdvancedController extends Controller{
                         ->findBynomitem($data['name']);
                     if ($liste_resultats_inter===null){$liste_resultats="aucun resultat";}
                     foreach ($liste_resultats_inter as $unitem) {
-                        if ($unitem->getIdcategorie()->getNomcategorie()==$categorie){
+                        if ($unitem->getCategorie()->getNomcategorie()==$categorie){
                             $liste_resultats =$unitem;
                         }
                         else{
@@ -91,7 +91,7 @@ class AdvancedController extends Controller{
                 $liste_resultats =  $em->getRepository('LambdaBundle:Item')
                      ->findBynomitem($data['name']);
                     foreach ($liste_resultats as $unitem) {
-                        $categories = $unitem->getIdcategorie()->getnomcategorie();
+                        $categories = $unitem->getCategorie()->getnomcategorie();
                        //$unitem->addIdcategorie($categories->first());
                     }
                 return $this->render('LambdaBundle:Search:listeItems.html.twig', array('liste_items' => $liste_resultats, 'categories' => $categories));
@@ -129,8 +129,7 @@ class AdvancedController extends Controller{
        return $this->render('LambdaBundle:Search:recherche.html.twig', array(
             'form' => $form->createView()
                 ));
-        
-        
-      
     }
+    
+
 }

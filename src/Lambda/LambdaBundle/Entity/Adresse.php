@@ -86,6 +86,13 @@ class Adresse
      * @ORM\JoinColumn(name="idEmprunt", referencedColumnName="idEmprunt")
      */
     private $emprunts;
+    
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="actual", type="boolean", nullable=false)
+     */
+    private $principale;
 
     /**
      * Constructor
@@ -94,6 +101,7 @@ class Adresse
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->emprunts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->principale = false;
     }
 
 
@@ -323,5 +331,29 @@ class Adresse
     public function __toString()
     {
         return ''.$this->numrue.', '.$this->textadresse.', '.$this->complement.', '.$this->cp.' '.$this->ville.' - '.$this->pays.'';
+    }
+
+    /**
+     * Set principale
+     *
+     * @param boolean $principale
+     *
+     * @return Adresse
+     */
+    public function setPrincipale($principale)
+    {
+        $this->principale = $principale;
+
+        return $this;
+    }
+
+    /**
+     * Get principale
+     *
+     * @return boolean
+     */
+    public function getPrincipale()
+    {
+        return $this->principale;
     }
 }

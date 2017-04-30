@@ -5,6 +5,10 @@ lambda_homepage:
 user:
     path: /user
     defaults: { _controller: LambdaBundle:User:index }
+    
+trouveuser:
+    resource: "@LambdaBundle/Controller/SpecialController.php"
+    type:      annotation
 
 login:
     path: /login

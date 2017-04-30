@@ -113,7 +113,7 @@ class User implements UserInterface, \Serializable
      * @var \Doctrine\Common\Collections\Collection
      * inverse side
      * @ORM\ManyToMany(targetEntity="Lambda\LambdaBundle\Entity\Adresse", mappedBy="users")
-     *
+     * @ORM\OrderBy({"principale" = "DESC"})
      */
     private $adresses;
 

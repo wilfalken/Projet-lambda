@@ -78,7 +78,40 @@ class EmpruntController extends Controller{
             ));
     }
     
-    //TODO base_emprunt_show
+    /**
+     * Finds and displays a emprunt entity.
+     *
+     * @Route("/{id}", name="base_emprunt_show")
+     * @Method("GET")
+     */
+    public function showAction(Emprunt $emprunt)
+    {
+        
+
+        return $this->render('BaseBundle:emprunt:show.html.twig', array(
+            'emprunt' => $emprunt,
+            
+        ));
+    }
+    
+     /**
+     * Finds and displays a emprunt entity.
+     *
+     * @Route("/{id}", name="base_emprunt_rendu")
+     * @Method("GET")
+     */
+    public function renduAction(Emprunt $emprunt)
+    {
+        $emprunteur = $emprunt->getIdemprunteur();
+        $proprietaire = $this->getUser();
+        $emprunteur->removeEmprunt($emprunt);
+        $proprietaire->removePret($emprunt);
+        return $this->render('BaseBundle:emprunt:show.html.twig', array(
+            'emprunt' => $emprunt,
+            
+            
+        ));
+    }
     
 
 }

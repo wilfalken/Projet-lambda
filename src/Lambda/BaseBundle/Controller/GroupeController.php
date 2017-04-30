@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 /**
  * Description of GroupeController
- * @Route("/base/groupe")
+ * @Route("/groupe")
  * @author admin
  */
 class GroupeController extends Controller{
@@ -42,29 +42,7 @@ class GroupeController extends Controller{
             
         ));
     }
-    
-     /**
-     * Montre un des groupes.
-     *
-     * @Route("/{idgroupe}", name="base_groupe_show")
-     * @Method("GET")
-     */
-    public function showAction($idgroupe)
-    {
-        $em = $this->getDoctrine()->getManager();
         
-        $groupe = $em->getRepository('LambdaBundle:Groupe')->findOneByIdgroupe($idgroupe);
-        
-        
-        
-        
-        return $this->render('BaseBundle:groupe:show.html.twig', array(
-            'groupe' => $groupe,
-            
-            
-        ));
-    }
-    
     /**
      * Crée une nouvelle entité Groupe.
      *
@@ -97,6 +75,28 @@ class GroupeController extends Controller{
         return $this->render('BaseBundle:groupe:new.html.twig', array(
             'groupe' => $groupe,
             'form' => $form->createView(),
+        ));
+    }
+    
+         /**
+     * Montre un des groupes.
+     *
+     * @Route("/{idgroupe}", name="base_groupe_show")
+     * @Method("GET")
+     */
+    public function showAction($idgroupe)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $groupe = $em->getRepository('LambdaBundle:Groupe')->findOneByIdgroupe($idgroupe);
+        
+        
+        
+        
+        return $this->render('BaseBundle:groupe:show.html.twig', array(
+            'groupe' => $groupe,
+            
+            
         ));
     }
     

@@ -5,7 +5,3 @@ admin_homepage:
 user:
     path: /user
     defaults: { _controller: LambdaBundle:User:index }
-
-exemplaire:
-    path: /exemplaire
-    defaults: { _controller: AdminBundle:Exemplaire:index }
