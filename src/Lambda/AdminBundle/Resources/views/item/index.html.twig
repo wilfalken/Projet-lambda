@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Les items{% endblock %}
 {% block body %}
-    <h1>Items list</h1>
+    <div class="tablecontainer">
+    <h1>Liste d'items</h1>
 
-    <table>
+    <table class="table table-condensed table-striped table-hover">
         <thead>
             <tr>
-                <th>Iditem</th>
-                <th>Nomitem</th>
+                <th>Id d'item</th>
+                <th>Nom d'item</th>
                 <th>Description</th>
-                <th>Photoitem</th>
-                <th>Isvalide</th>
+                <th>Photo</th>
+                <th>Valide ?</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,15 +22,14 @@
                 <td>{{ item.nomitem }}</td>
                 <td>{{ item.description }}</td>
                 <td>{{ item.photoitem }}</td>
-                <td>{% if item.isvalide %}Yes{% else %}No{% endif %}</td>
+                <td>{% if item.isvalide %}Oui{% else %}Non{% endif %}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('item_show', { 'id': item.iditem }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('item_edit', { 'id': item.iditem }) }}">edit</a>
-                        </li>
+
+                            <a <a class="btn btn-primary btn-xs" href="{{ path('item_show', { 'id': item.iditem }) }}">Voir</a>
+
+                            <a <a class="btn btn-primary btn-xs" href="{{ path('item_edit', { 'id': item.iditem }) }}">Modifier</a>
+
                     </ul>
                 </td>
             </tr>
@@ -38,8 +38,8 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('item_new') }}">Create a new item</a>
-        </li>
+
+            <a class="btn btn-warning" href="{{ path('item_new') }}">Nouvel item</a>
+
     </ul>
 {% endblock %}

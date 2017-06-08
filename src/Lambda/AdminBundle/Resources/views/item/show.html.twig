@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Item{% endblock %}
 {% block body %}
-    <h1>Item</h1>
-
-    <table>
+    <div class="tablecontainer">
+        <h1>Item :</h1>
+    <table class="table table-condensed table-striped table-hover">
         <tbody>
             <tr>
-                <th>Iditem</th>
+                <th>Id d'item</th>
                 <td>{{ item.iditem }}</td>
             </tr>
             <tr>
-                <th>Nomitem</th>
+                <th>Nom d'item</th>
                 <td>{{ item.nomitem }}</td>
             </tr>
             <tr>
@@ -18,27 +18,24 @@
                 <td>{{ item.description }}</td>
             </tr>
             <tr>
-                <th>Photoitem</th>
-                <td>{{ item.photoitem }}</td>
+                <th>Photo</th>
+                <td><img src="/uploads/item/{{ item.photoitem }}" /></td>
             </tr>
             <tr>
-                <th>Isvalide</th>
-                <td>{% if item.isvalide %}Yes{% else %}No{% endif %}</td>
+                <th>Valide ?</th>
+                <td>{% if item.isvalide %}Oui{% else %}Non{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('item_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('item_edit', { 'id': item.iditem }) }}">Edit</a>
-        </li>
-        <li>
+
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input class="btn btn-danger" type="submit" value="Supprimer">
+                        <a class="btn btn-warning" href="{{ path('item_edit', { 'id': item.iditem }) }}">Editer</a>
             {{ form_end(delete_form) }}
-        </li>
+            </br>
+            </br>
+            <a class="btn btn-primary" href="{{ path('item_index') }}">Retourner à la liste</a>
     </ul>
 {% endblock %}

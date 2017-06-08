@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: fr
     photo_exemplaire_directory: '%kernel.root_dir%/../web/uploads/exemplaire'
+    photo_item_directory: '%kernel.root_dir%/../web/uploads/item'
     photo_evenement_directory: '%kernel.root_dir%/../web/uploads/evenement'
 
 framework:
