@@ -33,7 +33,9 @@
                 Il permet de se grouper, de mettre des choses en commun, bref :</br></br>
                 Sur ce site, il ya peut-être votre seconde famille...</span></br></br></p><i class="fa fa-star-o fa-2x"></i>
         </br></br>
+        {% if (app.user.username|default('none') == 'none') %}
         <a class="btn btn-primary btn-success btn-lg" href="{{ path('register') }}">Inscription</a>
+        {% endif %}
     </div>
     {#  // TODO   <a href="{{ path('base_message_newuser', {'iddest':6} ) }}">Nouveau message</a>
         <a class="btn-primary" href="{{ path('extextcommentaire_new', {'idcommente':2} ) }}">Nouveau Commentaire exemplaire</a>#}

@@ -265,29 +265,29 @@ class Item
         return $this->idpropriete;
     }
 
-    /**
-     * Set idcategorie
-     *
-     * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
-     *
-     * @return Item
-     */
-    public function setIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie = null)
-    {
-        $this->idcategorie = $idcategorie;
-
-        return $this;
-    }
-
-    /**
-     * Get idcategorie
-     *
-     * @return \Lambda\LambdaBundle\Entity\Categorie
-     */
-    public function getIdcategorie()
-    {
-        return $this->idcategorie;
-    }
+//    /**
+//     * Set idcategorie
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
+//     *
+//     * @return Item
+//     */
+//    public function setIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie = null)
+//    {
+//        $this->idcategorie = $idcategorie;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get idcategorie
+//     *
+//     * @return \Lambda\LambdaBundle\Entity\Categorie
+//     */
+//    public function getIdcategorie()
+//    {
+//        return $this->idcategorie;
+//    }
 
     /**
      * Set categorie

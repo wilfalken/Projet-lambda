@@ -20,7 +20,7 @@
                 </tr>
                 <tr>
                     <th>Complement :</th>
-                    <td>{{ adresse.complement }}</td>
+                    <td>{% if (adresse.complement != '0') %}{{ adresse.complement }}{% endif %}</td>
                 </tr>
                 <tr>
                     <th>Code postal :</th>
@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <th>Pays :</th>
-                    <td>{{ adresse.pays }}</td>
+                    <td>{{ adresse.pays|countryName }}</td>
                 </tr>
                                 <tr>
                     <th>Adresse principale ?</th>

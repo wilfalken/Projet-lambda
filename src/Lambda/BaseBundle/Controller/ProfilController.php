@@ -19,14 +19,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Description of MessageController
+ * Description of ProfilController
  * @Route("/profil")
  * @author admin
  */
 class ProfilController extends Controller{
     
     /**
-    * Description of MessageController
+    * Description of ProfilController
     * @Route("/public/{iduser}", name="base_profil_public")
     * @Method({"GET","POST"})
     * @author admin

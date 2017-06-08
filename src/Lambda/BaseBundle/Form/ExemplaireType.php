@@ -20,7 +20,8 @@ class ExemplaireType extends AbstractType
                     'label'  => 'Veuillez stipuler l\'état dans lequel est votre objet :',))
                 ->add('photoexemplaire', FileType::class, array(
                     'label' => 'Vous pouvez ajouter une photo de votre objet :',
-                    'required' => false)
+                    'required' => false,
+                    'data_class' => null,)
                 ); 
                 //->add('idsouscategorie')
                 //->add('nomsouscategorie');

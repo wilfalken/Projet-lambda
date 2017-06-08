@@ -20,7 +20,7 @@ class Groupe
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idgroupe;
-
+            
     /**
      * @var string
      *

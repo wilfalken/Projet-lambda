@@ -18,7 +18,7 @@ class AdresseType extends AbstractType
     {
         $builder->add('numrue',TextType::class, array('label' => 'Numéro de rue :'))
                 ->add('textadresse',TextType::class, array('label' => 'Rue :'))
-                ->add('complement',TextType::class, array('label' => 'Complément d\'adresse :'))
+                ->add('complement',TextType::class, array('label' => 'Complément d\'adresse :', 'required' => false))
                 ->add('cp',TextType::class, array('label' => 'Code postal :'))
                 ->add('ville',TextType::class, array('label' => 'Ville :'))
                 ->add('pays',CountryType::class, array('label' => 'Pays :', 'placeholder' => 'Choisissez un pays'))

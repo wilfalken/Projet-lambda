@@ -28,7 +28,7 @@
                         <td>{{ unitem.nomitem }}</td>
                         <td>{{ unitem.description }}</td>
                         <td>{{ unitem.categorie.nomcategorie }}</td>
-                        <td>{% if unitem.photoitem==null %}Aucune photo...{% else %}{{ unitem.photoitem }}{% endif %}</td>
+                        <td>{% if unitem.photoitem==null %}Aucune photo...{% else %}<img src="{{ unitem.photoitem }}" />{% endif %}</td>
                         
                         
                         <td>

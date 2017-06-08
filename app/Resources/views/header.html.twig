@@ -20,7 +20,7 @@
         <a href="{{ path('advanced')}}" class="btn btn-warning" rel="color">recherche avancée</a>
     </div>
         <div id="paspadding">
-{% if (app.user) %}Bienvenue {{ app.user.username }}. Votre rôle : {% if is_granted('ROLE_ADMIN') %}
+{% if (app.user) %}Bienvenue <a href="{{ path('base_profil') }}">{{ app.user.username }}</a>. Votre rôle : {% if is_granted('ROLE_ADMIN') %}
     Administrateur
 {% elseif is_granted('ROLE_USER') %}
     Utilisateur
