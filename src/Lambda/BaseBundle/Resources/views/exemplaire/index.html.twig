@@ -28,7 +28,7 @@
                         <td>{{ exemplaire.item.categorie.nomCategorie }}</td>
                         <td>{{ exemplaire.etat }}</td>
                         <td>{{ exemplaire.dateajout|date('Y-m-d') }}</td>
-                        <td>{{ exemplaire.photoexemplaire }}</td>
+                        <td>{% if exemplaire.photoexemplaire %}<img width="150" height="150" src="/uploads/exemplaire/{{ exemplaire.photoexemplaire }}" />{% endif %}</td>
                         <td>
 
 

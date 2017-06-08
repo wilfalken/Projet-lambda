@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+{% block title %}Message{% endblock %}
+{% block body %}
+    <div class="form-group2">
+    <h1>Nouveau message</h1>
+    </br>
+    </br>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input class="btn btn-success" type="submit" value="Créer" />
+    {{ form_end(form) }}
+
+
+    </br>
+         
+        
+
+    </div>
+{% endblock %}

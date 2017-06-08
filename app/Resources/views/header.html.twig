@@ -1,8 +1,10 @@
 <div class="header">
+    
     </br>    
 
 {#<div class="well research_form">#}
-<div class="nomsite">
+<div class="nomsite row">
+    {% if 'ROLE_ADMIN' in app.user.roles|default('none') %}<a style="left:10px;" class="btn btn-danger btn-sm" href="{{ path('admin_homepage') }}">Admin</a>{% endif %}
     <a class="none" href="{{ path('homepage')}}" title="Retour à l'accueil"> L@MBDA !!!</a>
     
 </div>

@@ -10,6 +10,7 @@
                 <th>Id d'item</th>
                 <th>Nom d'item</th>
                 <th>Description</th>
+                <th>Categorie</th>
                 <th>Photo</th>
                 <th>Valide ?</th>
                 <th>Actions</th>
@@ -21,7 +22,8 @@
                 <td><a href="{{ path('item_show', { 'id': item.iditem }) }}">{{ item.iditem }}</a></td>
                 <td>{{ item.nomitem }}</td>
                 <td>{{ item.description }}</td>
-                <td>{{ item.photoitem }}</td>
+                <td>{{ item.categorie }}</td>
+                <td>{% if item.photoitem %}<img width="150" height="150" src="/uploads/item/{{ item.photoitem }}" />{% endif %}</td>
                 <td>{% if item.isvalide %}Oui{% else %}Non{% endif %}</td>
                 <td>
                     <ul>

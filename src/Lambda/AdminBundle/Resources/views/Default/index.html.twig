@@ -40,5 +40,29 @@
                 </tr>
         </table>
         <hr />
+         <table class="table table-hover">
+            <thead>
+                <tr>  
+                    <th><i class="fa fa-cutlery fa-3x" aria-hidden="true"></i> Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="btn btn-primary btn-sm" href="{{ path('item_index', { 'id': app.user } )}}">Les items</a></td>
+                </tr>
+        </table>
+                <hr />
+         <table class="table table-hover">
+            <thead>
+                <tr>  
+                    <th><i class="fa fa-hashtag fa-3x" aria-hidden="true"></i> Catégories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="btn btn-primary btn-sm" href="{{ path('categorie_index', { 'id': app.user } )}}">Les catégories</a></td>
+                </tr>
+        </table>
+                <hr />
     </div>
 {% endblock %}

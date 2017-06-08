@@ -3,6 +3,6 @@
     
     
     
-    <a href="{{ path('base_message_newadmin') }}">Contacter l'administrateur</a>
+    {% if app.user %}<a href="{{ path('base_message_newadmin') }}">Contacter l'administrateur</a>{% else %}Connectez-vous !!!{% endif %}
     
 </div>
