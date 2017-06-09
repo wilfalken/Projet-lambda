@@ -59,7 +59,7 @@
                                 <td>{{ exemplaire.item.nomitem }}</td>
                                 <td>{{ exemplaire.item.categorie.nomCategorie }}</td>
                                 <td>{{ exemplaire.dateajout|date('Y-m-d') }}</td>
-                                <td>{% if exemplaire.item.photoitem==null %}Aucune photo...{% else %}<img src="{{ exemplaire.item.photoitem }}" />{% endif %}</td>
+                                <td>{% if exemplaire.photoExemplaire==null %}Aucune photo...{% else %}<img width="100" height="100" src="/uploads/exemplaire/{{ exemplaire.photoExemplaire }}" />{% endif %}</td>
                                 <td>
                                     <ul>
                                         {% if app.user.id==user.id %}

@@ -45,7 +45,7 @@ class EmpruntType extends AbstractType{
                 ))
                 ->add('adresse', EntityType::class, array(
                     'class' => 'LambdaBundle:Adresse',
-                    'choices' => $this->user->getAdresses()['ville']
+                    'choices' => $this->user->getAdresses() //['ville']
                 ))
                 ->add('idexemplaire', TextType::class, array(
                     'disabled' => true,
