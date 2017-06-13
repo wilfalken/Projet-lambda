@@ -24,7 +24,7 @@
                         <td><a href="{{ path('adresse_show', { 'id': adresse.idadresse }) }}">{{ adresse.idadresse }}</a></td>
                         <td>{{ adresse.numrue }}</td>
                         <td>{{ adresse.textadresse }}</td>
-                        <td>{{ adresse.complement }}</td>
+                        <td>{% if (adresse.complement != '0') %}{{ adresse.complement }}{% endif %}</td>
                         <td>{{ adresse.cp }}</td>
                         <td>{{ adresse.ville }}</td>
                         <td>{{ adresse.pays|countryName }}</td>

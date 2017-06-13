@@ -19,14 +19,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Description of MessageController
+ * Description of ProfilController
  * @Route("/profil")
  * @author admin
  */
 class ProfilController extends Controller{
     
     /**
-    * Description of MessageController
+    * Description of ProfilController
     * @Route("/public/{iduser}", name="base_profil_public")
     * @Method({"GET","POST"})
     * @author admin
@@ -52,13 +52,14 @@ class ProfilController extends Controller{
     }
     /**
     * Description of MessageController
-    * @Route("/prive", name="base_profil_prive")
+    * @Route("/prive/{iduser}", name="base_profil_prive")
     * @author admin
     */
-        public function priveAction()
+        public function priveAction(User $iduser)
     {
-        $user = $this->getUser();
-    
-        return $this->render('BaseBundle:Profil:profil.html.twig', array('user' => $user));
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('LambdaBundle:User')->findOneById($iduser);
+        $exemplaires = $user->getExemplaires();
+        return $this->render('BaseBundle:Profil:prive.html.twig', array('user' => $user, 'exemplaires' => $exemplaires));
     }
 }

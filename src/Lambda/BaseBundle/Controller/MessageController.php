@@ -56,10 +56,10 @@ class MessageController extends Controller{
                 $em->persist($message);
                 $em->flush();
             }
-                    return $this->redirectToRoute('base_message_show', array('idmessage' => $message->getIdmessage()));
+                    return $this->redirectToRoute('lambda_homepage', array('idmessage' => $message->getIdmessage()));
         }
 
-        return $this->render('BaseBundle:message:new.html.twig', array(
+        return $this->render('BaseBundle:message:newepure.html.twig', array(
             'message' => $message,
             'form' => $form->createView(),
         ));

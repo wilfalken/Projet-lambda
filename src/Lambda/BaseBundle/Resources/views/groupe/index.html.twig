@@ -1,5 +1,5 @@
 {% extends '::base.html.twig' %}
-{% block title %}Mes groupe{% endblock %}
+{% block title %}Mes groupes{% endblock %}
 {% block body %}
     <div class="tablecontainer">
         <h1>Index du groupe</h1>
@@ -36,8 +36,8 @@
                         <tr class="table-">
                             <td>{{ membre.id }}</td>
                             <td>{{ membre.username }}</td>
-                            <td>{% for adresse in membre.adresses %}{{ adresse.ville }}{% endfor %}</td>
-                            <td>{% for adresse in membre.adresses %}{{ adresse.pays|countryName }}{% endfor %}</td>
+                            <td>{% for adresse in membre.adresses %}{{ adresse.ville }}</br>{% endfor %}</td>
+                            <td>{% for adresse in membre.adresses %}{{ adresse.pays|countryName }}</br>{% endfor %}</td>
                             <td class="active table-bordered">
 
                                 {% if ((app.user.username == membre.username) and (app.user.username not in groupe.officiers)) %}

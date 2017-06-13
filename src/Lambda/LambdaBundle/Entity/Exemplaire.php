@@ -3,6 +3,7 @@
 namespace Lambda\LambdaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Exemplaire
@@ -24,7 +25,14 @@ class Exemplaire
     /**
      * @var string
      *
-     * @ORM\Column(name="photoExemplaire", type="string", length=150, nullable=true)
+     * @ORM\Column(name="photoExemplaire", type="string", length=150, nullable=false)
+     * 
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 1000,
+     *     minHeight = 100,
+     *     maxHeight = 600
+     * )
      */
     private $photoexemplaire;
 

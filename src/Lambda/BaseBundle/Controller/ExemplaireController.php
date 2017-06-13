@@ -79,7 +79,12 @@ class ExemplaireController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             if ($user != null) { //s'il ya un user
-                
+                $file=$exemplaire->getPhotoexemplaire(); //cherche la photo
+                if (isset($file)) {
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension(); //génération nom de fichier
+                    $file->move($this->getParameter('photo_exemplaire_directory'),$fileName); //trouve où mettre le fichier (config.yml)
+                    $exemplaire->setPhotoexemplaire($fileName); //force le stockage du nom de fichier au lieu du contenu
+                }
                 $exemplaire->setUser($user);
                 $exemplaire->setItem($em->getRepository('LambdaBundle:Item')->findOneByIditem($item));
                 $user->addExemplaire($exemplaire);
@@ -112,6 +117,13 @@ class ExemplaireController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $file=$exemplaire->getPhotoexemplaire(); //cherche la photo
+                if (isset($file)) {
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension(); //génération nom de fichier
+                    $file->move($this->getParameter('photo_exemplaire_directory'),$fileName); //trouve où mettre le fichier (config.yml)
+                    $exemplaire->setPhotoexemplaire($fileName); //force le stockage du nom de fichier au lieu du contenu
+                }
+                $exemplaire->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('base_exemplaires_user', array('iduser' => $user->getId()));

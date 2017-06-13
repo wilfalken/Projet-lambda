@@ -28,11 +28,16 @@ class DefaultController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
              
             $data = $form->getData();
-            $requete = $request->request->get('search');
+            $requete = $data['search'];
             $em = $this->getDoctrine()->getManager();
-            $liste_items = $em->getRepository('LambdaBundle:Item')
-                    ->findBynomitem($data['search'])
-            ;
+            $repository = $em->getRepository('LambdaBundle:Item');
+                   $query = $repository->createQueryBuilder('i')
+  ->where('i.nomitem LIKE \'%'.$requete.'%\'')
+                           //->setParameter('search', $requete)
+  ->getQuery();
+            $liste_items = $query->getResult();
+                    //->findBynomitem($data['%search%'])
+            
 //            foreach ($liste_items as $unitem) {
 //                $categorie = $unitem->getIdcategorie()->getNomcategorie();
 //               // $unitem->addIdcategorie($categorie->first());

@@ -18,7 +18,7 @@ class ItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('nomitem')->add('description')->add('photoitem', FileType::class)->add('isvalide')->add('idcategorie', Null,array(
+        $builder->add('nomitem')->add('description')->add('photoitem', FileType::class, array('data_class' => null,))->add('isvalide')->add('categorie', Null,array(
             
         ));
             
@@ -32,7 +32,12 @@ class ItemType extends AbstractType
                 //    'attr'=> array('class' =>'valeur')
                 //))        ;
 
-        $builder->add('nomitem')->add('description')->add('photoitem')->add('isvalide')->add('idcategorie')->add('idpropriete')        ;
+        $builder->add('nomitem')
+                ->add('description')
+                ->add('photoitem')
+                ->add('isvalide')
+                ->add('categorie')
+                ->add('idpropriete')        ;
 
     }
     

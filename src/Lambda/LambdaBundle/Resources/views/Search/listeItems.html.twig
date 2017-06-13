@@ -28,12 +28,12 @@
                         <td>{{ unitem.nomitem }}</td>
                         <td>{{ unitem.description }}</td>
                         <td>{{ unitem.categorie.nomcategorie }}</td>
-                        <td>{% if unitem.photoitem==null %}Aucune photo...{% else %}{{ unitem.photoitem }}{% endif %}</td>
+                        <td>{% if unitem.photoitem==null %}Aucune photo...{% else %}<img src="/uploads/item/{{ unitem.photoitem }}" />{% endif %}</td>
                         
                         
                         <td>
                             <ul>
-                                <a class="btn btn-primary btn-xs" href="{{ path('base_usersrc', { 'iditem': unitem.iditem }) }}">Trouve !!!</a>
+                                <a class="btn btn-primary btn-xs" href="{{ path('base_usersrc', { 'iditem': unitem.iditem }) }}">Trouve les propriétaires !!!</a>
                                 {#{{ dump(categories) }}#}
 
                                 {% if app.user.username|default('Not Logged') != 'Not Logged' %}

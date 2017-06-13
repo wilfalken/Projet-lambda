@@ -3,6 +3,7 @@
 namespace Lambda\LambdaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Item
@@ -38,7 +39,14 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="photoItem", type="string", length=100, nullable=true)
+     * @ORM\Column(name="photoItem", type="string", length=150, nullable=false)
+     * 
+     * @Assert\Image(
+     *     minWidth = 100,
+     *     maxWidth = 1000,
+     *     minHeight = 250,
+     *     maxHeight = 600
+     * )
      */
     private $photoitem;
 
@@ -265,29 +273,29 @@ class Item
         return $this->idpropriete;
     }
 
-    /**
-     * Set idcategorie
-     *
-     * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
-     *
-     * @return Item
-     */
-    public function setIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie = null)
-    {
-        $this->idcategorie = $idcategorie;
-
-        return $this;
-    }
-
-    /**
-     * Get idcategorie
-     *
-     * @return \Lambda\LambdaBundle\Entity\Categorie
-     */
-    public function getIdcategorie()
-    {
-        return $this->idcategorie;
-    }
+//    /**
+//     * Set idcategorie
+//     *
+//     * @param \Lambda\LambdaBundle\Entity\Categorie $idcategorie
+//     *
+//     * @return Item
+//     */
+//    public function setIdcategorie(\Lambda\LambdaBundle\Entity\Categorie $idcategorie = null)
+//    {
+//        $this->idcategorie = $idcategorie;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get idcategorie
+//     *
+//     * @return \Lambda\LambdaBundle\Entity\Categorie
+//     */
+//    public function getIdcategorie()
+//    {
+//        return $this->idcategorie;
+//    }
 
     /**
      * Set categorie
