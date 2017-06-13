@@ -1,8 +1,88 @@
-{% extends 'public.html.twig' %}
-{% block prive %}
+{% extends '::base.html.twig' %}
+{% block title %}Profil{% endblock %}
+{% block body %}
+    </br></br>
+    <div class="container">
 
-    <div class="row">
-    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6"></br></br><h1 class="z-depth-5">Profil de : {{ user.username }} -- {% if user.genre == 0 %}<i class="fa fa-mars" aria-hidden="true"></i>{% else %}<i class="fa fa-venus" aria-hidden="true"></i>{% endif %}</h1></br>{{ user.username }} a {{ user.adresses|length }} adresses ...
+                     {#<a class="btn btn-primary btn-xs" href="{{ path('base_mesadresses', {'user': app.user.id} ) }}">Mes adresses</a>#}
+                       {# <a class="btn btn-primary btn-xs" href="{{ path('message_demandepret', {'idexemplaire':2} ) }}">Nouvel emprunt test</a>#}
+                       {# <a class="btn btn-primary btn-xs" href="{{ path('base_emprunt_new', {'idexemplaire':2, 'idemprunteur': 6 } ) }}">Nouvel emprunt</a>#}
+                    {#<a class="btn btn-primary btn-xs" href="{{ path('base_message_index') }}">Mes messages</a>#}
+                    </div>
+                    <div class="col-lg-offset-2 col-lg-4"><h3>{{ user.username }} est membre depuis : </h3></br><div id="DateCountdown" data-date="{{ user.mdepuis|date('m/d/Y') }}" style="width: 100%;"></div></div>   
+                </div>
+            </div>
+        </div>
+        </br>
+        <hr>
+        </br>
+        <div class="row">
+            <div class="col-lg-3"><h3>{{ user.username }} fait partie de :</h3></br>{% if user.groupes|length > 0 %}<ul class="fa-ul">{% for ungroupe in user.groupes %}<li class="fa-li fa fa-check"><span class="normal">{{ ungroupe.nomgroupe }}</span>   <a class="btn btn-primary btn-xs" href="{{ path('base_groupe_show', { 'idgroupe': ungroupe.idgroupe } )}}">Voir <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li></br>{% endfor %}{% else %}<h2>Aucun groupe !!!</h2>{% endif %}
+            </div>
+            <div class="col-lg-3"><h3>{{ user.username }} possède :</h3></br>{% if user.exemplaires|length > 0 %}{{ user.exemplaires|length }} Objets ....
+                <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaires_user', { 'iduser': app.user.id } )}}">Voir les objets <i class="fa fa-chevron-right" aria-hidden="true"></i></a>{% else %}<h2>Aucun objet !!!</h2>{% endif %}
+            </div>
+            <div class="col-lg-3"><h3>{{ user.username }} a fait :</h3></br>{% if user.emprunts|length > 0 %}{{ user.emprunts|length }} emprunts !</br></ul>{% else %}<h2>Aucun emprunt !!!</h2>{% endif %}
+            </div> 
+            <div class="col-lg-3"><h3>{{ user.username }} a prété :</h3></br>{% if user.prets|length > 0 %}{{ user.prets|length }} objet(s) !</br></ul>{% else %}<h2>Aucun prêt !!!</h2>{% endif %}
+            </div> 
+        </div>
+        <div class="row">
+            <hr />
+            </br>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><h1>Les objets de {{ user.username }} : </h1></div>
+            </br>
+        </div>
+        {% if user.exemplaires|length > 0 %}
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-10">
+                <table class="table table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id d'exemplaire :</th>
+                            <th colspan="2">Objet :</th>
+                            <th>Date d'ajout :</th>
+                            <th>Photo :</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for exemplaire in exemplaires %}
+                            <tr>
+                                <td>{{ exemplaire.idexemplaire }}</a></td>
+                                <td>{{ exemplaire.item.nomitem }}</td>
+                                <td>{{ exemplaire.item.categorie.nomCategorie }}</td>
+                                <td>{{ exemplaire.dateajout|date('Y-m-d') }}</td>
+                                <td>{% if exemplaire.photoExemplaire==null %}Aucune photo...{% else %}<img width="100" height="100" src="/uploads/exemplaire/{{ exemplaire.photoExemplaire }}" />{% endif %}</td>
+                                <td>
+                                    <ul>
+                                        {% if app.user.id==user.id %}
+                                            <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaire_show', { 'id': exemplaire.idexemplaire }) }}">Voir</a>
 
+                                            <a class="btn btn-primary btn-xs" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
+                                        {% else %}
+                                            <a class="btn btn-primary btn-xs disabled" href="{{ path('base_exemplaire_show', { 'id': exemplaire.idexemplaire }) }}">Voir</a>
 
-{% endblock %} 
+                                            <a class="btn btn-primary btn-xs disabled" href="{{ path('base_exemplaire_edit', { 'id': exemplaire.idexemplaire }) }}">Modifier</a>
+                                            
+                                            <a class="btn btn-primary btn-xs" href="{{ path('message_demandepret', { 'idexemplaire': exemplaire.idexemplaire, 'idproprietaire': exemplaire.user.id } ) }}">Demander un pret</a>
+                                        
+                                        {% endif %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>                  
+            </div>
+            </div>
+        {% endif %}
+        {% block prive %}
+        {% endblock %}    
+    {% endblock %}

@@ -59,9 +59,14 @@ class AdvancedController extends Controller{
             $categorie = $data['categorie'];
            // $categorie= $categories['0'];
                 if (!($data['name']==null)){
+                    $requete = $data['name'];
                     $em = $this->getDoctrine()->getManager();
                     $liste_resultats_inter = $em->getRepository('LambdaBundle:Item')
-                        ->findBynomitem($data['name']);
+                            ->createQueryBuilder('i')
+                            ->where('i.nomitem LIKE \'%'.$requete.'%\'')
+                           //->setParameter('search', $requete)
+                            ->getQuery()->getResult();
+                        //->findBynomitem($data['name']);
                     if ($liste_resultats_inter===null){$liste_resultats="aucun resultat";}
                     foreach ($liste_resultats_inter as $unitem) {
                         if ($unitem->getCategorie()->getNomcategorie()==$categorie){
@@ -88,8 +93,13 @@ class AdvancedController extends Controller{
             else if (!($data['name']==null)){
                 
                 $em = $this->getDoctrine()->getManager();
+                $requete = $data['name'];
                 $liste_resultats =  $em->getRepository('LambdaBundle:Item')
-                     ->findBynomitem($data['name']);
+                     //->findBynomitem($data['name']);
+                        ->createQueryBuilder('i')
+                            ->where('i.nomitem LIKE \'%'.$requete.'%\'')
+                           //->setParameter('search', $requete)
+                            ->getQuery()->getResult();
                     foreach ($liste_resultats as $unitem) {
                         $categories = $unitem->getCategorie()->getnomcategorie();
                        //$unitem->addIdcategorie($categories->first());

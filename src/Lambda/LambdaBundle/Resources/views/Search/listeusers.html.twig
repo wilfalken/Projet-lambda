@@ -39,7 +39,7 @@
                                 
 
                                 {% if app.user.id|default(null) == null %}Connectez-vous !{% else %}
-                                    <a class="btn btn-primary btn-xs" href="{{ path('base_profil_public', { 'iduser': unitem.id } ) }}">Voir le profil !!!</a>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('base_profil_prive', { 'iduser': unitem.id } ) }}">Voir le profil !!!</a>
                                     <a class="btn btn-primary btn-xs" href="{{ path('base_message_newuser', { 'iddest': unitem.id }) }}">Envoyer un message</a>
                                 {% endif %}
                             </ul>
